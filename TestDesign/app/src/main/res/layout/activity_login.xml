@@ -13,34 +13,30 @@
         android:layout_width="308dp"
         android:layout_height="208dp"
         android:layout_centerHorizontal="true"
-        android:layout_marginStart="51dp"
+        android:layout_marginStart="8dp"
         android:layout_marginTop="50dp"
-        android:layout_marginEnd="52dp"
+        android:layout_marginEnd="8dp"
         android:layout_marginBottom="51dp"
         app:layout_constraintBottom_toTopOf="@+id/email"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/guideline2"
+        app:layout_constraintStart_toStartOf="@+id/guideline"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/houses_logo" />
 
     <EditText
         android:id="@+id/email"
         android:layout_width="260dp"
-        android:layout_height="52dp"
+        android:layout_height="39dp"
         android:layout_below="@+id/logo"
         android:layout_centerInParent="true"
-        android:layout_marginStart="8dp"
         android:layout_marginTop="48dp"
-        android:layout_marginEnd="66dp"
         android:backgroundTint="#ffffff"
         android:hint="Name"
         android:inputType="textEmailAddress"
         android:paddingStart="10dp"
         android:textColor="#92FFFFFF"
         android:textColorHint="#92FFFFFF"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/guideline2"
         app:layout_constraintTop_toBottomOf="@+id/logo" />
 
 
@@ -51,7 +47,6 @@
         android:layout_below="@+id/email"
         android:layout_centerInParent="true"
         android:layout_marginTop="1dp"
-        android:layout_marginEnd="66dp"
         android:layout_marginBottom="95dp"
         android:backgroundTint="#ffffff"
         android:hint="Password"
@@ -60,25 +55,24 @@
         android:textColor="#92FFFFFF"
         android:textColorHint="#92FFFFFF"
         app:layout_constraintBottom_toTopOf="@+id/login"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/email" />
+        app:layout_constraintEnd_toStartOf="@+id/guideline2"
+        app:layout_constraintTop_toBottomOf="@+id/email"
+        app:layout_constraintVertical_chainStyle="spread" />
 
     <Button
         android:id="@+id/login"
-        android:layout_width="260dp"
-        android:layout_height="wrap_content"
+        android:layout_width="0dp"
+        android:layout_height="45dp"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginStart="85dp"
-        android:layout_marginTop="95dp"
-        android:layout_marginEnd="66dp"
-        android:background="@drawable/rounded"
 
+        android:layout_marginTop="112dp"
+        android:background="@drawable/rounded"
         android:text="Login"
         android:textColor="#D0FAF6F6"
         android:textSize="18sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/guideline2"
+        app:layout_constraintStart_toStartOf="@+id/guideline"
         app:layout_constraintTop_toBottomOf="@+id/pwd" />
 
     <Button
@@ -96,10 +90,10 @@
         android:text="@string/create_a_new_account"
         android:textColor="#FFFFFFFF"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/guideline2"
+        app:layout_constraintStart_toStartOf="@+id/guideline"
         app:layout_constraintTop_toBottomOf="@+id/login"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintVertical_bias="0.231" />
 
     <ImageView
         android:id="@+id/identity_logo"
@@ -108,11 +102,13 @@
         android:layout_alignTop="@+id/email"
         android:layout_alignBottom="@+id/email"
         android:layout_alignParentStart="true"
-        android:layout_marginStart="40dp"
         android:layout_marginTop="16dp"
+        android:layout_marginEnd="8dp"
         app:layout_constraintBottom_toBottomOf="@+id/email"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/email"
+        app:layout_constraintStart_toStartOf="@+id/guideline"
         app:layout_constraintTop_toTopOf="@+id/email"
+        app:layout_constraintVertical_bias="1.0"
         app:srcCompat="@drawable/identity" />
 
     <ImageView
@@ -122,12 +118,28 @@
         android:layout_alignTop="@+id/pwd"
         android:layout_alignBottom="@+id/pwd"
         android:layout_alignParentStart="true"
-        android:layout_marginStart="40dp"
+        android:layout_marginEnd="8dp"
         app:layout_constraintBottom_toBottomOf="@+id/pwd"
+        app:layout_constraintEnd_toStartOf="@+id/pwd"
         app:layout_constraintHorizontal_chainStyle="spread_inside"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/guideline"
         app:layout_constraintTop_toTopOf="@+id/pwd"
+        app:layout_constraintVertical_bias="0.642"
         app:srcCompat="@drawable/lock" />
+
+    <android.support.constraint.Guideline
+        android:id="@+id/guideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.1" />
+
+    <android.support.constraint.Guideline
+        android:id="@+id/guideline2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.9" />
 
 
 </android.support.constraint.ConstraintLayout>
