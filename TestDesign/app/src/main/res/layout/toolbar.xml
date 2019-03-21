@@ -9,9 +9,7 @@
     android:minHeight="?attr/actionBarSize"
     app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
     app:title="Overview"
-    app:titleTextColor="#ffffff"
-    android:background="@color/colorWhiteTransparent"
-    android:fontFamily="Roboto">
-    <!-- android:background="?attr/colorPrimaryDark"-->
+    app:titleTextColor="@color/colorWhite"
+    android:background="@color/colorPrimaryDark">
 
 </android.support.v7.widget.Toolbar>
