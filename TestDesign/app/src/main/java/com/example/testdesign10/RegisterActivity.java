@@ -2,6 +2,7 @@ package com.example.testdesign10;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.text.InputType;
 import android.text.TextUtils;
 import android.util.Patterns;
 import android.view.View;
@@ -43,6 +44,15 @@ public class RegisterActivity extends AppCompatActivity {
                 }
             }
         });
+
+        findViewById(R.id.button).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                password.setInputType(InputType.TYPE_CLASS_TEXT);
+                //Toast.makeText(RegisterActivity.this, "trtyrtyt5454rytryryrtyry4y5t", Toast.LENGTH_SHORT).show();
+            }
+        });
+        
     }
 
     public boolean isValidPassword(final String password) {
@@ -82,4 +92,5 @@ public class RegisterActivity extends AppCompatActivity {
             email.setError("Enter valid email!");
         }
     }
+  
 }

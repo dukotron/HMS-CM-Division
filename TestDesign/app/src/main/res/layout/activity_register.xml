@@ -165,4 +165,13 @@
         android:orientation="vertical"
         app:layout_constraintGuide_percent="0.1" />
 
+    <Button
+        android:id="@+id/button"
+        android:layout_width="55dp"
+        android:layout_height="36dp"
+        android:text="Button"
+        app:layout_constraintBottom_toBottomOf="@+id/Password"
+        app:layout_constraintEnd_toEndOf="@+id/Password"
+        app:layout_constraintTop_toTopOf="@+id/Password" />
+
 </android.support.constraint.ConstraintLayout>
