@@ -4,7 +4,10 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.InputType;
 import android.text.TextUtils;
+import android.text.method.HideReturnsTransformationMethod;
+import android.text.method.PasswordTransformationMethod;
 import android.util.Patterns;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -20,6 +23,7 @@ public class RegisterActivity extends AppCompatActivity {
     EditText email;
     EditText password;
     Button register;
+    Button button;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,6 +35,7 @@ public class RegisterActivity extends AppCompatActivity {
         email = findViewById(R.id.Email);
         password = findViewById(R.id.Password);
         register = findViewById(R.id.RegisterButton);
+        button = findViewById(R.id.button);
 
         register.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -45,13 +50,27 @@ public class RegisterActivity extends AppCompatActivity {
             }
         });
 
-        findViewById(R.id.button).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                password.setInputType(InputType.TYPE_CLASS_TEXT);
-                //Toast.makeText(RegisterActivity.this, "trtyrtyt5454rytryryrtyry4y5t", Toast.LENGTH_SHORT).show();
+        //when button is touched, the password becomes
+        // visible as long as the button is still pressed by the user
+
+        button.setOnTouchListener(new View.OnTouchListener() {
+            public boolean onTouch(View v, MotionEvent event) {
+
+                switch ( event.getAction() ) {
+
+                    case MotionEvent.ACTION_UP:
+                        password.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
+                        break;
+
+                    case MotionEvent.ACTION_DOWN:
+                        password.setInputType(InputType.TYPE_CLASS_TEXT);
+                        break;
+
+                }
+                return true;
             }
         });
+
         
     }
 

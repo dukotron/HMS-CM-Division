@@ -167,11 +167,15 @@
 
     <Button
         android:id="@+id/button"
-        android:layout_width="55dp"
-        android:layout_height="36dp"
-        android:text="Button"
+        android:layout_width="27dp"
+        android:layout_height="28dp"
+        android:layout_marginEnd="8dp"
+        android:background="@android:color/transparent"
+        android:drawableRight="@drawable/baseline_visibility_black_18dp"
+        android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="@+id/Password"
         app:layout_constraintEnd_toEndOf="@+id/Password"
-        app:layout_constraintTop_toTopOf="@+id/Password" />
+        app:layout_constraintTop_toTopOf="@+id/Password"
+        app:layout_constraintVertical_bias="0.318" />
 
 </android.support.constraint.ConstraintLayout>
