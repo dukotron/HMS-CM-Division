@@ -1,4 +1,4 @@
-package com.example.testdesign10;
+package com.example.testdesign10.View;
 
 import android.content.Intent;
 import android.support.annotation.NonNull;
@@ -11,6 +11,8 @@ import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.widget.Toast;
+
+import com.example.testdesign10.R;
 
 public class NavigationActivity extends AppCompatActivity {
 
@@ -61,7 +63,7 @@ public class NavigationActivity extends AppCompatActivity {
         switch(menuItem.getItemId()){
             case R.id.logout:
                 //TODO logic code to log out
-                startActivity(new Intent(this,MainActivity.class));
+                startActivity(new Intent(this, LoginActivity.class));
                 finish();
                 break;
             default:

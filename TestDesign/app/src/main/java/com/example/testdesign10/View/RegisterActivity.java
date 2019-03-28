@@ -1,17 +1,17 @@
-package com.example.testdesign10;
+package com.example.testdesign10.View;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.InputType;
 import android.text.TextUtils;
-import android.text.method.HideReturnsTransformationMethod;
-import android.text.method.PasswordTransformationMethod;
 import android.util.Patterns;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import com.example.testdesign10.R;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
