@@ -1,20 +1,20 @@
 package com.example.homie.View;
 
+
+import android.arch.lifecycle.Observer;
+import android.arch.lifecycle.ViewModelProviders;
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.text.InputType;
-import android.text.TextUtils;
-import android.util.Patterns;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
-
 import com.example.homie.R;
+import com.example.homie.ViewModel.RegisterViewModel;
 
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 public class RegisterActivity extends AppCompatActivity {
 
@@ -22,38 +22,103 @@ public class RegisterActivity extends AppCompatActivity {
     EditText lastName;
     EditText email;
     EditText password;
-    Button register;
-    Button button;
+
+    RegisterViewModel viewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
 
-        firstName = findViewById(R.id.FirstName);
-        lastName = findViewById(R.id.LastName);
-        email = findViewById(R.id.Email);
-        password = findViewById(R.id.Password);
-        register = findViewById(R.id.RegisterButton);
-        button = findViewById(R.id.button);
+        firstName = findViewById(R.id.firstName);
+        lastName = findViewById(R.id.lastName);
+        email = findViewById(R.id.email);
+        password = findViewById(R.id.password);
 
-        register.setOnClickListener(new View.OnClickListener() {
+        initRegisterButton();
+        initPasswordButton();
+        initLoginButton();
+
+        initViewModel();
+    }
+
+    void initViewModel(){
+        viewModel = ViewModelProviders.of(this).get(RegisterViewModel.class);
+
+        viewModel.getIsRegistered().observe(this, new Observer<Boolean>() {
             @Override
-            public void onClick(View v) {
-                checkDataEntered();
-
-                if (isValidPassword(password.getText().toString().trim())){
-                    Toast.makeText(RegisterActivity.this, "Done", Toast.LENGTH_SHORT).show();
-                } else {
-                    Toast.makeText(RegisterActivity.this, "You need at least 6 characters(big + small) and numbers", Toast.LENGTH_SHORT).show();
+            public void onChanged(@Nullable Boolean aBoolean) {
+                if(aBoolean){
+                    startActivity(new Intent(RegisterActivity.this, NavigationActivity.class));
                 }
             }
         });
 
+        viewModel.getIsValidFirstName().observe(this, new Observer<Boolean>() {
+            @Override
+            public void onChanged(@Nullable Boolean aBoolean) {
+                if(!aBoolean){
+                    firstName.setError("Wrong First Name");
+                }
+            }
+        });
+
+        viewModel.getIsValidLastName().observe(this, new Observer<Boolean>() {
+            @Override
+            public void onChanged(@Nullable Boolean aBoolean) {
+                if(!aBoolean){
+                    lastName.setError("Wrong Last Name");
+                }
+            }
+        });
+
+        viewModel.getIsValidEmail().observe(this, new Observer<Boolean>() {
+            @Override
+            public void onChanged(@Nullable Boolean aBoolean) {
+                if(!aBoolean){
+                    email.setError("Wrong Email");
+                }
+            }
+        });
+
+        viewModel.getIsValidPassword().observe(this, new Observer<Boolean>() {
+            @Override
+            public void onChanged(@Nullable Boolean aBoolean) {
+                if(!aBoolean){
+                    password.setError("Wrong Password");
+                }
+            }
+        });
+    }
+
+    void initRegisterButton(){
+        Button registerBtn = findViewById(R.id.registerButton);
+        registerBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                viewModel.registerUser(firstName.getText().toString(),lastName.getText().toString(),
+                        email.getText().toString(),password.getText().toString().trim());
+            }
+        });
+    }
+
+    void initLoginButton(){
+        Button loginBtn = findViewById(R.id.go_to_login);
+        loginBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
+                startActivity(intent);
+                finish();
+            }
+        });
+    }
+
+    void initPasswordButton(){
         //when button is touched, the password becomes
         // visible as long as the button is still pressed by the user
-
-        button.setOnTouchListener(new View.OnTouchListener() {
+        Button showPasswordBtn = findViewById(R.id.showPasswordButton);
+        showPasswordBtn.setOnTouchListener(new View.OnTouchListener() {
             public boolean onTouch(View v, MotionEvent event) {
 
                 switch ( event.getAction() ) {
@@ -70,46 +135,6 @@ public class RegisterActivity extends AppCompatActivity {
                 return true;
             }
         });
-
-        
     }
 
-    public boolean isValidPassword(final String password) {
-
-        Pattern pattern;
-        Matcher matcher;
-
-        final String PASSWORD_PATTERN = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=\\S+$).{6,}$";
-
-        pattern = Pattern.compile(PASSWORD_PATTERN);
-        matcher = pattern.matcher(password);
-
-        return matcher.matches();
-
-    }
-
-    boolean isEmail (EditText text){
-        CharSequence email = text.getText().toString();
-        return (!TextUtils.isEmpty(email)&& Patterns.EMAIL_ADDRESS.matcher(email).matches());
-    }
-
-    boolean isEmpty(EditText text){
-        CharSequence str = text.getText().toString();
-        return TextUtils.isEmpty(str);
-    }
-
-    void checkDataEntered(){
-        if (isEmpty(firstName)){
-            firstName.setError("First name is required!");
-        }
-
-        if(isEmpty(lastName)){
-            lastName.setError("Last name is required!");
-        }
-
-        if (isEmail(email) == false){
-            email.setError("Enter valid email!");
-        }
-    }
-  
 }
