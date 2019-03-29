@@ -4,14 +4,8 @@ import android.app.Application;
 import android.arch.lifecycle.AndroidViewModel;
 import android.arch.lifecycle.MutableLiveData;
 import android.support.annotation.NonNull;
-import android.text.TextUtils;
-import android.util.Patterns;
-import android.widget.EditText;
-
 import com.example.homie.Repository.UserRepository;
-
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+import com.example.homie.ViewModel.Util.InputDataValidator;
 
 public class RegisterViewModel extends AndroidViewModel {
     private MutableLiveData<Boolean> isValidFirstName;
@@ -22,6 +16,7 @@ public class RegisterViewModel extends AndroidViewModel {
     private MutableLiveData<Boolean> isRegistered;
 
     private UserRepository userRepository;
+
     public RegisterViewModel(@NonNull Application application) {
         super(application);
         userRepository = UserRepository.getInstance();
@@ -39,49 +34,31 @@ public class RegisterViewModel extends AndroidViewModel {
         isRegistered.setValue(false);
     }
 
-    public void registerUser(String firstName,String lastName,String email,String password){
-        if(checkEnteredData(firstName,lastName,email,password)){
-            userRepository.createNewAccount(firstName,lastName,email,password);
+    public void registerUser(String firstName, String lastName, String email, String password) {
+        if (checkEnteredData(firstName, lastName, email, password)) {
+            userRepository.createNewAccount(firstName, lastName, email, password);
             isRegistered.setValue(true);
         }
     }
 
-    private boolean isValidPassword(final String password) {
-
-        Pattern pattern;
-        Matcher matcher;
-
-        final String PASSWORD_PATTERN = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=\\S+$).{6,}$";
-
-        pattern = Pattern.compile(PASSWORD_PATTERN);
-        matcher = pattern.matcher(password);
-
-        return matcher.matches();
-
-    }
-
-    boolean isEmail (String email){
-        return (!email.isEmpty() && Patterns.EMAIL_ADDRESS.matcher(email).matches());
-    }
-
-    boolean checkEnteredData(String firstName,String lastName,String email,String password){
+    boolean checkEnteredData(String firstName, String lastName, String email, String password) {
         boolean valid = true;
-        if (firstName.isEmpty()){
+        if (firstName.isEmpty()) {
             isValidFirstName.setValue(false);
             valid = false;
         }
 
-        if(lastName.isEmpty()){
+        if (lastName.isEmpty()) {
             isValidLastName.setValue(false);
             valid = false;
         }
 
-        if (!isEmail(email)){
+        if (!InputDataValidator.isEmail(email)) {
             isValidEmail.setValue(false);
             valid = false;
         }
 
-        if(!isValidPassword(password)){
+        if (!InputDataValidator.isValidPassword(password)) {
             isValidPassword.setValue(false);
             valid = false;
         }

@@ -5,4 +5,9 @@ public class DWHConnection implements APIConnection {
     public void createNewAccount(String firstName, String lastName, String email, String password) {
 
     }
+
+    @Override
+    public void loginAccount(String email, String password) {
+
+    }
 }

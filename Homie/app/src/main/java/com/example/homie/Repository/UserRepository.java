@@ -8,17 +8,22 @@ public class UserRepository {
     private APIConnection apiConnection;
     private static UserRepository instance;
 
-    private UserRepository(){
+    private UserRepository() {
         apiConnection = new DWHConnection();
     }
+
     public static UserRepository getInstance() {
-        if(instance==null){
+        if (instance == null) {
             instance = new UserRepository();
         }
         return instance;
     }
 
-    public void createNewAccount(String firstName,String lastName,String email,String password){
-        apiConnection.createNewAccount(firstName,lastName,email,password);
+    public void createNewAccount(String firstName, String lastName, String email, String password) {
+        apiConnection.createNewAccount(firstName, lastName, email, password);
+    }
+
+    public void loginAccount(String email, String password) {
+        apiConnection.loginAccount(email, password);
     }
 }

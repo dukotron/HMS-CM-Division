@@ -12,6 +12,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+
 import com.example.homie.R;
 import com.example.homie.ViewModel.RegisterViewModel;
 
@@ -32,24 +33,25 @@ public class RegisterActivity extends AppCompatActivity {
 
         firstName = findViewById(R.id.firstName);
         lastName = findViewById(R.id.lastName);
-        email = findViewById(R.id.email);
-        password = findViewById(R.id.password);
+        email = findViewById(R.id.emailRegister);
+        password = findViewById(R.id.passwordRegister);
 
         initRegisterButton();
         initPasswordButton();
-        initLoginButton();
+        initGoToLoginButton();
 
         initViewModel();
     }
 
-    void initViewModel(){
+    void initViewModel() {
         viewModel = ViewModelProviders.of(this).get(RegisterViewModel.class);
 
         viewModel.getIsRegistered().observe(this, new Observer<Boolean>() {
             @Override
             public void onChanged(@Nullable Boolean aBoolean) {
-                if(aBoolean){
+                if (aBoolean) {
                     startActivity(new Intent(RegisterActivity.this, NavigationActivity.class));
+                    finish();
                 }
             }
         });
@@ -57,7 +59,7 @@ public class RegisterActivity extends AppCompatActivity {
         viewModel.getIsValidFirstName().observe(this, new Observer<Boolean>() {
             @Override
             public void onChanged(@Nullable Boolean aBoolean) {
-                if(!aBoolean){
+                if (!aBoolean) {
                     firstName.setError("Wrong First Name");
                 }
             }
@@ -66,7 +68,7 @@ public class RegisterActivity extends AppCompatActivity {
         viewModel.getIsValidLastName().observe(this, new Observer<Boolean>() {
             @Override
             public void onChanged(@Nullable Boolean aBoolean) {
-                if(!aBoolean){
+                if (!aBoolean) {
                     lastName.setError("Wrong Last Name");
                 }
             }
@@ -75,7 +77,7 @@ public class RegisterActivity extends AppCompatActivity {
         viewModel.getIsValidEmail().observe(this, new Observer<Boolean>() {
             @Override
             public void onChanged(@Nullable Boolean aBoolean) {
-                if(!aBoolean){
+                if (!aBoolean) {
                     email.setError("Wrong Email");
                 }
             }
@@ -84,25 +86,25 @@ public class RegisterActivity extends AppCompatActivity {
         viewModel.getIsValidPassword().observe(this, new Observer<Boolean>() {
             @Override
             public void onChanged(@Nullable Boolean aBoolean) {
-                if(!aBoolean){
+                if (!aBoolean) {
                     password.setError("Wrong Password");
                 }
             }
         });
     }
 
-    void initRegisterButton(){
+    void initRegisterButton() {
         Button registerBtn = findViewById(R.id.registerButton);
         registerBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                viewModel.registerUser(firstName.getText().toString(),lastName.getText().toString(),
-                        email.getText().toString(),password.getText().toString().trim());
+                viewModel.registerUser(firstName.getText().toString(), lastName.getText().toString(),
+                        email.getText().toString(), password.getText().toString().trim());
             }
         });
     }
 
-    void initLoginButton(){
+    void initGoToLoginButton() {
         Button loginBtn = findViewById(R.id.go_to_login);
         loginBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -114,14 +116,14 @@ public class RegisterActivity extends AppCompatActivity {
         });
     }
 
-    void initPasswordButton(){
+    void initPasswordButton() {
         //when button is touched, the password becomes
         // visible as long as the button is still pressed by the user
         Button showPasswordBtn = findViewById(R.id.showPasswordButton);
         showPasswordBtn.setOnTouchListener(new View.OnTouchListener() {
             public boolean onTouch(View v, MotionEvent event) {
 
-                switch ( event.getAction() ) {
+                switch (event.getAction()) {
 
                     case MotionEvent.ACTION_UP:
                         password.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);

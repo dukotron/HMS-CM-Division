@@ -1,27 +1,80 @@
 package com.example.homie.View;
 
 import android.content.Intent;
+import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
+import android.widget.Button;
+import android.widget.EditText;
+
 import com.example.homie.R;
 import com.example.homie.ViewModel.LoginViewModel;
 
 
 public class LoginActivity extends AppCompatActivity {
+
+    EditText email;
+    EditText password;
+
     LoginViewModel viewModel;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
+        email = findViewById(R.id.emailLogin);
+        password = findViewById(R.id.passwordLogin);
+
+        initLoginButton();
+
         initViewModel();
     }
 
-    void initViewModel(){
+    void initViewModel() {
         viewModel = ViewModelProviders.of(this).get(LoginViewModel.class);
+
+        viewModel.getIsLoggedIn().observe(this, new Observer<Boolean>() {
+            @Override
+            public void onChanged(@Nullable Boolean aBoolean) {
+                if (aBoolean) {
+                    startActivity(new Intent(LoginActivity.this, NavigationActivity.class));
+                    finish();
+                }
+            }
+        });
+
+        viewModel.getIsValidEmail().observe(this, new Observer<Boolean>() {
+            @Override
+            public void onChanged(@Nullable Boolean aBoolean) {
+                if (!aBoolean) {
+                    email.setError("Wrong Email");
+                }
+            }
+        });
+
+        viewModel.getIsValidPassword().observe(this, new Observer<Boolean>() {
+            @Override
+            public void onChanged(@Nullable Boolean aBoolean) {
+                if (!aBoolean) {
+                    password.setError("Wrong Password");
+                }
+            }
+        });
+
+    }
+
+    void initLoginButton() {
+        Button login = findViewById(R.id.login);
+        login.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                viewModel.loginUser(email.getText().toString(), password.getText().toString().trim());
+            }
+        });
     }
 
     public void createAccountActivity(View view) {
