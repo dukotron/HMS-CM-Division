@@ -1,4 +1,4 @@
-package com.example.homie.ViewModel.Util;
+package com.example.homie.viewModel.util;
 
 import android.util.Patterns;
 
@@ -6,10 +6,12 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class InputDataValidator {
-    public static boolean isEmail(String email) {
+
+    public static boolean isEmailValid(String email) {
         return (!email.isEmpty() && Patterns.EMAIL_ADDRESS.matcher(email).matches());
     }
-    public static boolean isValidPassword(final String password) {
+
+    public static boolean isPasswordValid(final String password) {
 
         Pattern pattern;
         Matcher matcher;

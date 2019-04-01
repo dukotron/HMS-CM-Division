@@ -1,4 +1,4 @@
-package com.example.homie.View;
+package com.example.homie.view;
 
 import android.content.Intent;
 import android.support.annotation.Nullable;
@@ -11,7 +11,7 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import com.example.homie.R;
-import com.example.homie.ViewModel.LoginViewModel;
+import com.example.homie.viewModel.LoginViewModel;
 
 
 public class LoginActivity extends AppCompatActivity {

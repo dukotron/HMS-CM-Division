@@ -1,4 +1,4 @@
-package com.example.homie.View;
+package com.example.homie.view;
 
 
 import android.arch.lifecycle.Observer;
@@ -14,7 +14,7 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import com.example.homie.R;
-import com.example.homie.ViewModel.RegisterViewModel;
+import com.example.homie.viewModel.RegisterViewModel;
 
 
 public class RegisterActivity extends AppCompatActivity {

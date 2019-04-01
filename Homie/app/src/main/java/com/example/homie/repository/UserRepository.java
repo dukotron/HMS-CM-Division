@@ -1,7 +1,7 @@
-package com.example.homie.Repository;
+package com.example.homie.repository;
 
-import com.example.homie.Network.APIConnection;
-import com.example.homie.Network.DWHConnection;
+import com.example.homie.network.APIConnection;
+import com.example.homie.network.DWHConnection;
 
 public class UserRepository {
 
@@ -19,8 +19,8 @@ public class UserRepository {
         return instance;
     }
 
-    public void createNewAccount(String firstName, String lastName, String email, String password) {
-        apiConnection.createNewAccount(firstName, lastName, email, password);
+    public void createAccount(String firstName, String lastName, String email, String password) {
+        apiConnection.createAccount(firstName, lastName, email, password);
     }
 
     public void loginAccount(String email, String password) {

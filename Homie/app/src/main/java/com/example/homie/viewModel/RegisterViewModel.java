@@ -1,11 +1,11 @@
-package com.example.homie.ViewModel;
+package com.example.homie.viewModel;
 
 import android.app.Application;
 import android.arch.lifecycle.AndroidViewModel;
 import android.arch.lifecycle.MutableLiveData;
 import android.support.annotation.NonNull;
-import com.example.homie.Repository.UserRepository;
-import com.example.homie.ViewModel.Util.InputDataValidator;
+import com.example.homie.repository.UserRepository;
+import com.example.homie.viewModel.util.InputDataValidator;
 
 public class RegisterViewModel extends AndroidViewModel {
     private MutableLiveData<Boolean> isValidFirstName;
@@ -36,7 +36,7 @@ public class RegisterViewModel extends AndroidViewModel {
 
     public void registerUser(String firstName, String lastName, String email, String password) {
         if (checkEnteredData(firstName, lastName, email, password)) {
-            userRepository.createNewAccount(firstName, lastName, email, password);
+            userRepository.createAccount(firstName, lastName, email, password);
             isRegistered.setValue(true);
         }
     }
@@ -53,12 +53,12 @@ public class RegisterViewModel extends AndroidViewModel {
             valid = false;
         }
 
-        if (!InputDataValidator.isEmail(email)) {
+        if (!InputDataValidator.isEmailValid(email)) {
             isValidEmail.setValue(false);
             valid = false;
         }
 
-        if (!InputDataValidator.isValidPassword(password)) {
+        if (!InputDataValidator.isPasswordValid(password)) {
             isValidPassword.setValue(false);
             valid = false;
         }

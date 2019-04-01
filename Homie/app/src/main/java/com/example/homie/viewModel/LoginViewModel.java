@@ -1,11 +1,11 @@
-package com.example.homie.ViewModel;
+package com.example.homie.viewModel;
 
 import android.app.Application;
 import android.arch.lifecycle.AndroidViewModel;
 import android.arch.lifecycle.MutableLiveData;
 import android.support.annotation.NonNull;
-import com.example.homie.Repository.UserRepository;
-import com.example.homie.ViewModel.Util.InputDataValidator;
+import com.example.homie.repository.UserRepository;
+import com.example.homie.viewModel.util.InputDataValidator;
 
 public class LoginViewModel extends AndroidViewModel {
 
@@ -40,12 +40,12 @@ public class LoginViewModel extends AndroidViewModel {
     boolean checkEnteredData(String email, String password) {
         boolean valid = true;
 
-        if (!InputDataValidator.isEmail(email)) {
+        if (!InputDataValidator.isEmailValid(email)) {
             isValidEmail.setValue(false);
             valid = false;
         }
 
-        if (!InputDataValidator.isValidPassword(password)) {
+        if (!InputDataValidator.isPasswordValid(password)) {
             isValidPassword.setValue(false);
             valid = false;
         }

@@ -1,4 +1,4 @@
-package com.example.homie.View;
+package com.example.homie.view;
 
 import android.content.Intent;
 import android.support.annotation.NonNull;
