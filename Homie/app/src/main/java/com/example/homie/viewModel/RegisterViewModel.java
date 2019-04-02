@@ -3,9 +3,23 @@ package com.example.homie.viewModel;
 import android.app.Application;
 import android.arch.lifecycle.AndroidViewModel;
 import android.arch.lifecycle.MutableLiveData;
+import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.NonNull;
+import android.widget.Toast;
+
+import com.example.homie.network.APIConnection;
+import com.example.homie.network.DTO.UserLoginDTO;
+import com.example.homie.network.DTO.UserRegisterDTO;
 import com.example.homie.repository.UserRepository;
+import com.example.homie.view.MenuActivity;
 import com.example.homie.viewModel.util.InputDataValidator;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 public class RegisterViewModel extends AndroidViewModel {
     private MutableLiveData<Boolean> isValidFirstName;
@@ -16,10 +30,11 @@ public class RegisterViewModel extends AndroidViewModel {
     private MutableLiveData<Boolean> isRegistered;
 
     private UserRepository userRepository;
+    static final String BASE_URL = "http://104.248.241.99";
 
     public RegisterViewModel(@NonNull Application application) {
         super(application);
-        userRepository = UserRepository.getInstance();
+        //userRepository = UserRepository.getInstance();
 
         isValidFirstName = new MutableLiveData<>();
         isValidLastName = new MutableLiveData<>();
@@ -36,8 +51,9 @@ public class RegisterViewModel extends AndroidViewModel {
 
     public void registerUser(String firstName, String lastName, String email, String password) {
         if (checkEnteredData(firstName, lastName, email, password)) {
-            userRepository.createAccount(firstName, lastName, email, password);
+            //userRepository.createAccount(firstName, lastName, email, password);
             isRegistered.setValue(true);
+            new RegistrationRequest().start(firstName, lastName, email, password);
         }
     }
 
@@ -83,5 +99,35 @@ public class RegisterViewModel extends AndroidViewModel {
 
     public MutableLiveData<Boolean> getIsRegistered() {
         return isRegistered;
+    }
+
+    private class RegistrationRequest implements Callback<UserRegisterDTO> {
+
+        private Context context;
+
+        public void start(String firstName, String lastName, String email, String password) {
+
+            Retrofit.Builder builder = new Retrofit.Builder()
+                    .baseUrl(BASE_URL)
+                    .addConverterFactory(GsonConverterFactory.create());
+
+            Retrofit retrofit = builder.build();
+
+            APIConnection client = retrofit.create(APIConnection.class);
+            Call<UserRegisterDTO> call = client.createAccount(firstName, lastName, email, password);
+            call.enqueue(this);
+
+        }
+
+        @Override
+        public void onResponse(Call<UserRegisterDTO> call, Response<UserRegisterDTO> response) {
+            //this was just for test, do we want to login in after created account?
+            Intent intent = new Intent(context, MenuActivity.class);
+            context.startActivity(intent);
+        }
+
+        @Override
+        public void onFailure(Call<UserRegisterDTO> call, Throwable t) {
+        }
     }
 }

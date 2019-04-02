@@ -3,9 +3,24 @@ package com.example.homie.viewModel;
 import android.app.Application;
 import android.arch.lifecycle.AndroidViewModel;
 import android.arch.lifecycle.MutableLiveData;
+import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.NonNull;
+import android.view.Menu;
+
+import com.example.homie.R;
+import com.example.homie.network.APIConnection;
+import com.example.homie.network.DTO.UserLoginDTO;
 import com.example.homie.repository.UserRepository;
+import com.example.homie.view.LoginActivity;
+import com.example.homie.view.MenuActivity;
 import com.example.homie.viewModel.util.InputDataValidator;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 public class LoginViewModel extends AndroidViewModel {
 
@@ -15,10 +30,11 @@ public class LoginViewModel extends AndroidViewModel {
     private MutableLiveData<Boolean> isLoggedIn;
 
     private UserRepository userRepository;
+    static final String BASE_URL = "http://104.248.241.99";
 
     public LoginViewModel(@NonNull Application application) {
         super(application);
-        userRepository = UserRepository.getInstance();
+        //userRepository = UserRepository.getInstance();
 
         isValidEmail = new MutableLiveData<>();
         isValidPassword = new MutableLiveData<>();
@@ -30,12 +46,12 @@ public class LoginViewModel extends AndroidViewModel {
     }
 
     public void loginUser(String email, String password) {
-        if (checkEnteredData(email, password)) {
-            userRepository.loginAccount(email, password);
-            isLoggedIn.setValue(true);
+        //if (checkEnteredData(email, password)) {
+//            userRepository.loginAccount(email, password);
+//            isLoggedIn.setValue(true);
+            new LoginRequest().start(email, password);
         }
 
-    }
 
     boolean checkEnteredData(String email, String password) {
         boolean valid = true;
@@ -62,5 +78,35 @@ public class LoginViewModel extends AndroidViewModel {
 
     public MutableLiveData<Boolean> getIsLoggedIn() {
         return isLoggedIn;
+    }
+
+    private class LoginRequest implements Callback<UserLoginDTO> {
+
+        private Context context;
+
+        public void start(String email, String password) {
+
+            Retrofit.Builder builder = new Retrofit.Builder()
+                    .baseUrl(BASE_URL)
+                    .addConverterFactory(GsonConverterFactory.create());
+
+            Retrofit retrofit = builder.build();
+
+            APIConnection client = retrofit.create(APIConnection.class);
+            Call<UserLoginDTO> call = client.loginAccount(email, password);
+            call.enqueue(this);
+
+        }
+
+        @Override
+        public void onResponse(Call<UserLoginDTO> call, Response<UserLoginDTO> response) {
+            Intent intent = new Intent(context, MenuActivity.class);
+            context.startActivity(intent);
+        }
+
+        @Override
+        public void onFailure(Call<UserLoginDTO> call, Throwable t) {
+
+        }
     }
 }
