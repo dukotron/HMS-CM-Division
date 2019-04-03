@@ -21,8 +21,8 @@ public interface APIConnection {
                                         @Field("password") String password);
 
     //change to POST
-
-    @GET("api/user/login")
+    @FormUrlEncoded
+    @POST("api/user/login")
     Call<UserLoginDTO> loginAccount(@Field("email") String email,
                                     @Field("password") String password) ;
 

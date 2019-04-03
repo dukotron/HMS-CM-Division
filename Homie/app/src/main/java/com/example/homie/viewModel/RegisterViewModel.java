@@ -21,6 +21,8 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
+import static com.example.homie.network.NetworkConfig.BASE_URL;
+
 public class RegisterViewModel extends AndroidViewModel {
     private MutableLiveData<Boolean> isValidFirstName;
     private MutableLiveData<Boolean> isValidLastName;
@@ -30,7 +32,8 @@ public class RegisterViewModel extends AndroidViewModel {
     private MutableLiveData<Boolean> isRegistered;
 
     private UserRepository userRepository;
-    static final String BASE_URL = "http://104.248.241.99";
+    //TODO move IP address to separate configuration class
+
 
     public RegisterViewModel(@NonNull Application application) {
         super(application);

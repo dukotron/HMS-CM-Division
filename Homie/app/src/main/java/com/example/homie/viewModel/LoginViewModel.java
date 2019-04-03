@@ -6,13 +6,11 @@ import android.arch.lifecycle.MutableLiveData;
 import android.content.Context;
 import android.content.Intent;
 import android.support.annotation.NonNull;
-import android.view.Menu;
+import android.util.Log;
 
-import com.example.homie.R;
 import com.example.homie.network.APIConnection;
 import com.example.homie.network.DTO.UserLoginDTO;
 import com.example.homie.repository.UserRepository;
-import com.example.homie.view.LoginActivity;
 import com.example.homie.view.MenuActivity;
 import com.example.homie.viewModel.util.InputDataValidator;
 
@@ -22,6 +20,8 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
+import static com.example.homie.network.NetworkConfig.BASE_URL;
+
 public class LoginViewModel extends AndroidViewModel {
 
     private MutableLiveData<Boolean> isValidEmail;
@@ -30,7 +30,6 @@ public class LoginViewModel extends AndroidViewModel {
     private MutableLiveData<Boolean> isLoggedIn;
 
     private UserRepository userRepository;
-    static final String BASE_URL = "http://104.248.241.99";
 
     public LoginViewModel(@NonNull Application application) {
         super(application);
@@ -49,7 +48,7 @@ public class LoginViewModel extends AndroidViewModel {
         //if (checkEnteredData(email, password)) {
 //            userRepository.loginAccount(email, password);
 //            isLoggedIn.setValue(true);
-            new LoginRequest().start(email, password);
+            new LoginRequest(getApplication()).start(email, password);
         }
 
 
@@ -84,7 +83,12 @@ public class LoginViewModel extends AndroidViewModel {
 
         private Context context;
 
+        private LoginRequest(Context context) {
+            this.context = context;
+        }
+
         public void start(String email, String password) {
+            Log.d("LoginRequestTask", "Login request started");
 
             Retrofit.Builder builder = new Retrofit.Builder()
                     .baseUrl(BASE_URL)
@@ -100,7 +104,9 @@ public class LoginViewModel extends AndroidViewModel {
 
         @Override
         public void onResponse(Call<UserLoginDTO> call, Response<UserLoginDTO> response) {
+            Log.d("LoginRequestTask", "Login Response");
             Intent intent = new Intent(context, MenuActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK); //just for now
             context.startActivity(intent);
         }
 
