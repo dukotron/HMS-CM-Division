@@ -28,8 +28,8 @@ public class LoginRequest implements LoginCallback {
 
         Retrofit retrofit = builder.build();
 
-        RetrofitAPI client = retrofit.create(RetrofitAPI.class);
-        Call<UserLoginDTO> call = client.loginAccount(user);
+        RetrofitAPI server = retrofit.create(RetrofitAPI.class);
+        Call<AuthDRO> call = server.loginAccount(user);
         call.enqueue(this);
 
         return null;
@@ -37,12 +37,12 @@ public class LoginRequest implements LoginCallback {
     }
 
     @Override
-    public void onResponse(Call<UserLoginDTO> call, Response<UserLoginDTO> response) {
-
+    public void onResponse(Call<AuthDRO> call, Response<AuthDRO> response) {
+        Log.d("Callback info",response.body().getFirstName()+"````````````````````````````````````````");
     }
 
     @Override
-    public void onFailure(Call<UserLoginDTO> call, Throwable t) {
+    public void onFailure(Call<AuthDRO> call, Throwable t) {
 
     }
 

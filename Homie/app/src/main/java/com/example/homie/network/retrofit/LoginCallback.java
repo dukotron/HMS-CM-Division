@@ -6,7 +6,7 @@ import com.example.homie.network.DTO.UserLoginDTO;
 
 import retrofit2.Callback;
 
-public interface LoginCallback extends Callback<UserLoginDTO> {
+public interface LoginCallback extends Callback<AuthDRO> {
 
     AuthDRO start(UserLoginDTO user);
 }

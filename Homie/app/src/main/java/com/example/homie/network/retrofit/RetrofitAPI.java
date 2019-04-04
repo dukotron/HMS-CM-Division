@@ -1,5 +1,6 @@
 package com.example.homie.network.retrofit;
 
+import com.example.homie.network.DRO.AuthDRO;
 import com.example.homie.network.DTO.UserLoginDTO;
 import com.example.homie.network.DTO.UserRegisterDTO;
 
@@ -11,11 +12,11 @@ public interface RetrofitAPI {
 
 
     @POST("api/user/register")
-    Call<UserRegisterDTO> createAccount(@Body UserRegisterDTO user);
+    Call<AuthDRO> createAccount(@Body UserRegisterDTO user);
 
 
     @POST("api/user/login")
-    Call<UserLoginDTO> loginAccount(@Body UserLoginDTO user) ;
+    Call<AuthDRO> loginAccount(@Body UserLoginDTO user) ;
 
 
 }

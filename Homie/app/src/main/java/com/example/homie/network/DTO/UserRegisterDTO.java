@@ -2,17 +2,31 @@ package com.example.homie.network.DTO;
 
 public class UserRegisterDTO {
 
-    public String firstName;
-    public String lastName;
-    public String email;
-    public byte[] password;
-    public byte[] salt;
+    private String firstName;
+    private String lastName;
+    private String email;
+    private String password;
 
-    public UserRegisterDTO(String firstName, String lastName, String email, byte[] password, byte[] salt) {
+    public UserRegisterDTO(String firstName, String lastName, String email, String password) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
         this.password = password;
-        this.salt = salt;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public String getPassword() {
+        return password;
     }
 }

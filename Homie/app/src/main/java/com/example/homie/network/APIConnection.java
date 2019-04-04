@@ -4,7 +4,6 @@ import com.example.homie.network.DTO.UserLoginDTO;
 import com.example.homie.network.DTO.UserRegisterDTO;
 import com.example.homie.network.retrofit.LoginRequest;
 import com.example.homie.network.retrofit.RegisterRequest;
-import com.example.homie.network.util.PasswordUtil;
 
 public class APIConnection implements NetworkConnection {
 
@@ -14,15 +13,13 @@ public class APIConnection implements NetworkConnection {
 
     @Override
     public void loginAccount(String email, String password) {
-        byte[] salt = PasswordUtil.generateSalt();
-        UserLoginDTO user = new UserLoginDTO(email, PasswordUtil.hashPassword(password.toCharArray(), salt, 128, 256),salt);
+        UserLoginDTO user = new UserLoginDTO(email, password);
         loginRequest.start(user);
     }
 
     @Override
     public void createAccount(String firstName, String lastName, String email, String password) {
-        byte[] salt = PasswordUtil.generateSalt();
-        UserRegisterDTO user = new UserRegisterDTO(firstName, lastName, email, PasswordUtil.hashPassword(password.toCharArray(), salt, 128, 256),salt);
+        UserRegisterDTO user = new UserRegisterDTO(firstName, lastName, email, password);
         registerRequest.start(user);
     }
 }
