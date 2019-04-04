@@ -21,6 +21,8 @@ public class LoginActivity extends AppCompatActivity {
 
     LoginViewModel viewModel;
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,9 +31,11 @@ public class LoginActivity extends AppCompatActivity {
         email = findViewById(R.id.emailLogin);
         password = findViewById(R.id.passwordLogin);
 
+
         initLoginButton();
 
         initViewModel();
+
     }
 
     void initViewModel() {
@@ -82,4 +86,5 @@ public class LoginActivity extends AppCompatActivity {
         startActivity(intent);
         finish();
     }
+
 }

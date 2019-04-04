@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:padding="5dp">
+
+    <ImageView
+        android:layout_width="56dp"
+        android:layout_height="56dp"
+        android:src="@mipmap/ic_launcher_round"
+        android:id="@+id/imd_device"/>
+
+    <LinearLayout
+        android:layout_width="317dp"
+        android:layout_height="66dp"
+        android:layout_marginLeft="16dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/location_device"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Location of the device"
+            android:gravity="center_horizontal"
+            android:textColor="@color/design_default_color_primary_dark"
+            android:textSize="14sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/status_device"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:text="Status"
+            android:textColor="@color/colorPrimaryDark"
+            android:textStyle="bold" />
+
+    </LinearLayout>
+    
+    <!--<LinearLayout-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent"-->
+        <!--android:gravity="end">-->
+
+        <!--<ImageView-->
+            <!--android:layout_width="188dp"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_gravity=""-->
+            <!--android:src="@drawable/iconshome" />-->
+
+    <!--</LinearLayout>-->
+
+</LinearLayout>
