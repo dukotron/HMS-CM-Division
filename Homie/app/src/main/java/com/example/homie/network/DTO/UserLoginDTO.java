@@ -3,19 +3,12 @@ package com.example.homie.network.DTO;
 public class UserLoginDTO {
 
     public String email;
-    public String password;
-    public char[] salt;
+    public byte[] password;
+    public byte[] salt;
 
-    public UserLoginDTO(String email, String password) {
+    public UserLoginDTO(String email, byte[] password,byte[] salt) {
         this.email = email;
         this.password = password;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public String getPassword() {
-        return password;
+        this.salt=salt;
     }
 }

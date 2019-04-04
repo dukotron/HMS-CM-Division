@@ -30,7 +30,7 @@ public class LoginViewModel extends AndroidViewModel {
 
     public LoginViewModel(@NonNull Application application) {
         super(application);
-        //userRepository = UserRepository.getInstance();
+        userRepository = UserRepository.getInstance();
 
         isValidEmail = new MutableLiveData<>();
         isValidPassword = new MutableLiveData<>();
@@ -42,12 +42,12 @@ public class LoginViewModel extends AndroidViewModel {
     }
 
     public void loginUser(String email, String password) {
-        //if (checkEnteredData(email, password)) {
-//            userRepository.loginAccount(email, password);
-//            isLoggedIn.setValue(true);
-            new LoginRequest(getApplication()).start(email, password);
+        if (checkEnteredData(email, password)) {
+            userRepository.loginAccount(email, password);
+            //TODO check response from API
+            isLoggedIn.setValue(true);
         }
-
+    }
 
     boolean checkEnteredData(String email, String password) {
         boolean valid = true;
@@ -74,44 +74,5 @@ public class LoginViewModel extends AndroidViewModel {
 
     public MutableLiveData<Boolean> getIsLoggedIn() {
         return isLoggedIn;
-    }
-
-    private class LoginRequest implements Callback<UserLoginDTO> {
-
-        private Context context;
-
-        private LoginRequest(Context context) {
-            this.context = context;
-        }
-
-        public void start(String email, String password) {
-            Log.d("LoginRequestTask", "Login request started");
-
-            Retrofit.Builder builder = new Retrofit.Builder()
-                    .baseUrl(BASE_URL)
-                    .addConverterFactory(GsonConverterFactory.create());
-
-            Retrofit retrofit = builder.build();
-
-            APIConnection client = retrofit.create(APIConnection.class);
-            Call<UserLoginDTO> call = client.loginAccount(email, password);
-            call.enqueue(this);
-
-        }
-
-        @Override
-        public void onResponse(Call<UserLoginDTO> call, Response<UserLoginDTO> response) {
-
-            Log.d("LoginRequestTask", "Login Response");
-//            Intent intent = new Intent(context, MenuActivity.class);
-////            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK); //just for now
-////            context.startActivity(intent);
-            isLoggedIn.setValue(true);
-        }
-
-        @Override
-        public void onFailure(Call<UserLoginDTO> call, Throwable t) {
-
-        }
     }
 }
