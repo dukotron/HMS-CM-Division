@@ -4,6 +4,7 @@ public class UserLoginDTO {
 
     public String email;
     public String password;
+    public char[] salt;
 
     public UserLoginDTO(String email, String password) {
         this.email = email;

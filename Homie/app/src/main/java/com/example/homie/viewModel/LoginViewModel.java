@@ -4,14 +4,11 @@ import android.app.Application;
 import android.arch.lifecycle.AndroidViewModel;
 import android.arch.lifecycle.MutableLiveData;
 import android.content.Context;
-import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.util.Log;
 
-import com.example.homie.network.APIConnection;
 import com.example.homie.network.DTO.UserLoginDTO;
 import com.example.homie.repository.UserRepository;
-import com.example.homie.view.MenuActivity;
 import com.example.homie.viewModel.util.InputDataValidator;
 
 import retrofit2.Call;
@@ -20,7 +17,7 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-import static com.example.homie.network.NetworkConfig.BASE_URL;
+import static com.example.homie.network.util.NetworkConfig.BASE_URL;
 
 public class LoginViewModel extends AndroidViewModel {
 
@@ -104,10 +101,12 @@ public class LoginViewModel extends AndroidViewModel {
 
         @Override
         public void onResponse(Call<UserLoginDTO> call, Response<UserLoginDTO> response) {
+
             Log.d("LoginRequestTask", "Login Response");
-            Intent intent = new Intent(context, MenuActivity.class);
-            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK); //just for now
-            context.startActivity(intent);
+//            Intent intent = new Intent(context, MenuActivity.class);
+////            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK); //just for now
+////            context.startActivity(intent);
+            isLoggedIn.setValue(true);
         }
 
         @Override

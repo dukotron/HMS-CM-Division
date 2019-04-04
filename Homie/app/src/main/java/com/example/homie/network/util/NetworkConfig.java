@@ -1,4 +1,4 @@
-package com.example.homie.network;
+package com.example.homie.network.util;
 
 public class NetworkConfig {
 

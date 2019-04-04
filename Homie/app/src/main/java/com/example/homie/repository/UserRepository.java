@@ -1,29 +1,30 @@
 package com.example.homie.repository;
 
+
 import com.example.homie.network.APIConnection;
-import com.example.homie.network.DWHConnection;
+import com.example.homie.network.NetworkConnection;
 
 public class UserRepository {
 
-    private APIConnection apiConnection;
+    private NetworkConnection connection;
     private static UserRepository instance;
 
-//    private UserRepository() {
-//        apiConnection = new DWHConnection();
-//    }
-//
-//    public static UserRepository getInstance() {
-//        if (instance == null) {
-//            instance = new UserRepository();
-//        }
-//        return instance;
-//    }
-//
-//    public void createAccount(String firstName, String lastName, String email, String password) {
-//        apiConnection.createAccount(firstName, lastName, email, password);
-//    }
-//
-//    public void loginAccount(String email, String password) {
-//        apiConnection.loginAccount(email, password);
-//    }
+    private UserRepository() {
+        connection = new APIConnection();
+    }
+
+    public static UserRepository getInstance() {
+        if (instance == null) {
+            instance = new UserRepository();
+        }
+        return instance;
+    }
+
+    public void createAccount(String firstName, String lastName, String email, String password) {
+        connection.createAccount(firstName, lastName, email, password);
+    }
+
+    public void loginAccount(String email, String password) {
+        connection.loginAccount(email, password);
+    }
 }

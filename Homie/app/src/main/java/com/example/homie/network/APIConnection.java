@@ -2,30 +2,24 @@ package com.example.homie.network;
 
 import com.example.homie.network.DTO.UserLoginDTO;
 import com.example.homie.network.DTO.UserRegisterDTO;
+import com.example.homie.network.retrofit.LoginRequest;
+import com.example.homie.network.retrofit.RegisterRequest;
 
-import retrofit2.Call;
-import retrofit2.http.Body;
-import retrofit2.http.Field;
-import retrofit2.http.FormUrlEncoded;
-import retrofit2.http.GET;
-import retrofit2.http.POST;
-import retrofit2.http.Path;
+public class APIConnection implements NetworkConnection {
 
-public interface APIConnection {
-
-    @FormUrlEncoded
-    @POST("api/user/register")
-    Call<UserRegisterDTO> createAccount(@Field("firstName") String firstName,
-                                        @Field("lastName") String lastName,
-                                        @Field("email") String email,
-                                        @Field("password") String password);
-
-    //change to POST
-    @FormUrlEncoded
-    @POST("api/user/login")
-    Call<UserLoginDTO> loginAccount(@Field("email") String email,
-                                    @Field("password") String password) ;
+    private LoginRequest loginRequest;
+    private RegisterRequest registerRequest;
 
 
+    @Override
+    public void loginAccount(String email, String password) {
+        UserLoginDTO user = new UserLoginDTO(email, password);
+        loginRequest.start(user);
+    }
+
+    @Override
+    public void createAccount(String firstName, String lastName, String email, String password) {
+        UserRegisterDTO user = new UserRegisterDTO(firstName, lastName, email, password);
+        registerRequest.start(user);
+    }
 }
-
