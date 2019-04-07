@@ -29,8 +29,8 @@ public class RegisterRequest implements RegisterCallback {
         Retrofit retrofit = builder.build();
 
         RetrofitAPI client = retrofit.create(RetrofitAPI.class);
-        Call<UserRegisterDTO> call = client.createAccount(user);
-        call.enqueue(this);
+      //  Call<UserRegisterDTO> call = client.createAccount(user);
+     //   call.enqueue(this);
 
         return null;
         //return new AuthDRO();
