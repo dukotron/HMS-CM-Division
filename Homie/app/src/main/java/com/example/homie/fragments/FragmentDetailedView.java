@@ -1,4 +1,4 @@
-package com.example.homie.Fragments;
+package com.example.homie.fragments;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;

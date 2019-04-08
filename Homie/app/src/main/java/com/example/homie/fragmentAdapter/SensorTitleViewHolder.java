@@ -1,4 +1,4 @@
-package com.example.homie.model.viewHolders;
+package com.example.homie.fragmentAdapter;
 
 import android.support.annotation.NonNull;
 import android.view.View;
