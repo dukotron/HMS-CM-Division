@@ -7,33 +7,18 @@ import java.io.Serializable;
 
 public class AuthDRO implements Serializable {
 
-    @SerializedName("firstName")
-    @Expose
-    private String firstName;
-    @SerializedName("lastName")
-    @Expose
-    private String lastName;
-    @SerializedName("statusCode")
+
     @Expose
     private int statusCode;
-    @SerializedName("userId")
+    @SerializedName("UserId")
     @Expose
     private String userId;
 
-    public AuthDRO(String firstName, String lastName, int statusCode, String userId) {
-        this.firstName = firstName;
-        this.lastName = lastName;
+    public AuthDRO(int statusCode, String userId) {
         this.statusCode = statusCode;
         this.userId = userId;
     }
 
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
 
     public int getStatusCode() {
         return statusCode;
@@ -41,5 +26,13 @@ public class AuthDRO implements Serializable {
 
     public String getUserId() {
         return userId;
+    }
+
+    @Override
+    public String toString() {
+        return "AuthDRO{" +
+                "statusCode=" + statusCode +
+                ", userId='" + userId + '\'' +
+                '}';
     }
 }

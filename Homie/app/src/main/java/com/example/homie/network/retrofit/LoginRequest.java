@@ -36,7 +36,7 @@ public class LoginRequest implements LoginCallback {
 
     @Override
     public void onResponse(Call<AuthDRO> call, Response<AuthDRO> response) {
-        Log.d("Callback info",response.body().getFirstName()+"````````````````````````````````````````````````````");
+        Log.d("Callback info",response.body()+"````````````````````````````````````````````````````");
     }
 
     @Override

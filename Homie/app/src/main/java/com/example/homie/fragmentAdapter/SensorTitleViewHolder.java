@@ -1,4 +1,4 @@
-package com.example.homie.model.viewHolders;
+package com.example.homie.fragmentAdapter;
 
 import android.support.annotation.NonNull;
 import android.view.View;
@@ -13,6 +13,6 @@ public class SensorTitleViewHolder extends ParentViewHolder {
 
     public SensorTitleViewHolder(@NonNull View itemView) {
         super(itemView);
-        sensorTextView = (TextView) itemView.findViewById(R.id.sensor_title);
+        sensorTextView = itemView.findViewById(R.id.sensor_title);
     }
 }

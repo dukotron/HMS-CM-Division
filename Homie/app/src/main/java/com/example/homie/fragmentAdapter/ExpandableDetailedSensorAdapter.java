@@ -1,4 +1,4 @@
-package com.example.homie.model.viewHolders;
+package com.example.homie.fragmentAdapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -11,7 +11,6 @@ import com.example.homie.R;
 import com.example.homie.model.SensorContent;
 import com.example.homie.model.SensorTitle;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class ExpandableDetailedSensorAdapter extends ExpandableRecyclerAdapter<SensorTitleViewHolder, SensorContentViewHolder> {

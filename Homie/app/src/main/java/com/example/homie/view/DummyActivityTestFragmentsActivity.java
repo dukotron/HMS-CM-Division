@@ -5,9 +5,7 @@ import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 
-import com.example.homie.FragmentAdapter.ViewPagerAdapter;
-import com.example.homie.Fragments.FragmentDetailedView;
-import com.example.homie.Fragments.FragmentDevices;
+import com.example.homie.fragmentAdapter.ViewPagerAdapter;
 import com.example.homie.R;
 
 public class DummyActivityTestFragmentsActivity extends AppCompatActivity {

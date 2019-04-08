@@ -1,9 +1,8 @@
-package com.example.homie.FragmentAdapter;
+package com.example.homie.fragmentAdapter;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
-import android.support.v4.view.ViewPager;
 
 import java.util.List;
 import java.util.ArrayList;
