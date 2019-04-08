@@ -3,6 +3,7 @@ package com.example.homie.repository;
 
 import com.example.homie.network.APIConnection;
 import com.example.homie.network.NetworkConnection;
+import com.example.homie.viewModel.AuthCallBack;
 
 public class UserRepository {
 
@@ -20,11 +21,11 @@ public class UserRepository {
         return instance;
     }
 
-    public void createAccount(String firstName, String lastName, String email, String password) {
-        connection.createAccount(firstName, lastName, email, password);
+    public void createAccount(String firstName, String lastName, String email, String password, AuthCallBack viewModel) {
+        connection.createAccount(firstName, lastName, email, password, viewModel);
     }
 
-    public void loginAccount(String email, String password) {
-        connection.loginAccount(email, password);
+    public void loginAccount(String email, String password, AuthCallBack viewModel) {
+        connection.loginAccount(email, password, viewModel);
     }
 }

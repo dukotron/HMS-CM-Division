@@ -8,7 +8,7 @@ import android.support.annotation.NonNull;
 import com.example.homie.repository.UserRepository;
 import com.example.homie.viewModel.util.InputDataValidator;
 
-public class RegisterViewModel extends AndroidViewModel {
+public class RegisterViewModel extends AndroidViewModel implements AuthCallBack {
     private MutableLiveData<Boolean> isValidFirstName;
     private MutableLiveData<Boolean> isValidLastName;
     private MutableLiveData<Boolean> isValidEmail;
@@ -17,6 +17,7 @@ public class RegisterViewModel extends AndroidViewModel {
     private MutableLiveData<Boolean> isRegistered;
 
     private UserRepository userRepository;
+
     //TODO move IP address to separate configuration class
 
 
@@ -39,8 +40,7 @@ public class RegisterViewModel extends AndroidViewModel {
 
     public void registerUser(String firstName, String lastName, String email, String password) {
         if (checkEnteredData(firstName, lastName, email, password)) {
-            userRepository.createAccount(firstName, lastName, email, password);
-            //isRegistered.setValue(true);
+            userRepository.createAccount(firstName, lastName, email, password, this);
 
         }
     }
@@ -90,4 +90,10 @@ public class RegisterViewModel extends AndroidViewModel {
     }
 
 
+    @Override
+    public void onReturn(boolean value) {
+        if(value) {
+            isRegistered.setValue(true);
+        }
+    }
 }

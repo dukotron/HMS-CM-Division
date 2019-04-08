@@ -5,6 +5,7 @@ import android.util.Log;
 import com.example.homie.network.DRO.AuthDRO;
 import com.example.homie.network.DTO.UserLoginDTO;
 import com.example.homie.network.DTO.UserRegisterDTO;
+import com.example.homie.viewModel.AuthCallBack;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -17,11 +18,12 @@ import static com.example.homie.network.util.NetworkConfig.BASE_URL;
 public class LoginRequest implements LoginCallback {
 
     private final static String TAG = "Login Request";
+    private AuthCallBack callBack;
 
     @Override
-    public void start(UserLoginDTO user) {
+    public void start(UserLoginDTO user, AuthCallBack callBack) {
         Log.d(TAG, "Login request started");
-
+        this.callBack = callBack;
         Retrofit.Builder builder = new Retrofit.Builder()
                 .baseUrl(BASE_URL)
                 .addConverterFactory(GsonConverterFactory.create());
@@ -36,7 +38,12 @@ public class LoginRequest implements LoginCallback {
 
     @Override
     public void onResponse(Call<AuthDRO> call, Response<AuthDRO> response) {
-        Log.d("Callback info",response.body()+"````````````````````````````````````````````````````");
+        if(response.code() == 200){
+            Log.d("Callback info"," status code " + response.body()+" ```````````````````````````````````````` ");
+            //callBack.onReturn(true);
+        }else {
+            Log.d("Callback info", "status code" + response.body());
+        }
     }
 
     @Override

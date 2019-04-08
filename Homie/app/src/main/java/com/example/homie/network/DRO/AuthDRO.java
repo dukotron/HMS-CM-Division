@@ -7,7 +7,6 @@ import java.io.Serializable;
 
 public class AuthDRO implements Serializable {
 
-
     @Expose
     private int statusCode;
     @SerializedName("UserId")

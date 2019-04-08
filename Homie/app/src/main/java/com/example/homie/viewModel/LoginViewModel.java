@@ -19,7 +19,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 import static com.example.homie.network.util.NetworkConfig.BASE_URL;
 
-public class LoginViewModel extends AndroidViewModel {
+public class LoginViewModel extends AndroidViewModel implements AuthCallBack{
 
     private MutableLiveData<Boolean> isValidEmail;
     private MutableLiveData<Boolean> isValidPassword;
@@ -43,7 +43,7 @@ public class LoginViewModel extends AndroidViewModel {
 
     public void loginUser(String email, String password) {
         if (checkEnteredData(email, password)) {
-            userRepository.loginAccount(email, password);
+            userRepository.loginAccount(email, password, this);
             //TODO check response from API
             isLoggedIn.setValue(true);
         }
@@ -74,5 +74,12 @@ public class LoginViewModel extends AndroidViewModel {
 
     public MutableLiveData<Boolean> getIsLoggedIn() {
         return isLoggedIn;
+    }
+
+    @Override
+    public void onReturn(boolean value) {
+        if (value) {
+            isLoggedIn.setValue(true);
+        }
     }
 }

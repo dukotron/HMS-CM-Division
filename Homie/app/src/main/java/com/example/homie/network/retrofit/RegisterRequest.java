@@ -1,10 +1,10 @@
 package com.example.homie.network.retrofit;
 
 import android.util.Log;
-import android.widget.Toast;
 
 import com.example.homie.network.DRO.AuthDRO;
 import com.example.homie.network.DTO.UserRegisterDTO;
+import com.example.homie.viewModel.AuthCallBack;
 
 import retrofit2.Call;
 import retrofit2.Response;
@@ -17,10 +17,12 @@ public class RegisterRequest implements RegisterCallback {
 
 
     private final static String TAG = "Register Request";
+    private AuthCallBack callBack;
 
 
     @Override
-    public void start(UserRegisterDTO user) {
+    public void start(UserRegisterDTO user, AuthCallBack callBack) {
+        this.callBack = callBack;
         Log.d(TAG, "Register request started");
         Retrofit.Builder builder = new Retrofit.Builder()
                 .baseUrl(BASE_URL)
@@ -37,11 +39,10 @@ public class RegisterRequest implements RegisterCallback {
     @Override
     public void onResponse(Call<AuthDRO> call, Response<AuthDRO> response) {
         if(response.code() == 200){
-            Log.d("Callback info","status code" + response.body()+"````````````````````````````````````````");
-
-            System.out.println("Callback response: " + response);
+            Log.d("Callback info"," status code " + response.body()+" ```````````````````````````````````````` ");
+            callBack.onReturn(true);
         }else {
-            // request response is not OK (200)
+           Log.d("Callback info", "status code" + response.body());
         }
     }
 
