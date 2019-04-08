@@ -22,7 +22,7 @@ public class RegisterViewModel extends AndroidViewModel {
 
     public RegisterViewModel(@NonNull Application application) {
         super(application);
-        //userRepository = UserRepository.getInstance();
+        userRepository = UserRepository.getInstance();
 
         isValidFirstName = new MutableLiveData<>();
         isValidLastName = new MutableLiveData<>();
@@ -39,9 +39,9 @@ public class RegisterViewModel extends AndroidViewModel {
 
     public void registerUser(String firstName, String lastName, String email, String password) {
         if (checkEnteredData(firstName, lastName, email, password)) {
-            //userRepository.createAccount(firstName, lastName, email, password);
-            isRegistered.setValue(true);
-            //new RegistrationRequest().start(firstName, lastName, email, password);
+            userRepository.createAccount(firstName, lastName, email, password);
+            //isRegistered.setValue(true);
+
         }
     }
 

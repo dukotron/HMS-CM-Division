@@ -7,19 +7,13 @@ import com.example.homie.network.retrofit.RegisterRequest;
 
 public class APIConnection implements NetworkConnection {
 
-    private LoginRequest loginRequest;
-    private RegisterRequest registerRequest;
-
-
     @Override
     public void loginAccount(String email, String password) {
-        UserLoginDTO user = new UserLoginDTO(email, password);
-        loginRequest.start(user);
+        new LoginRequest().start(new UserLoginDTO(email, password));
     }
 
     @Override
     public void createAccount(String firstName, String lastName, String email, String password) {
-        UserRegisterDTO user = new UserRegisterDTO(firstName, lastName, email, password);
-        registerRequest.start(user);
+        new RegisterRequest().start(new UserRegisterDTO(firstName, lastName, email, password));
     }
 }

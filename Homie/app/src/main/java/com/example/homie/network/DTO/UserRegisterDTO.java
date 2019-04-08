@@ -1,6 +1,8 @@
 package com.example.homie.network.DTO;
 
-public class UserRegisterDTO {
+import java.io.Serializable;
+
+public class UserRegisterDTO implements Serializable {
 
     private String firstName;
     private String lastName;

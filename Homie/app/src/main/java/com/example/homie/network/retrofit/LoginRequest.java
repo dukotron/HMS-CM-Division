@@ -19,7 +19,7 @@ public class LoginRequest implements LoginCallback {
     private final static String TAG = "Login Request";
 
     @Override
-    public AuthDRO start(UserLoginDTO user) {
+    public void start(UserLoginDTO user) {
         Log.d(TAG, "Login request started");
 
         Retrofit.Builder builder = new Retrofit.Builder()
@@ -32,18 +32,16 @@ public class LoginRequest implements LoginCallback {
         Call<AuthDRO> call = server.loginAccount(user);
         call.enqueue(this);
 
-        return null;
-       // return new AuthDRO();
     }
 
     @Override
     public void onResponse(Call<AuthDRO> call, Response<AuthDRO> response) {
-        Log.d("Callback info",response.body().getFirstName()+"````````````````````````````````````````");
+        Log.d("Callback info",response.body().getFirstName()+"````````````````````````````````````````````````````");
     }
 
     @Override
     public void onFailure(Call<AuthDRO> call, Throwable t) {
-
+        Log.d("Callback info","``````````````````````````````ERROOROOOROOOOROOOOR``````````");
     }
 
 

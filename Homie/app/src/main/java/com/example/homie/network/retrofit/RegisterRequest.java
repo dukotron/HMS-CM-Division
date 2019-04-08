@@ -19,7 +19,7 @@ public class RegisterRequest implements RegisterCallback {
 
 
     @Override
-    public AuthDRO start(UserRegisterDTO user) {
+    public void start(UserRegisterDTO user) {
         Log.d(TAG, "Register request started");
 
         Retrofit.Builder builder = new Retrofit.Builder()
@@ -29,21 +29,20 @@ public class RegisterRequest implements RegisterCallback {
         Retrofit retrofit = builder.build();
 
         RetrofitAPI client = retrofit.create(RetrofitAPI.class);
-      //  Call<UserRegisterDTO> call = client.createAccount(user);
-     //   call.enqueue(this);
+        Call<AuthDRO> call = client.createAccount(user);
+        call.enqueue(this);
 
-        return null;
-        //return new AuthDRO();
-    }
-
-    @Override
-    public void onResponse(Call<UserRegisterDTO> call, Response<UserRegisterDTO> response) {
 
     }
 
     @Override
-    public void onFailure(Call<UserRegisterDTO> call, Throwable t) {
+    public void onResponse(Call<AuthDRO> call, Response<AuthDRO> response) {
+        Log.d("Callback info",response.body().getStatusCode()+"````````````````````````````````````````");
+    }
 
+    @Override
+    public void onFailure(Call<AuthDRO> call, Throwable t) {
+        Log.d("Callback info","``````````````````EROROROROROROROROROROROR``````````````````````");
     }
 
 

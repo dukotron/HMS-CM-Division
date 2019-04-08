@@ -12,6 +12,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.example.homie.R;
 import com.example.homie.viewModel.RegisterViewModel;
@@ -95,9 +96,11 @@ public class RegisterActivity extends AppCompatActivity {
 
     void initRegisterButton() {
         Button registerBtn = findViewById(R.id.registerButton);
+
         registerBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Toast.makeText(RegisterActivity.this, "qqqqqqqqqqqqqqqqqqqqqqqqqq", Toast.LENGTH_SHORT).show();
                 viewModel.registerUser(firstName.getText().toString(), lastName.getText().toString(),
                         email.getText().toString(), password.getText().toString().trim());
             }

@@ -8,5 +8,5 @@ import retrofit2.Callback;
 
 public interface LoginCallback extends Callback<AuthDRO> {
 
-    AuthDRO start(UserLoginDTO user);
+    void start(UserLoginDTO user);
 }

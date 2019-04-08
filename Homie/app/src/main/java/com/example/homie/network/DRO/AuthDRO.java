@@ -1,10 +1,23 @@
 package com.example.homie.network.DRO;
 
-public class AuthDRO {
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
 
+import java.io.Serializable;
+
+public class AuthDRO implements Serializable {
+
+    @SerializedName("firstName")
+    @Expose
     private String firstName;
+    @SerializedName("lastName")
+    @Expose
     private String lastName;
+    @SerializedName("statusCode")
+    @Expose
     private int statusCode;
+    @SerializedName("userId")
+    @Expose
     private String userId;
 
     public AuthDRO(String firstName, String lastName, int statusCode, String userId) {
