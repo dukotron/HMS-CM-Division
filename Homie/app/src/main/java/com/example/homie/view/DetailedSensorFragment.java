@@ -62,6 +62,8 @@ public class DetailedSensorFragment extends Fragment {
     private List<ParentObject> initData() {
         return new ArrayList<ParentObject>();
         //get data from view model class
+        //parent object is just title of sensor
+        //child object is graph and (text) current value
     }
 
 }

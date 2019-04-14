@@ -6,7 +6,6 @@ public class Device {
     public String location;
     public String status;
 
-
     public Device(){
 
 

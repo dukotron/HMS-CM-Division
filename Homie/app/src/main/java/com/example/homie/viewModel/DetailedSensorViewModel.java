@@ -1,7 +1,13 @@
 package com.example.homie.viewModel;
 
-import android.arch.lifecycle.ViewModel;
+import android.app.Application;
+import android.arch.lifecycle.AndroidViewModel;
+import android.support.annotation.NonNull;
 
-public class DetailedSensorViewModel extends ViewModel {
-    // TODO: Implement the ViewModel
+public class DetailedSensorViewModel extends AndroidViewModel {
+
+    public DetailedSensorViewModel(@NonNull Application application) {
+        super(application);
+    }
+
 }
