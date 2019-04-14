@@ -15,7 +15,7 @@ public class SensorContentViewHolder extends ChildViewHolder {
 
     public SensorContentViewHolder(@NonNull View itemView) {
         super(itemView);
-        graph = itemView.findViewById(R.id.graph);
-        value = itemView.findViewById(R.id.value);
+        graph = (ImageView) itemView.findViewById(R.id.graph);
+        value = (TextView) itemView.findViewById(R.id.value);
     }
 }

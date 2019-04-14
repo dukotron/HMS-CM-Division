@@ -26,7 +26,7 @@ public class DummyActivityTestFragmentsActivity extends AppCompatActivity {
         // Add fragments
 
         adapter.AddFragment(new FragmentDevices(), "Devices");
-        adapter.AddFragment(new FragmentDetailedView(), "Detailed view");
+        adapter.AddFragment(new DetailedSensorFragment(), "Detailed view");
         viewPager.setAdapter(adapter);
         tabLayout.setupWithViewPager(viewPager);
 

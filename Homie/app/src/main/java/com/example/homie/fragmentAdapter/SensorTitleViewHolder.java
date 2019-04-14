@@ -13,6 +13,6 @@ public class SensorTitleViewHolder extends ParentViewHolder {
 
     public SensorTitleViewHolder(@NonNull View itemView) {
         super(itemView);
-        sensorTextView = itemView.findViewById(R.id.sensor_title);
+        sensorTextView = (TextView) itemView.findViewById(R.id.sensor_title);
     }
 }
