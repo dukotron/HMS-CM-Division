@@ -5,6 +5,7 @@ import android.util.Log;
 import com.example.homie.DRO.AuthDRO;
 import com.example.homie.DTO.UserLoginDTO;
 import com.example.homie.viewModel.AuthCallBack;
+import com.example.homie.viewModel.util.StatusCode;
 
 import retrofit2.Call;
 import retrofit2.Response;
@@ -15,18 +16,15 @@ import static com.example.homie.network.util.NetworkConfig.BASE_URL;
 
 public class LoginRequest implements LoginCallback {
 
-    private final static String TAG = "Login Request";
     private AuthCallBack callBack;
 
     @Override
     public void start(UserLoginDTO user, AuthCallBack callBack) {
-        Log.d(TAG, "Login request started");
         this.callBack = callBack;
-        Retrofit.Builder builder = new Retrofit.Builder()
+        Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(BASE_URL)
-                .addConverterFactory(GsonConverterFactory.create());
-
-        Retrofit retrofit = builder.build();
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
 
         RetrofitAPI server = retrofit.create(RetrofitAPI.class);
         Call<AuthDRO> call = server.loginAccount(user);
@@ -36,17 +34,17 @@ public class LoginRequest implements LoginCallback {
 
     @Override
     public void onResponse(Call<AuthDRO> call, Response<AuthDRO> response) {
+        Log.d("LOGIN",response.body()+" response code - "+response.code());
         if(response.code() == 200){
-            Log.d("Callback info"," status code " + response.body()+" ```````````````````````````````````````` ");
-            //callBack.onReturn(true);
+            callBack.onReturn(response.body());
         }else {
-            Log.d("Callback info", "status code" + response.body());
+            callBack.onReturn(new AuthDRO(StatusCode.NOT_OK));
         }
     }
 
     @Override
     public void onFailure(Call<AuthDRO> call, Throwable t) {
-        Log.d("Callback info","``````````````````````````````ERROOROOOROOOOROOOOR``````````");
+        callBack.onReturn(new AuthDRO(StatusCode.NOT_OK));
     }
 
 

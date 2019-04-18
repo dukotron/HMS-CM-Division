@@ -1,12 +1,22 @@
 package com.example.homie.DTO;
 
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
+
 import java.io.Serializable;
 
 public class UserRegisterDTO implements Serializable {
-
+    @SerializedName("FirstName")
+    @Expose
     private String firstName;
+    @SerializedName("LastName")
+    @Expose
     private String lastName;
+    @SerializedName("Email")
+    @Expose
     private String email;
+    @SerializedName("Password")
+    @Expose
     private String password;
 
     public UserRegisterDTO(String firstName, String lastName, String email, String password) {
@@ -30,5 +40,15 @@ public class UserRegisterDTO implements Serializable {
 
     public String getPassword() {
         return password;
+    }
+
+    @Override
+    public String toString() {
+        return "UserRegisterDTO{" +
+                "firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", email='" + email + '\'' +
+                ", password='" + password + '\'' +
+                '}';
     }
 }

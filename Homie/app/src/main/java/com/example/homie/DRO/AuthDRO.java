@@ -13,6 +13,10 @@ public class AuthDRO implements Serializable {
     @Expose
     private String userId;
 
+    public AuthDRO(int statusCode) {
+        this.statusCode = statusCode;
+    }
+
     public AuthDRO(int statusCode, String userId) {
         this.statusCode = statusCode;
         this.userId = userId;

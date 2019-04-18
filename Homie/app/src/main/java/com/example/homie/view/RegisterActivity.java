@@ -92,6 +92,15 @@ public class RegisterActivity extends AppCompatActivity {
                 }
             }
         });
+
+        viewModel.getShowError().observe(this, new Observer<Boolean>() {
+            @Override
+            public void onChanged(@Nullable Boolean aBoolean) {
+                if (aBoolean) {
+                    Toast.makeText(RegisterActivity.this, "Some error occurred!", Toast.LENGTH_LONG).show();
+                }
+            }
+        });
     }
 
     void initRegisterButton() {
@@ -100,9 +109,8 @@ public class RegisterActivity extends AppCompatActivity {
         registerBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(RegisterActivity.this, "qqqqqqqqqqqqqqqqqqqqqqqqqq", Toast.LENGTH_SHORT).show();
-                viewModel.registerUser(firstName.getText().toString(), lastName.getText().toString(),
-                        email.getText().toString(), password.getText().toString().trim());
+                viewModel.registerUser(firstName.getText().toString().trim(), lastName.getText().toString().trim(),
+                        email.getText().toString().trim(), password.getText().toString().trim());
             }
         });
     }

@@ -5,8 +5,10 @@ import android.arch.lifecycle.AndroidViewModel;
 import android.arch.lifecycle.MutableLiveData;
 import android.support.annotation.NonNull;
 
+import com.example.homie.DRO.AuthDRO;
 import com.example.homie.repository.UserRepository;
 import com.example.homie.viewModel.util.InputDataValidator;
+import com.example.homie.viewModel.util.StatusCode;
 
 public class LoginViewModel extends AndroidViewModel implements AuthCallBack{
 
@@ -15,6 +17,7 @@ public class LoginViewModel extends AndroidViewModel implements AuthCallBack{
 
     private MutableLiveData<Boolean> isLoggedIn;
 
+    private MutableLiveData<Boolean> showError;
     private UserRepository userRepository;
 
     public LoginViewModel(@NonNull Application application) {
@@ -24,17 +27,17 @@ public class LoginViewModel extends AndroidViewModel implements AuthCallBack{
         isValidEmail = new MutableLiveData<>();
         isValidPassword = new MutableLiveData<>();
         isLoggedIn = new MutableLiveData<>();
+        showError = new MutableLiveData<>();
 
         isValidEmail.setValue(true);
         isValidPassword.setValue(true);
         isLoggedIn.setValue(false);
+        showError.setValue(false);
     }
 
     public void loginUser(String email, String password) {
         if (checkEnteredData(email, password)) {
             userRepository.loginAccount(email, password, this);
-            //TODO check response from API
-            isLoggedIn.setValue(true);
         }
     }
 
@@ -65,10 +68,16 @@ public class LoginViewModel extends AndroidViewModel implements AuthCallBack{
         return isLoggedIn;
     }
 
+    public MutableLiveData<Boolean> getShowError() {
+        return showError;
+    }
+
     @Override
-    public void onReturn(boolean value) {
-        if (value) {
+    public void onReturn(AuthDRO response) {
+        if (response.getStatusCode() == StatusCode.OK) {
             isLoggedIn.setValue(true);
+        }else{
+            showError.setValue(true);
         }
     }
 }

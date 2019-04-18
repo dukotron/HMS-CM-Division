@@ -9,6 +9,7 @@ import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.example.homie.R;
 import com.example.homie.viewModel.LoginViewModel;
@@ -21,8 +22,6 @@ public class LoginActivity extends AppCompatActivity {
 
     LoginViewModel viewModel;
 
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -30,12 +29,10 @@ public class LoginActivity extends AppCompatActivity {
 
         email = findViewById(R.id.emailLogin);
         password = findViewById(R.id.passwordLogin);
-
-
+        
         initLoginButton();
 
         initViewModel();
-
     }
 
     void initViewModel() {
@@ -69,6 +66,14 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
+        viewModel.getShowError().observe(this, new Observer<Boolean>() {
+            @Override
+            public void onChanged(@Nullable Boolean aBoolean) {
+                if (aBoolean) {
+                    Toast.makeText(LoginActivity.this, "Some error occurred!", Toast.LENGTH_LONG).show();
+                }
+            }
+        });
     }
 
     void initLoginButton() {
@@ -76,7 +81,7 @@ public class LoginActivity extends AppCompatActivity {
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                viewModel.loginUser(email.getText().toString(), password.getText().toString().trim());
+                viewModel.loginUser(email.getText().toString().trim(), password.getText().toString().trim());
             }
         });
     }
