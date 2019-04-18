@@ -1,4 +1,4 @@
-package com.example.homie.network.DTO;
+package com.example.homie.DTO;
 
 public class UserLoginDTO {
 

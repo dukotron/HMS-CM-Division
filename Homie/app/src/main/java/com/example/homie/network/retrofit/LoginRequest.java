@@ -2,13 +2,11 @@ package com.example.homie.network.retrofit;
 
 import android.util.Log;
 
-import com.example.homie.network.DRO.AuthDRO;
-import com.example.homie.network.DTO.UserLoginDTO;
-import com.example.homie.network.DTO.UserRegisterDTO;
+import com.example.homie.DRO.AuthDRO;
+import com.example.homie.DTO.UserLoginDTO;
 import com.example.homie.viewModel.AuthCallBack;
 
 import retrofit2.Call;
-import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;

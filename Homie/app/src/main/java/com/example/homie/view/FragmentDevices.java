@@ -9,7 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.homie.Device;
+import com.example.homie.model.Device;
 import com.example.homie.fragmentAdapter.RecyclerViewAdapter;
 import com.example.homie.R;
 

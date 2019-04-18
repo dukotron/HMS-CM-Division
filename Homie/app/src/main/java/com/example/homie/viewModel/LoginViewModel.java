@@ -3,21 +3,10 @@ package com.example.homie.viewModel;
 import android.app.Application;
 import android.arch.lifecycle.AndroidViewModel;
 import android.arch.lifecycle.MutableLiveData;
-import android.content.Context;
 import android.support.annotation.NonNull;
-import android.util.Log;
 
-import com.example.homie.network.DTO.UserLoginDTO;
 import com.example.homie.repository.UserRepository;
 import com.example.homie.viewModel.util.InputDataValidator;
-
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
-
-import static com.example.homie.network.util.NetworkConfig.BASE_URL;
 
 public class LoginViewModel extends AndroidViewModel implements AuthCallBack{
 

@@ -1,4 +1,4 @@
-package com.example.homie;
+package com.example.homie.model;
 
 public class Device {
 
@@ -12,11 +12,8 @@ public class Device {
     }
 
     public Device(String location, String status){
-
         location = location;
         status = status;
-
-
     }
 
     public String getStatus() {

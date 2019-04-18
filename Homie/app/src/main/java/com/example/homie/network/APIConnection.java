@@ -1,7 +1,7 @@
 package com.example.homie.network;
 
-import com.example.homie.network.DTO.UserLoginDTO;
-import com.example.homie.network.DTO.UserRegisterDTO;
+import com.example.homie.DTO.UserLoginDTO;
+import com.example.homie.DTO.UserRegisterDTO;
 import com.example.homie.network.retrofit.LoginRequest;
 import com.example.homie.network.retrofit.RegisterRequest;
 import com.example.homie.viewModel.AuthCallBack;

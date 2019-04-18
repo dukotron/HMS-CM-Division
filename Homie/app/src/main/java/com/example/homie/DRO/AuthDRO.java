@@ -1,4 +1,4 @@
-package com.example.homie.network.DRO;
+package com.example.homie.DRO;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;

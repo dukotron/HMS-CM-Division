@@ -2,8 +2,8 @@ package com.example.homie.network.retrofit;
 
 import android.util.Log;
 
-import com.example.homie.network.DRO.AuthDRO;
-import com.example.homie.network.DTO.UserRegisterDTO;
+import com.example.homie.DRO.AuthDRO;
+import com.example.homie.DTO.UserRegisterDTO;
 import com.example.homie.viewModel.AuthCallBack;
 
 import retrofit2.Call;
