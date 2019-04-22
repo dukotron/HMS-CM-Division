@@ -41,7 +41,7 @@ public class LoginViewModel extends AndroidViewModel implements AuthCallBack{
         }
     }
 
-    boolean checkEnteredData(String email, String password) {
+    private boolean checkEnteredData(String email, String password) {
         boolean valid = true;
 
         if (!InputDataValidator.isEmailValid(email)) {

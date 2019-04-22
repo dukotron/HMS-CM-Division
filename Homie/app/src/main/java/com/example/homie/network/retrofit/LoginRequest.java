@@ -34,7 +34,6 @@ public class LoginRequest implements LoginCallback {
 
     @Override
     public void onResponse(Call<AuthDRO> call, Response<AuthDRO> response) {
-        Log.d("LOGIN",response.body()+" response code - "+response.code());
         if(response.code() == 200){
             callBack.onReturn(response.body());
         }else {

@@ -42,7 +42,7 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onChanged(@Nullable Boolean aBoolean) {
                 if (aBoolean) {
-                    startActivity(new Intent(LoginActivity.this, NavigationActivity.class));
+                    startActivity(new Intent(LoginActivity.this, MainActivity.class));
                     finish();
                 }
             }

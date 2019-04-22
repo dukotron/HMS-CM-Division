@@ -30,12 +30,4 @@ public class AuthDRO implements Serializable {
     public String getUserId() {
         return userId;
     }
-
-    @Override
-    public String toString() {
-        return "AuthDRO{" +
-                "statusCode=" + statusCode +
-                ", userId='" + userId + '\'' +
-                '}';
-    }
 }

@@ -1,7 +1,6 @@
 package com.example.homie.view;
 
 import android.arch.lifecycle.ViewModelProviders;
-import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -14,7 +13,7 @@ import android.view.ViewGroup;
 
 import com.bignerdranch.expandablerecyclerview.Model.ParentObject;
 import com.example.homie.R;
-import com.example.homie.fragmentAdapter.ExpandableDetailedSensorAdapter;
+import com.example.homie.adapters.ExpandableDetailedSensorAdapter;
 import com.example.homie.viewModel.DetailedSensorViewModel;
 
 import java.util.ArrayList;

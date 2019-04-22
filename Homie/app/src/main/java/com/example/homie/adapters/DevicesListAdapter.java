@@ -1,4 +1,4 @@
-package com.example.homie.fragmentAdapter;
+package com.example.homie.adapters;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
@@ -13,13 +13,13 @@ import com.example.homie.R;
 
 import java.util.List;
 
-public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.MyViewHolder> {
+public class DevicesListAdapter extends RecyclerView.Adapter<DevicesListAdapter.MyViewHolder> {
 
 
     Context myContext;
     List<Device> myData;
 
-    public RecyclerViewAdapter(Context myContext, List<Device> myData) {
+    public DevicesListAdapter(Context myContext, List<Device> myData) {
         this.myContext = myContext;
         this.myData = myData;
     }
@@ -37,8 +37,8 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
 
-        holder.tv_location.setText(myData.get(position).getLocation());
-        holder.tv_status.setText(myData.get(position).getStatus());
+        //holder.tv_location.setText(myData.get(position).getLocation());
+        //holder.tv_status.setText(myData.get(position).getStatus());
 
     }
 

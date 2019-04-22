@@ -5,7 +5,7 @@ import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 
-import com.example.homie.fragmentAdapter.ViewPagerAdapter;
+import com.example.homie.adapters.ViewPagerAdapter;
 import com.example.homie.R;
 
 public class DummyActivityTestFragmentsActivity extends AppCompatActivity {
@@ -25,7 +25,7 @@ public class DummyActivityTestFragmentsActivity extends AppCompatActivity {
 
         // Add fragments
 
-        adapter.AddFragment(new FragmentDevices(), "Devices");
+        adapter.AddFragment(new DevicesListFragment(), "Devices");
         adapter.AddFragment(new DetailedSensorFragment(), "Detailed view");
         viewPager.setAdapter(adapter);
         tabLayout.setupWithViewPager(viewPager);

@@ -1,4 +1,4 @@
-package com.example.homie.fragmentAdapter;
+package com.example.homie.adapters;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;

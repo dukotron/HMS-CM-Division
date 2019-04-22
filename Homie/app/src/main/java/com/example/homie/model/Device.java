@@ -1,34 +1,12 @@
 package com.example.homie.model;
 
-public class Device {
+import com.thoughtbot.expandablerecyclerview.models.ExpandableGroup;
 
-    public String serialNo;
-    public String location;
-    public String status;
+import java.util.List;
 
-    public Device(){
+public class Device extends ExpandableGroup<CurrentData> {
 
-
-    }
-
-    public Device(String location, String status){
-        location = location;
-        status = status;
-    }
-
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
-    }
-
-    public String getLocation() {
-        return location;
-    }
-
-    public void setLocation(String location) {
-        this.location = location;
+    public Device(String title, List<CurrentData> items) {
+        super(title, items);
     }
 }

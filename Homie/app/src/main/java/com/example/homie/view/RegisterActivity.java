@@ -40,7 +40,6 @@ public class RegisterActivity extends AppCompatActivity {
         initRegisterButton();
         initPasswordButton();
         initGoToLoginButton();
-
         initViewModel();
     }
 
@@ -51,7 +50,7 @@ public class RegisterActivity extends AppCompatActivity {
             @Override
             public void onChanged(@Nullable Boolean aBoolean) {
                 if (aBoolean) {
-                    startActivity(new Intent(RegisterActivity.this, NavigationActivity.class));
+                    startActivity(new Intent(RegisterActivity.this, MainActivity.class));
                     finish();
                 }
             }

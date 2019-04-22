@@ -1,4 +1,4 @@
-package com.example.homie.fragmentAdapter;
+package com.example.homie.adapters;
 
 import android.content.Context;
 import android.view.LayoutInflater;
