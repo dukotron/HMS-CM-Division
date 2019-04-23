@@ -26,6 +26,8 @@ public class DevicesFragment extends Fragment {
     private DevicesAdapter adapter;
     private List<Device> devices;
 
+    //TODO viewModel class for the fragment
+
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
@@ -52,6 +54,7 @@ public class DevicesFragment extends Fragment {
     }
 
     private void getDevicesInfo(){
+        //TODO get devices info logic code
         devices = new ArrayList<>();
         CurrentData data = new CurrentData("CO2","322");
         ArrayList<CurrentData> a = new ArrayList<>();

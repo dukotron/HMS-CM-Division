@@ -13,13 +13,13 @@ import android.view.ViewGroup;
 
 import com.bignerdranch.expandablerecyclerview.Model.ParentObject;
 import com.example.homie.R;
-import com.example.homie.adapters.ExpandableDetailedSensorAdapter;
+import com.example.homie.adapters.SensorsAdapter;
 import com.example.homie.viewModel.DetailedSensorViewModel;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
-
+    //TODO delete the class
 public class DetailedSensorFragment extends Fragment {
 
     private DetailedSensorViewModel mViewModel;
@@ -49,11 +49,11 @@ public class DetailedSensorFragment extends Fragment {
     @Override
     public void onSaveInstanceState(@NonNull Bundle outState) {
         super.onSaveInstanceState(outState);
-        ((ExpandableDetailedSensorAdapter) Objects.requireNonNull(recyclerView.getAdapter())).onSaveInstanceState(outState);
+        ((SensorsAdapter) Objects.requireNonNull(recyclerView.getAdapter())).onSaveInstanceState(outState);
     }
 
     private void initAdapter() {
-        ExpandableDetailedSensorAdapter adapter = new ExpandableDetailedSensorAdapter(view.getContext(), initData());
+        SensorsAdapter adapter = new SensorsAdapter(view.getContext(), initData());
         adapter.setParentClickableViewAnimationDefaultDuration();
         adapter.setParentAndIconExpandOnClick(true);
     }

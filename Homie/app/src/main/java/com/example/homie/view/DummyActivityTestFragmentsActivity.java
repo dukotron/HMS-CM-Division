@@ -7,7 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 
 import com.example.homie.adapters.ViewPagerAdapter;
 import com.example.homie.R;
-
+    //TODO probably delete
 public class DummyActivityTestFragmentsActivity extends AppCompatActivity {
 
     private TabLayout tabLayout;

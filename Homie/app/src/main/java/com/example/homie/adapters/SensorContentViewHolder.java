@@ -5,17 +5,21 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.bignerdranch.expandablerecyclerview.ViewHolder.ChildViewHolder;
 import com.example.homie.R;
+import com.thoughtbot.expandablerecyclerview.viewholders.ChildViewHolder;
 
 public class SensorContentViewHolder extends ChildViewHolder {
 
-    public ImageView graph;
-    public TextView value;
-
+    private ImageView chart;
+    private TextView value;
+    //TODO layout for sensor content
     public SensorContentViewHolder(@NonNull View itemView) {
         super(itemView);
-        graph = (ImageView) itemView.findViewById(R.id.graph);
-        value = (TextView) itemView.findViewById(R.id.value);
+        chart = itemView.findViewById(R.id.graph);
+        value = itemView.findViewById(R.id.value);
+    }
+
+    public void setValue(String title) {
+        value.setText(title);
     }
 }

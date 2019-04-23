@@ -1,23 +1,51 @@
 package com.example.homie.model;
 
-public class SensorContent  {
+import android.os.Parcel;
+import android.os.Parcelable;
 
-    private int graph;
-    private String cValue;
+public class SensorContent implements Parcelable {
 
-    public int getGraph() {
-        return graph;
+    private String type;
+    private int chart;
+
+
+    public SensorContent(String type) {
+        this.type = type;
+        this.chart = chart;
     }
 
-    public void setGraph(int graph) {
-        this.graph = graph;
+    protected SensorContent(Parcel in ) {
+        type = in .readString();
+        chart = in.readInt();
     }
 
-    public String getcValue() {
-        return cValue;
+    public String getType() {
+        return type;
     }
 
-    public void setcValue(String cValue) {
-        this.cValue = cValue;
+    public int getChart() {
+        return chart;
     }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(type);
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    public static final Creator < SensorContent > CREATOR = new Creator < SensorContent > () {
+        @Override
+        public SensorContent createFromParcel(Parcel in ) {
+            return new SensorContent( in );
+        }
+
+        @Override
+        public SensorContent[] newArray(int size) {
+            return new SensorContent[size];
+        }
+    };
 }
