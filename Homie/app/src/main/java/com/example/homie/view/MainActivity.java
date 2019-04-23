@@ -27,7 +27,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         initToolbar();
 
-        displayFragment(new DevicesListFragment());
+        displayFragment(new DevicesFragment());
     }
 
     private void displayFragment(Fragment fragment) {

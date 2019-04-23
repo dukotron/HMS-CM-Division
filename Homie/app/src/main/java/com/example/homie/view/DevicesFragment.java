@@ -15,16 +15,14 @@ import android.widget.Button;
 import com.example.homie.adapters.DevicesAdapter;
 import com.example.homie.model.CurrentData;
 import com.example.homie.model.Device;
-import com.example.homie.adapters.DevicesListAdapter;
 import com.example.homie.R;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class DevicesListFragment extends Fragment {
+public class DevicesFragment extends Fragment {
 
     private RecyclerView myRecyclerView;
-    //private DevicesListAdapter adapter;
     private DevicesAdapter adapter;
     private List<Device> devices;
 
@@ -92,7 +90,6 @@ public class DevicesListFragment extends Fragment {
 
     private void initRecycleView(View view){
         myRecyclerView = view.findViewById(R.id.recycler_view_devices_list);
-        //adapter = new DevicesListAdapter(getContext(), devices);
         adapter = new DevicesAdapter(devices);
         myRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         myRecyclerView.setAdapter(adapter);

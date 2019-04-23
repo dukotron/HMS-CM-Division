@@ -10,10 +10,11 @@ import com.bignerdranch.expandablerecyclerview.Model.ParentObject;
 import com.example.homie.R;
 import com.example.homie.model.SensorContent;
 import com.example.homie.model.SensorTitle;
+import com.thoughtbot.expandablerecyclerview.ExpandableRecyclerViewAdapter;
 
 import java.util.List;
 
-public class ExpandableDetailedSensorAdapter extends ExpandableRecyclerAdapter<SensorTitleViewHolder, SensorContentViewHolder> {
+public class ExpandableDetailedSensorAdapter extends ExpandableRecyclerViewAdapter<SensorTitleViewHolder, SensorContentViewHolder> {
     LayoutInflater inflater;
 
 
