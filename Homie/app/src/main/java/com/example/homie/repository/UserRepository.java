@@ -28,4 +28,8 @@ public class UserRepository {
     public void loginAccount(String email, String password, AuthCallBack viewModel) {
         connection.loginAccount(email, password, viewModel);
     }
+
+    public void logoutAccount(String userId){
+        //TODO network code for logout
+    }
 }

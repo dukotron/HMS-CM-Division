@@ -9,15 +9,15 @@ import com.example.homie.DRO.AuthDRO;
 import com.example.homie.repository.UserRepository;
 import com.example.homie.viewModel.util.InputDataValidator;
 import com.example.homie.viewModel.util.StatusCode;
+import com.example.homie.viewModel.util.TempMemory;
 
 public class LoginViewModel extends AndroidViewModel implements AuthCallBack{
 
     private MutableLiveData<Boolean> isValidEmail;
     private MutableLiveData<Boolean> isValidPassword;
-
     private MutableLiveData<Boolean> isLoggedIn;
-
     private MutableLiveData<Boolean> showError;
+
     private UserRepository userRepository;
 
     public LoginViewModel(@NonNull Application application) {
@@ -75,6 +75,7 @@ public class LoginViewModel extends AndroidViewModel implements AuthCallBack{
     @Override
     public void onReturn(AuthDRO response) {
         if (response.getStatusCode() == StatusCode.OK) {
+            TempMemory.saveUserId(getApplication().getApplicationContext(),response.getUserId());
             isLoggedIn.setValue(true);
         }else{
             showError.setValue(true);

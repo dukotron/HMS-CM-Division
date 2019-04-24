@@ -9,6 +9,7 @@ import com.example.homie.DRO.AuthDRO;
 import com.example.homie.repository.UserRepository;
 import com.example.homie.viewModel.util.InputDataValidator;
 import com.example.homie.viewModel.util.StatusCode;
+import com.example.homie.viewModel.util.TempMemory;
 
 public class RegisterViewModel extends AndroidViewModel implements AuthCallBack {
     private MutableLiveData<Boolean> isValidFirstName;
@@ -101,6 +102,7 @@ public class RegisterViewModel extends AndroidViewModel implements AuthCallBack 
     @Override
     public void onReturn(AuthDRO response) {
         if(response.getStatusCode() == StatusCode.OK) {
+            TempMemory.saveUserId(getApplication().getApplicationContext(),response.getUserId());
             isRegistered.setValue(true);
         }else{
             showError.setValue(true);
