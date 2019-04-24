@@ -1,12 +1,17 @@
 package com.example.homie.adapters;
 
+import android.content.Context;
+import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.example.homie.R;
 import com.example.homie.model.CurrentData;
 import com.example.homie.model.Device;
+import com.example.homie.view.SensorsActivity;
 import com.thoughtbot.expandablerecyclerview.ExpandableRecyclerViewAdapter;
 import com.thoughtbot.expandablerecyclerview.models.ExpandableGroup;
 
@@ -14,8 +19,11 @@ import java.util.List;
 
 public class DevicesAdapter extends ExpandableRecyclerViewAdapter<DeviceViewHolder,CurrentDataViewHolder> {
 
-    public DevicesAdapter(List<? extends ExpandableGroup> groups) {
+    private Context context;
+
+    public DevicesAdapter(List<? extends ExpandableGroup> groups, Context context) {
         super(groups);
+        this.context = context;
     }
 
     @Override
@@ -41,8 +49,22 @@ public class DevicesAdapter extends ExpandableRecyclerViewAdapter<DeviceViewHold
     }
 
     @Override
-    public void onBindGroupViewHolder(DeviceViewHolder holder, int flatPosition,
-                                      ExpandableGroup group) {
+    public void onBindGroupViewHolder(final DeviceViewHolder holder, final int flatPosition,
+                                      final ExpandableGroup group) {
         holder.setDeviceTitle(group);
+        holder.getArrow().setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(context, SensorsActivity.class);
+                intent.putExtra("deviceTitle",group.getTitle());
+                context.startActivity(intent);
+            }
+        });
     }
+
+    @Override
+    public boolean onGroupClick(int flatPos) {
+        return super.onGroupClick(flatPos);
+    }
+
 }

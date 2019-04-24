@@ -15,7 +15,9 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Toast;
 
 import com.example.homie.R;
@@ -34,7 +36,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         setContentView(R.layout.activity_main_navigation);
 
         initToolbar();
-
+        initViewModel();
         displayFragment(new DevicesFragment());
     }
 

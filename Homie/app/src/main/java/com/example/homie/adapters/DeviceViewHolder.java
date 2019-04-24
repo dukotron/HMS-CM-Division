@@ -2,6 +2,7 @@ package com.example.homie.adapters;
 
 import android.view.View;
 import android.view.animation.RotateAnimation;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -14,7 +15,7 @@ import static android.view.animation.Animation.RELATIVE_TO_SELF;
 public class DeviceViewHolder extends GroupViewHolder {
 
     private TextView deviceTitle;
-    private ImageView arrow;
+    private Button arrow;
 
     public DeviceViewHolder(View itemView) {
         super(itemView);
@@ -24,6 +25,10 @@ public class DeviceViewHolder extends GroupViewHolder {
 
     public void setDeviceTitle(ExpandableGroup group){
         deviceTitle.setText(group.getTitle());
+    }
+
+    public Button getArrow(){
+        return arrow;
     }
 
     @Override
