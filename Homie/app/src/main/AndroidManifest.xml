@@ -12,10 +12,6 @@
         android:supportsRtl="true"
         android:usesCleartextTraffic="true"
         android:theme="@style/AppTheme">
-        <activity
-            android:name=".view.MenuActivity"
-            android:label="@string/title_activity_menu">
-        </activity>
         <activity android:name=".view.MainActivity">
         </activity>
         <activity
@@ -29,10 +25,6 @@
         </activity>
         <activity
             android:name=".view.RegisterActivity"
-            android:screenOrientation="portrait">
-        </activity>
-        <activity
-            android:name=".view.DummyActivityTestFragmentsActivity"
             android:screenOrientation="portrait">
         </activity>
     </application>

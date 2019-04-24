@@ -5,7 +5,4 @@
         android:startColor="@color/colorPrimaryDark"
         android:endColor="@color/colorAccent"
         android:angle="0" />
-
-
-
 </shape>
