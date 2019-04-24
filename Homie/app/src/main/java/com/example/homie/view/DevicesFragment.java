@@ -44,7 +44,7 @@ public class DevicesFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         initRecycleView(view);
 
-        Button clear = view.findViewById(R.id.toggle_button);
+        Button clear = view.findViewById(R.id.toggle_button_devices_list);
         clear.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

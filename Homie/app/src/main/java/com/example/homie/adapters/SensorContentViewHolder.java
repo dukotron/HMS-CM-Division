@@ -12,11 +12,11 @@ public class SensorContentViewHolder extends ChildViewHolder {
 
     private ImageView chart;
     private TextView value;
-    //TODO layout for sensor content
+
     public SensorContentViewHolder(@NonNull View itemView) {
         super(itemView);
-        chart = itemView.findViewById(R.id.graph);
-        value = itemView.findViewById(R.id.value);
+        chart = itemView.findViewById(R.id.list_item_sensor_content_graph);
+        value = itemView.findViewById(R.id.list_item_sensor_content_value);
     }
 
     public void setValue(String title) {

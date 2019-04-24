@@ -24,14 +24,13 @@ public class SensorsActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //TODO layout for sensors list
         setContentView(R.layout.activity_sensors_list);
 
         initToolbar();
         getSensorsInfo();
         initRecycleView();
 
-        Button clear = findViewById(R.id.toggle_button);
+        Button clear = findViewById(R.id.toggle_button_sensors_list);
         clear.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

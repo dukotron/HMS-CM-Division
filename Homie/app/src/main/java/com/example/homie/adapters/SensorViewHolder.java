@@ -7,10 +7,6 @@ import android.widget.TextView;
 
 import com.example.homie.R;
 import com.thoughtbot.expandablerecyclerview.models.ExpandableGroup;
-import com.thoughtbot.expandablerecyclerview.sample.Genre;
-import com.thoughtbot.expandablerecyclerview.sample.R;
-import com.thoughtbot.expandablerecyclerview.sample.multicheck.MultiCheckGenre;
-import com.thoughtbot.expandablerecyclerview.sample.singlecheck.SingleCheckGenre;
 import com.thoughtbot.expandablerecyclerview.viewholders.GroupViewHolder;
 
 import static android.view.animation.Animation.RELATIVE_TO_SELF;
@@ -19,7 +15,7 @@ public class SensorViewHolder extends GroupViewHolder {
 
     private TextView sensorTitle;
     private ImageView arrow;
-    //TODO layout for sensor
+
     public SensorViewHolder(View itemView) {
         super(itemView);
         sensorTitle = itemView.findViewById(R.id.list_item_sensor_title);

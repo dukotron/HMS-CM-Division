@@ -18,7 +18,6 @@ public class SensorsAdapter extends ExpandableRecyclerViewAdapter<SensorViewHold
     public SensorsAdapter(List<? extends ExpandableGroup> groups) {
         super(groups);
     }
-    //TODO layout for sensors list
     @Override
     public SensorViewHolder onCreateGroupViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
