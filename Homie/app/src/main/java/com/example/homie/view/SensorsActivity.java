@@ -30,7 +30,7 @@ public class SensorsActivity extends AppCompatActivity {
     //TODO viewModel class for the activity
 
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
+    public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sensors_list);
 

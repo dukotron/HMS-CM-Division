@@ -12,6 +12,7 @@ import com.example.homie.R;
 import com.example.homie.model.CurrentData;
 import com.example.homie.model.Device;
 import com.example.homie.view.SensorsActivity;
+import com.example.homie.view.TestSensorsActivity;
 import com.thoughtbot.expandablerecyclerview.ExpandableRecyclerViewAdapter;
 import com.thoughtbot.expandablerecyclerview.models.ExpandableGroup;
 
@@ -55,7 +56,7 @@ public class DevicesAdapter extends ExpandableRecyclerViewAdapter<DeviceViewHold
         holder.getArrow().setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(context, SensorsActivity.class);
+                Intent intent = new Intent(context, TestSensorsActivity.class);
                 intent.putExtra("deviceTitle",group.getTitle());
                 context.startActivity(intent);
             }
