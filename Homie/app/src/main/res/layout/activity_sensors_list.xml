@@ -15,17 +15,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
 
-        <Button
-            android:id="@+id/toggle_button_sensors_list"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Toggle Classic Group" />
-
         <android.support.v7.widget.RecyclerView
             android:id="@+id/recycler_view_sensors_list"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_below="@id/toggle_button_sensors_list" />
+            android:layout_height="match_parent" />
 
     </LinearLayout>
 

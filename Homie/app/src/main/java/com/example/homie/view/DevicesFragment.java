@@ -46,18 +46,6 @@ public class DevicesFragment extends Fragment {
 
         getDevicesInfo();
         initRecycleView(view);
-
-        //TODO solve cancer with this button
-        Button clear = view.findViewById(R.id.toggle_button_devices_list);
-        clear.setText("444");
-
-        clear.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Log.d("~~~~~~~~~~~~~~~~~~~~", "onClick: fffffffffffffffffffffff");
-                //adapter.toggleGroup(sensors.get(0));
-            }
-        });
     }
 
     @Override

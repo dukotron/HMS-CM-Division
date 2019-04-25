@@ -13,9 +13,6 @@ public class TempMemory {
     public static void saveUserId(Context context, String userId){
         SharedPreferences sharedPreferences = context.getSharedPreferences(APP_PREFERENCES,Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
-        //TODO ask Kasper
-        editor.clear();
-        editor.apply();
         editor.putString(USERID_KEY, userId);
         editor.apply();
     }

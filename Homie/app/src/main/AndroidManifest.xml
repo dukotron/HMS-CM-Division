@@ -18,6 +18,9 @@
         <activity android:name=".view.SensorsActivity">
 
         </activity>
+        <activity android:name=".view.TestSensorsActivity">
+
+        </activity>
         <activity
             android:name=".view.LoginActivity"
             android:screenOrientation="portrait">
