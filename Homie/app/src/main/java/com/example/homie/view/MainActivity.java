@@ -49,7 +49,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     startActivity(new Intent(MainActivity.this, LoginActivity.class));
                     finish();
                 }
-
             }
         });
     }
