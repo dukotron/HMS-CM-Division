@@ -6,6 +6,10 @@
             android:icon="@android:drawable/ic_dialog_alert"
             android:title="@string/test_btn"/>
         <item
+            android:id="@+id/setting"
+            android:icon="@android:drawable/ic_menu_manage"
+            android:title="Settings"/>
+        <item
             android:id="@+id/logout"
             android:icon="@android:drawable/ic_delete"
             android:title="@string/logout"/>
