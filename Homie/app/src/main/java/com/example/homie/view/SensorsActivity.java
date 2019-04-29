@@ -1,5 +1,7 @@
 package com.example.homie.view;
 
+import android.arch.lifecycle.ViewModelProvider;
+import android.arch.lifecycle.ViewModelProviders;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
@@ -12,6 +14,7 @@ import android.widget.Button;
 import com.example.homie.R;
 import com.example.homie.adapters.SensorsAdapter;
 import com.example.homie.model.Sensor;
+import com.example.homie.viewModel.SensorsViewModel;
 
 import java.util.ArrayList;
 
@@ -20,33 +23,32 @@ public class SensorsActivity extends AppCompatActivity {
     private ArrayList<Sensor> sensors;
     private RecyclerView recyclerView;
 
+    private SensorsViewModel viewModel;
+
     private String deviceTitle;
 
     //TODO viewModel class for the activity
 
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
+    public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sensors_list);
 
         deviceTitle = getIntent().getExtras().getString("deviceTitle");
 
         initToolbar();
+        initViewModel();
         getSensorsInfo();
         initRecycleView();
-
-        Button clear = findViewById(R.id.toggle_button_sensors_list);
-        clear.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                adapter.toggleGroup(sensors.get(0));
-            }
-        });
     }
 
     private void initToolbar(){
         Toolbar toolbar = findViewById(R.id.toolbar);
         toolbar.setTitle(deviceTitle);
+    }
+
+    private void initViewModel(){
+        viewModel = ViewModelProviders.of(this).get(SensorsViewModel.class);
     }
 
     private void initRecycleView(){
@@ -59,6 +61,7 @@ public class SensorsActivity extends AppCompatActivity {
     private void getSensorsInfo(){
         //TODO get sensors info logic code
         sensors = new ArrayList<>();
+        //Sensor sensor = new Sensor();
     }
 
     @Override

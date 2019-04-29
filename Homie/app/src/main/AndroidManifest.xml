@@ -15,7 +15,13 @@
         <activity android:name=".view.MainActivity">
 
         </activity>
+
+        <activity android:theme="@style/AppTheme.NoActionBar"
+            android:name=".view.SettingsActivity"/>
         <activity android:name=".view.SensorsActivity">
+
+        </activity>
+        <activity android:name=".view.TestSensorsActivity">
 
         </activity>
         <activity

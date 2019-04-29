@@ -27,7 +27,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     private Toolbar toolbar;
     private DrawerLayout drawerLayout;
-
     private MainViewModel viewModel;
 
     @Override
@@ -95,6 +94,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             case R.id.logout:
                 viewModel.logoutUser();
                 break;
+
+            case R.id.setting:
+                Intent intent = new Intent(this, SettingsActivity.class);
+                this.startActivity(intent);
+                break;
+
             default:
                 Toast.makeText(this, "Menu Item Works!!!", Toast.LENGTH_SHORT).show();
                 break;
