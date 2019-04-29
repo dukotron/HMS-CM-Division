@@ -13,6 +13,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.homie.R;
+import com.example.homie.network.retrofit.MovementRequest;
 import com.example.homie.viewModel.LoginViewModel;
 
 
@@ -34,6 +35,8 @@ public class LoginActivity extends AppCompatActivity {
         initLoginButton();
 
         initViewModel();
+
+        testRequest();
     }
 
     void initViewModel() {
@@ -91,6 +94,11 @@ public class LoginActivity extends AppCompatActivity {
         Intent intent = new Intent(this, RegisterActivity.class);
         startActivity(intent);
         finish();
+    }
+
+    public void testRequest() {
+        MovementRequest r = new MovementRequest();
+        r.start(1234);
     }
 
 }
