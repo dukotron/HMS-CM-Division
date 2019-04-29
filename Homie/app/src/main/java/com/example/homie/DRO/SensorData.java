@@ -4,7 +4,7 @@ import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
 
-class SensorData implements Serializable {
+public class SensorData implements Serializable {
 
     @SerializedName("TimeStamp")
     private String timeStamp;

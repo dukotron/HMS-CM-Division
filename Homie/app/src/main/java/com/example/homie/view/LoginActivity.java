@@ -21,7 +21,7 @@ import com.example.homie.viewModel.MovementSensorCallBack;
 import java.util.List;
 
 
-public class LoginActivity extends AppCompatActivity implements MovementSensorCallBack{
+public class LoginActivity extends AppCompatActivity {
 
     EditText email;
     EditText password;
@@ -88,10 +88,6 @@ public class LoginActivity extends AppCompatActivity implements MovementSensorCa
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                MovementRequest request = new MovementRequest();
-                request.start(1234, LoginActivity.this);
-
                 viewModel.loginUser(email.getText().toString().trim(), password.getText().toString().trim());
             }
         });
@@ -103,8 +99,4 @@ public class LoginActivity extends AppCompatActivity implements MovementSensorCa
         finish();
     }
 
-    @Override
-    public void onReturn(MovementDRO response) {
-        Log.d("MovementRequest", response.toString());
-    }
 }
