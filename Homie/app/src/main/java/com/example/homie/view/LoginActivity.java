@@ -12,8 +12,13 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.homie.DRO.MovementDRO;
 import com.example.homie.R;
+import com.example.homie.network.retrofit.MovementRequest;
 import com.example.homie.viewModel.LoginViewModel;
+import com.example.homie.viewModel.MovementSensorCallBack;
+
+import java.util.List;
 
 
 public class LoginActivity extends AppCompatActivity {
@@ -34,6 +39,7 @@ public class LoginActivity extends AppCompatActivity {
         initLoginButton();
 
         initViewModel();
+
     }
 
     void initViewModel() {

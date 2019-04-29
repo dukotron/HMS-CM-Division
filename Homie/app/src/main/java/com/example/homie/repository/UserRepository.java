@@ -10,6 +10,7 @@ public class UserRepository {
     private NetworkConnection connection;
     private static UserRepository instance;
 
+
     private UserRepository() {
         connection = new APIConnection();
     }
