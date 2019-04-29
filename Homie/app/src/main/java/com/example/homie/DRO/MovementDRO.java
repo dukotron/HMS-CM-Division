@@ -3,11 +3,13 @@ package com.example.homie.DRO;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class MovementDRO {
+public class MovementDRO implements Serializable {
 
     @Expose
+    @SerializedName("StatusCode")
     private int statusCode;
     @SerializedName("SensorDataList")
     @Expose
@@ -29,4 +31,11 @@ public class MovementDRO {
 
     public List<SensorData> getSensorDataList() {return sensorData;}
 
+    @Override
+    public String toString() {
+        return "MovementDRO{" +
+                "statusCode=" + statusCode +
+                ", sensorData=" + sensorData +
+                '}';
+    }
 }

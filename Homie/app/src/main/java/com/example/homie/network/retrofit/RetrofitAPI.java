@@ -24,7 +24,7 @@ public interface RetrofitAPI {
     Call<AuthDRO> loginAccount(@Body UserLoginDTO user);
 
     @GET("api/movement/dailyavg")
-    Call<List<MovementDRO>> getMovementData(@Query("userId") int userId);
+    Call<MovementDRO> getMovementData(@Query("userId") int userId);
 
 
 }

@@ -1,8 +1,14 @@
 package com.example.homie.DRO;
 
-class SensorData {
+import com.google.gson.annotations.SerializedName;
 
+import java.io.Serializable;
+
+class SensorData implements Serializable {
+
+    @SerializedName("TimeStamp")
     private String timeStamp;
+    @SerializedName("Value")
     private int value;
 
 

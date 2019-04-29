@@ -12,12 +12,16 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.homie.DRO.MovementDRO;
 import com.example.homie.R;
 import com.example.homie.network.retrofit.MovementRequest;
 import com.example.homie.viewModel.LoginViewModel;
+import com.example.homie.viewModel.MovementSensorCallBack;
+
+import java.util.List;
 
 
-public class LoginActivity extends AppCompatActivity {
+public class LoginActivity extends AppCompatActivity implements MovementSensorCallBack{
 
     EditText email;
     EditText password;
@@ -36,7 +40,6 @@ public class LoginActivity extends AppCompatActivity {
 
         initViewModel();
 
-        testRequest();
     }
 
     void initViewModel() {
@@ -85,6 +88,10 @@ public class LoginActivity extends AppCompatActivity {
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                MovementRequest request = new MovementRequest();
+                request.start(1234, LoginActivity.this);
+
                 viewModel.loginUser(email.getText().toString().trim(), password.getText().toString().trim());
             }
         });
@@ -96,9 +103,8 @@ public class LoginActivity extends AppCompatActivity {
         finish();
     }
 
-    public void testRequest() {
-        MovementRequest r = new MovementRequest();
-        r.start(1234);
+    @Override
+    public void onReturn(MovementDRO response) {
+        Log.d("MovementRequest", response.toString());
     }
-
 }
