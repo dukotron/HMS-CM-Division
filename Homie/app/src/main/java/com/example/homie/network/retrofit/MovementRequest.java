@@ -5,6 +5,8 @@ import android.util.Log;
 
 import com.example.homie.DRO.MovementDRO;
 import com.example.homie.viewModel.MovementSensorCallBack;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 import java.util.List;
 
@@ -22,9 +24,14 @@ public class MovementRequest implements MovementCallback {
     @Override
     public void start(int userId, MovementSensorCallBack callBack) {
         this.callBack = callBack;
+
+        Gson gson = new GsonBuilder()
+                .setDateFormat("yyyy-MM-dd'T'HH:mm:ss")
+                .create();
+
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(BASE_URL)
-                .addConverterFactory(GsonConverterFactory.create())
+                .addConverterFactory(GsonConverterFactory.create(gson))
                 .build();
 
         RetrofitAPI client = retrofit.create(RetrofitAPI.class);
