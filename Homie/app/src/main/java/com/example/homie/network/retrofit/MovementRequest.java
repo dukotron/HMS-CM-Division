@@ -51,6 +51,7 @@ public class MovementRequest implements MovementCallback {
 
     @Override
     public void onFailure(Call<MovementDRO> call, Throwable t) {
+        Log.d("MovementRequest",t.toString());
 
     }
 }

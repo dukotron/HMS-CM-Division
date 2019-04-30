@@ -3,21 +3,22 @@ package com.example.homie.DRO;
 import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
+import java.util.Date;
 
 public class SensorData implements Serializable {
 
     @SerializedName("TimeStamp")
-    private String timeStamp;
+    private Date timeStamp;
     @SerializedName("Value")
     private int value;
 
 
-    public SensorData(String timeStamp, int value) {
+    public SensorData(Date timeStamp, int value) {
         this.timeStamp = timeStamp;
         this.value = value;
     }
 
-    public String getTimeStamp() {
+    public Date getTimeStamp() {
         return timeStamp;
     }
 

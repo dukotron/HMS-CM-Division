@@ -4,6 +4,7 @@ import android.util.Log;
 
 import com.example.homie.DRO.AuthDRO;
 import com.example.homie.DTO.UserLoginDTO;
+import com.example.homie.view.LoginActivity;
 import com.example.homie.viewModel.AuthCallBack;
 import com.example.homie.viewModel.util.StatusCode;
 
@@ -36,6 +37,7 @@ public class LoginRequest implements LoginCallback {
     public void onResponse(Call<AuthDRO> call, Response<AuthDRO> response) {
         if(response.code() == 200){
             callBack.onReturn(response.body());
+            Log.d("LoginRequest", response.body().toString());
         }else {
             callBack.onReturn(new AuthDRO(StatusCode.NOT_OK));
         }
@@ -43,6 +45,7 @@ public class LoginRequest implements LoginCallback {
 
     @Override
     public void onFailure(Call<AuthDRO> call, Throwable t) {
+        Log.d("LoginRequest", t.toString());
         callBack.onReturn(new AuthDRO(StatusCode.NOT_OK));
     }
 

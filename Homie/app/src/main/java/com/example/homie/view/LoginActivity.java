@@ -12,13 +12,19 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.homie.DRO.AuthDRO;
 import com.example.homie.DRO.MovementDRO;
+import com.example.homie.DTO.UserLoginDTO;
 import com.example.homie.R;
+import com.example.homie.network.retrofit.LoginRequest;
 import com.example.homie.network.retrofit.MovementRequest;
+import com.example.homie.viewModel.AuthCallBack;
 import com.example.homie.viewModel.LoginViewModel;
 import com.example.homie.viewModel.MovementSensorCallBack;
 
 import java.util.List;
+
+import okhttp3.Response;
 
 
 public class LoginActivity extends AppCompatActivity {
@@ -93,10 +99,21 @@ public class LoginActivity extends AppCompatActivity {
         });
     }
 
+//    void testMovRequest() {
+//        MovementRequest request = new MovementRequest();
+//        request.start(1234, (MovementSensorCallBack) this);
+//    }
+//
+//    void testLoginRequest() {
+//        LoginRequest request = new LoginRequest();
+//        request.start(new UserLoginDTO("Sneakyjson@user.com", "VerySecure"), this);
+//    }
+
     public void createAccountActivity(View view) {
         Intent intent = new Intent(this, RegisterActivity.class);
         startActivity(intent);
         finish();
     }
+
 
 }

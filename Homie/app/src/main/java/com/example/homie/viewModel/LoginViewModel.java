@@ -4,8 +4,11 @@ import android.app.Application;
 import android.arch.lifecycle.AndroidViewModel;
 import android.arch.lifecycle.MutableLiveData;
 import android.support.annotation.NonNull;
+import android.util.Log;
 
 import com.example.homie.DRO.AuthDRO;
+import com.example.homie.DRO.MovementDRO;
+import com.example.homie.network.retrofit.MovementRequest;
 import com.example.homie.repository.UserRepository;
 import com.example.homie.viewModel.util.InputDataValidator;
 import com.example.homie.viewModel.util.StatusCode;
@@ -36,11 +39,11 @@ public class LoginViewModel extends AndroidViewModel implements AuthCallBack{
     }
 
     public void loginUser(String email, String password) {
-        isLoggedIn.setValue(true);
 
         if (checkEnteredData(email, password)) {
             userRepository.loginAccount(email, password, this);
         }
+        //isLoggedIn.setValue(true);
 
     }
 
@@ -77,11 +80,13 @@ public class LoginViewModel extends AndroidViewModel implements AuthCallBack{
 
     @Override
     public void onReturn(AuthDRO response) {
-        if (response.getStatusCode() == StatusCode.OK) {
+        if (response.getStatusCode() == 0) {
             TempMemory.saveUserId(getApplication().getApplicationContext(),response.getUserId());
             isLoggedIn.setValue(true);
         }else{
             showError.setValue(true);
         }
     }
+
+
 }
