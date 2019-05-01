@@ -8,18 +8,18 @@ import java.util.Date;
 public class SensorData implements Serializable {
 
     @SerializedName("TimeStamp")
-    private Date timeStamp;
+    private Date date;
     @SerializedName("Value")
     private int value;
 
 
-    public SensorData(Date timeStamp, int value) {
-        this.timeStamp = timeStamp;
+    public SensorData(Date date, int value) {
+        this.date = date;
         this.value = value;
     }
 
-    public Date getTimeStamp() {
-        return timeStamp;
+    public Date getDate() {
+        return date;
     }
 
     public int getValue() {
@@ -29,7 +29,7 @@ public class SensorData implements Serializable {
     @Override
     public String toString() {
         return "SensorData{" +
-                "timeStamp='" + timeStamp + '\'' +
+                "date='" + date + '\'' +
                 ", value=" + value +
                 '}';
     }
