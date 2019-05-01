@@ -2,7 +2,9 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="@drawable/gradient"
+    >
 
     <include
         layout="@layout/toolbar"
@@ -11,22 +13,27 @@
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        >
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            >
 
             <TextView
                 android:id="@+id/movement_sensor"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="60dp"
                 android:gravity="center"
-                android:text="Movement"
-                android:textSize="30sp" />
+                android:text="movement"
+                android:textSize="25sp"
+                android:background="@drawable/transparent_background"
+                android:textColor="@color/colorWhite"/>
 
             <LinearLayout
+
                 android:id="@+id/movement_sensor_charts"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -36,17 +43,20 @@
                 <com.github.mikephil.charting.charts.LineChart
                     android:id="@+id/movement_sensor_line_chart"
                     android:layout_width="match_parent"
-                    android:layout_height="300dp" />
+                    android:layout_height="300dp"
+                    />
 
             </LinearLayout>
 
             <TextView
                 android:id="@+id/co_sensor"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="60dp"
                 android:gravity="center"
                 android:text="CO2"
-                android:textSize="30sp" />
+                android:textSize="25sp"
+                android:background="@drawable/transparent_background"
+                android:textColor="@color/colorWhite"/>
 
             <LinearLayout
                 android:id="@+id/co_sensor_charts"
@@ -65,10 +75,12 @@
             <TextView
                 android:id="@+id/temperature_sensor"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="60dp"
                 android:gravity="center"
-                android:text="Temperature"
-                android:textSize="30sp" />
+                android:text="temperature"
+                android:textSize="25sp"
+                android:background="@drawable/transparent_background"
+                android:textColor="@color/colorWhite"/>
 
             <LinearLayout
                 android:id="@+id/temperature_sensor_charts"
@@ -87,10 +99,12 @@
             <TextView
                 android:id="@+id/humidity_sensor"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="60dp"
                 android:gravity="center"
-                android:text="Humidity"
-                android:textSize="30sp" />
+                android:text="humidity"
+                android:textSize="25sp"
+                android:background="@drawable/transparent_background"
+                android:textColor="@color/colorWhite"/>
 
             <LinearLayout
                 android:id="@+id/humidity_sensor_charts"
@@ -109,10 +123,12 @@
             <TextView
                 android:id="@+id/noise_sensor"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="60dp"
                 android:gravity="center"
-                android:text="Noise"
-                android:textSize="30sp" />
+                android:text="noise"
+                android:textSize="25sp"
+                android:background="@drawable/transparent_background"
+                android:textColor="@color/colorWhite"/>
 
             <LinearLayout
                 android:id="@+id/noise_sensor_charts"
@@ -131,10 +147,12 @@
             <TextView
                 android:id="@+id/light_sensor"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="60dp"
                 android:gravity="center"
-                android:text="Light"
-                android:textSize="30sp" />
+                android:text="light"
+                android:textSize="25sp"
+                android:background="@drawable/transparent_background"
+                android:textColor="@color/colorWhite"/>
 
             <LinearLayout
                 android:id="@+id/light_sensor_charts"

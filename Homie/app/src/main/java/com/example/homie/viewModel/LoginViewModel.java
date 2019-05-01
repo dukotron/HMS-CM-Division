@@ -43,7 +43,7 @@ public class LoginViewModel extends AndroidViewModel implements AuthCallBack{
         if (checkEnteredData(email, password)) {
             userRepository.loginAccount(email, password, this);
         }
-        //isLoggedIn.setValue(true);
+       // isLoggedIn.setValue(true);
 
     }
 

@@ -62,17 +62,17 @@ public class DevicesFragment extends Fragment {
         a.add(data);
         data = new CurrentData("Temperature", "22");
         a.add(data);
-        Device device = new Device("Hallway", a);
+        Device device = new Device("hallway", a);
         devices.add(device);
         data = new CurrentData("Temperature", "22");
         a = new ArrayList<>();
         a.add(data);
-        device = new Device("Living", a);
+        device = new Device("living", a);
         devices.add(device);
         data = new CurrentData("CO2", "122");
         a = new ArrayList<>();
         a.add(data);
-        device = new Device("Bedroom", a);
+        device = new Device("bedroom", a);
         devices.add(device);
         /*
         devices.add(new Device("Bedroom", "32w" ));

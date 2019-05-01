@@ -48,6 +48,10 @@ public class TestSensorsActivity extends AppCompatActivity {
         initMovementCharts();
         initMovementData();
         //setupMovementSensorData();
+
+        int white = getResources().getColor(R.color.colorWhite);
+        movementCharts.setBackgroundColor(white);
+
     }
 
     private void initToolbar() {
