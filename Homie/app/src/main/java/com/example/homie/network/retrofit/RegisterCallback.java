@@ -1,11 +1,12 @@
 package com.example.homie.network.retrofit;
 
-import com.example.homie.network.DRO.AuthDRO;
-import com.example.homie.network.DTO.UserRegisterDTO;
+import com.example.homie.DRO.AuthDRO;
+import com.example.homie.DTO.UserRegisterDTO;
+import com.example.homie.viewModel.AuthCallBack;
 
 import retrofit2.Callback;
 
-public interface RegisterCallback extends Callback<UserRegisterDTO> {
+public interface RegisterCallback extends Callback<AuthDRO> {
 
-    AuthDRO start(UserRegisterDTO user);
+    void start(UserRegisterDTO user, AuthCallBack callBack);
 }

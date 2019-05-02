@@ -12,6 +12,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.example.homie.R;
 import com.example.homie.viewModel.RegisterViewModel;
@@ -39,7 +40,6 @@ public class RegisterActivity extends AppCompatActivity {
         initRegisterButton();
         initPasswordButton();
         initGoToLoginButton();
-
         initViewModel();
     }
 
@@ -50,7 +50,7 @@ public class RegisterActivity extends AppCompatActivity {
             @Override
             public void onChanged(@Nullable Boolean aBoolean) {
                 if (aBoolean) {
-                    startActivity(new Intent(RegisterActivity.this, NavigationActivity.class));
+                    startActivity(new Intent(RegisterActivity.this, MainActivity.class));
                     finish();
                 }
             }
@@ -91,15 +91,25 @@ public class RegisterActivity extends AppCompatActivity {
                 }
             }
         });
+
+        viewModel.getShowError().observe(this, new Observer<Boolean>() {
+            @Override
+            public void onChanged(@Nullable Boolean aBoolean) {
+                if (aBoolean) {
+                    Toast.makeText(RegisterActivity.this, "Some error occurred!", Toast.LENGTH_LONG).show();
+                }
+            }
+        });
     }
 
     void initRegisterButton() {
         Button registerBtn = findViewById(R.id.registerButton);
+
         registerBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                viewModel.registerUser(firstName.getText().toString(), lastName.getText().toString(),
-                        email.getText().toString(), password.getText().toString().trim());
+                viewModel.registerUser(firstName.getText().toString().trim(), lastName.getText().toString().trim(),
+                        email.getText().toString().trim(), password.getText().toString().trim());
             }
         });
     }

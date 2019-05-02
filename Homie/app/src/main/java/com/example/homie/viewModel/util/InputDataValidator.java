@@ -12,16 +12,15 @@ public class InputDataValidator {
     }
 
     public static boolean isPasswordValid(final String password) {
-
-        Pattern pattern;
-        Matcher matcher;
-
-        final String PASSWORD_PATTERN = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=\\S+$).{6,}$";
-
-        pattern = Pattern.compile(PASSWORD_PATTERN);
-        matcher = pattern.matcher(password);
-
+        final String PASSWORD_PATTERN = "[\\w+~@#$%^&*+=`|{}:;!.?\"()\\[\\]-]{8,128}$";
+        Pattern pattern = Pattern.compile(PASSWORD_PATTERN);
+        Matcher matcher = pattern.matcher(password);
         return matcher.matches();
-
+    }
+    public static boolean isStringValid(final String inputString){
+        final String STRING_PATTERN = "^[A-Za-z]{1,20}$";
+        Pattern pattern = Pattern.compile(STRING_PATTERN);
+        Matcher matcher = pattern.matcher(inputString);
+        return matcher.matches();
     }
 }

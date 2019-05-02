@@ -1,0 +1,71 @@
+package com.example.homie.adapters;
+
+import android.content.Context;
+import android.content.Intent;
+import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Toast;
+
+import com.example.homie.R;
+import com.example.homie.model.CurrentData;
+import com.example.homie.model.Device;
+import com.example.homie.view.SensorsActivity;
+import com.example.homie.view.TestSensorsActivity;
+import com.thoughtbot.expandablerecyclerview.ExpandableRecyclerViewAdapter;
+import com.thoughtbot.expandablerecyclerview.models.ExpandableGroup;
+
+import java.util.List;
+
+public class DevicesAdapter extends ExpandableRecyclerViewAdapter<DeviceViewHolder,CurrentDataViewHolder> {
+
+    private Context context;
+
+    public DevicesAdapter(List<? extends ExpandableGroup> groups, Context context) {
+        super(groups);
+        this.context = context;
+    }
+
+    @Override
+    public DeviceViewHolder onCreateGroupViewHolder(ViewGroup parent, int viewType) {
+        View view = LayoutInflater.from(parent.getContext())
+                .inflate(R.layout.list_item_device,parent,false);
+        return new DeviceViewHolder(view);
+    }
+
+    @Override
+    public CurrentDataViewHolder onCreateChildViewHolder(ViewGroup parent, int viewType) {
+        View view = LayoutInflater.from(parent.getContext())
+                .inflate(R.layout.list_item_current_data,parent,false);
+        return new CurrentDataViewHolder(view);
+    }
+
+    @Override
+    public void onBindChildViewHolder(CurrentDataViewHolder holder, int flatPosition,
+                                      ExpandableGroup group, int childIndex) {
+        final CurrentData currentData = ((Device)group).getItems().get(childIndex);
+        holder.setDataType(currentData.getDataType());
+        holder.setDataValue(currentData.getDataValue());
+    }
+
+    @Override
+    public void onBindGroupViewHolder(final DeviceViewHolder holder, final int flatPosition,
+                                      final ExpandableGroup group) {
+        holder.setDeviceTitle(group);
+        holder.getArrow().setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(context, TestSensorsActivity.class);
+                intent.putExtra("deviceTitle",group.getTitle());
+                context.startActivity(intent);
+            }
+        });
+    }
+
+    @Override
+    public boolean onGroupClick(int flatPos) {
+        return super.onGroupClick(flatPos);
+    }
+
+}

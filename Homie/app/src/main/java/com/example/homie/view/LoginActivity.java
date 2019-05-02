@@ -4,14 +4,27 @@ import android.content.Intent;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
+import com.example.homie.DRO.AuthDRO;
+import com.example.homie.DRO.MovementDRO;
+import com.example.homie.DTO.UserLoginDTO;
 import com.example.homie.R;
+import com.example.homie.network.retrofit.LoginRequest;
+import com.example.homie.network.retrofit.MovementRequest;
+import com.example.homie.viewModel.AuthCallBack;
 import com.example.homie.viewModel.LoginViewModel;
+import com.example.homie.viewModel.MovementSensorCallBack;
+
+import java.util.List;
+
+import okhttp3.Response;
 
 
 public class LoginActivity extends AppCompatActivity {
@@ -21,8 +34,6 @@ public class LoginActivity extends AppCompatActivity {
 
     LoginViewModel viewModel;
 
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -30,8 +41,7 @@ public class LoginActivity extends AppCompatActivity {
 
         email = findViewById(R.id.emailLogin);
         password = findViewById(R.id.passwordLogin);
-
-
+        
         initLoginButton();
 
         initViewModel();
@@ -45,7 +55,7 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onChanged(@Nullable Boolean aBoolean) {
                 if (aBoolean) {
-                    startActivity(new Intent(LoginActivity.this, NavigationActivity.class));
+                    startActivity(new Intent(LoginActivity.this, MainActivity.class));
                     finish();
                 }
             }
@@ -69,6 +79,14 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
+        viewModel.getShowError().observe(this, new Observer<Boolean>() {
+            @Override
+            public void onChanged(@Nullable Boolean aBoolean) {
+                if (aBoolean) {
+                    Toast.makeText(LoginActivity.this, "Some error occurred!", Toast.LENGTH_LONG).show();
+                }
+            }
+        });
     }
 
     void initLoginButton() {
@@ -76,15 +94,26 @@ public class LoginActivity extends AppCompatActivity {
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                viewModel.loginUser(email.getText().toString(), password.getText().toString().trim());
+                viewModel.loginUser(email.getText().toString().trim(), password.getText().toString().trim());
             }
         });
     }
+
+//    void testMovRequest() {
+//        MovementRequest request = new MovementRequest();
+//        request.start(1234, (MovementSensorCallBack) this);
+//    }
+//
+//    void testLoginRequest() {
+//        LoginRequest request = new LoginRequest();
+//        request.start(new UserLoginDTO("Sneakyjson@user.com", "VerySecure"), this);
+//    }
 
     public void createAccountActivity(View view) {
         Intent intent = new Intent(this, RegisterActivity.class);
         startActivity(intent);
         finish();
     }
+
 
 }

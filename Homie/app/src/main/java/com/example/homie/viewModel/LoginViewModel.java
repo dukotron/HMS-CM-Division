@@ -3,28 +3,23 @@ package com.example.homie.viewModel;
 import android.app.Application;
 import android.arch.lifecycle.AndroidViewModel;
 import android.arch.lifecycle.MutableLiveData;
-import android.content.Context;
 import android.support.annotation.NonNull;
 import android.util.Log;
 
-import com.example.homie.network.DTO.UserLoginDTO;
+import com.example.homie.DRO.AuthDRO;
+import com.example.homie.DRO.MovementDRO;
+import com.example.homie.network.retrofit.MovementRequest;
 import com.example.homie.repository.UserRepository;
 import com.example.homie.viewModel.util.InputDataValidator;
+import com.example.homie.viewModel.util.StatusCode;
+import com.example.homie.viewModel.util.TempMemory;
 
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
-
-import static com.example.homie.network.util.NetworkConfig.BASE_URL;
-
-public class LoginViewModel extends AndroidViewModel {
+public class LoginViewModel extends AndroidViewModel implements AuthCallBack{
 
     private MutableLiveData<Boolean> isValidEmail;
     private MutableLiveData<Boolean> isValidPassword;
-
     private MutableLiveData<Boolean> isLoggedIn;
+    private MutableLiveData<Boolean> showError;
 
     private UserRepository userRepository;
 
@@ -35,21 +30,24 @@ public class LoginViewModel extends AndroidViewModel {
         isValidEmail = new MutableLiveData<>();
         isValidPassword = new MutableLiveData<>();
         isLoggedIn = new MutableLiveData<>();
+        showError = new MutableLiveData<>();
 
         isValidEmail.setValue(true);
         isValidPassword.setValue(true);
         isLoggedIn.setValue(false);
+        showError.setValue(false);
     }
 
     public void loginUser(String email, String password) {
+
         if (checkEnteredData(email, password)) {
-            userRepository.loginAccount(email, password);
-            //TODO check response from API
-            isLoggedIn.setValue(true);
+            userRepository.loginAccount(email, password, this);
         }
+       // isLoggedIn.setValue(true);
+
     }
 
-    boolean checkEnteredData(String email, String password) {
+    private boolean checkEnteredData(String email, String password) {
         boolean valid = true;
 
         if (!InputDataValidator.isEmailValid(email)) {
@@ -75,4 +73,20 @@ public class LoginViewModel extends AndroidViewModel {
     public MutableLiveData<Boolean> getIsLoggedIn() {
         return isLoggedIn;
     }
+
+    public MutableLiveData<Boolean> getShowError() {
+        return showError;
+    }
+
+    @Override
+    public void onReturn(AuthDRO response) {
+        if (response.getStatusCode() == 0) {
+            TempMemory.saveUserId(getApplication().getApplicationContext(),response.getUserId());
+            isLoggedIn.setValue(true);
+        }else{
+            showError.setValue(true);
+        }
+    }
+
+
 }

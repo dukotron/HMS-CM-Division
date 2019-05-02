@@ -12,33 +12,30 @@
         android:supportsRtl="true"
         android:usesCleartextTraffic="true"
         android:theme="@style/AppTheme">
-        <activity
-            android:name=".view.MenuActivity"
-            android:label="@string/title_activity_menu"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
-        <activity android:name=".view.NavigationActivity"></activity>
-        <activity
-            android:name=".view.LoginActivity"
-            android:screenOrientation="portrait">
-            <!--<intent-filter>-->
-                <!--<action android:name="android.intent.action.MAIN" />-->
+        <activity android:name=".view.MainActivity">
 
-                <!--<category android:name="android.intent.category.LAUNCHER" />-->
-            <!--</intent-filter>-->
+        </activity>
+
+        <activity android:theme="@style/AppTheme.NoActionBar"
+            android:name=".view.SettingsActivity"/>
+        <activity android:name=".view.SensorsActivity">
+
+        </activity>
+        <activity android:name=".view.TestSensorsActivity">
+
         </activity>
         <activity
-            android:name=".view.RegisterActivity"
-            android:screenOrientation="portrait"></activity>
-
-        <activity
-            android:name=".view.DummyActivityTestFragmentsActivity"
+            android:name=".view.LoginActivity"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
+        </activity>
+        <activity
+            android:name=".view.RegisterActivity"
+            android:screenOrientation="portrait">
         </activity>
     </application>
 
