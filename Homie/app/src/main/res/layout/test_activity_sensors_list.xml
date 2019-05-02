@@ -38,13 +38,12 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:visibility="visible">
+                android:visibility="gone">
 
                 <com.github.mikephil.charting.charts.LineChart
                     android:id="@+id/movement_sensor_line_chart"
                     android:layout_width="match_parent"
-                    android:layout_height="300dp"
-                    />
+                    android:layout_height="300dp" />
 
             </LinearLayout>
 

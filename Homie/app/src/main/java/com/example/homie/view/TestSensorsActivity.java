@@ -2,6 +2,7 @@ package com.example.homie.view;
 
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.annotation.Nullable;
@@ -48,10 +49,6 @@ public class TestSensorsActivity extends AppCompatActivity {
         initMovementCharts();
         initMovementData();
         //setupMovementSensorData();
-
-        int white = getResources().getColor(R.color.colorWhite);
-        movementCharts.setBackgroundColor(white);
-
     }
 
     private void initToolbar() {
@@ -117,6 +114,14 @@ public class TestSensorsActivity extends AppCompatActivity {
         ValueFormatter xAxisFormatter = new DateAxisValueFormatter(referenceTimestamp);
         XAxis xAxis = movementLineChart.getXAxis();
         xAxis.setValueFormatter(xAxisFormatter);
+
+        movementLineChart.getAxisLeft().setTextColor(Color.WHITE);
+        movementLineChart.getXAxis().setTextColor(Color.WHITE);
+
+        movementLineChart.getAxisRight().setEnabled(false);
+
+        int trans = getResources().getColor(R.color.transparent);
+        movementCharts.setBackgroundColor(trans);
 
         movementLineChart.setData(lineData);
         movementLineChart.invalidate();
