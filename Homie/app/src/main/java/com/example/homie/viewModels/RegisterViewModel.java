@@ -51,7 +51,7 @@ public class RegisterViewModel extends AndroidViewModel implements AuthCallBack 
         }
     }
 
-    boolean checkEnteredData(String firstName, String lastName, String email, String password) {
+    private boolean checkEnteredData(String firstName, String lastName, String email, String password) {
         boolean valid = true;
         if (!InputDataValidator.isStringValid(firstName)) {
             isValidFirstName.setValue(false);
@@ -100,9 +100,8 @@ public class RegisterViewModel extends AndroidViewModel implements AuthCallBack 
     }
 
     @Override
-    public void onReturn(AuthDRO response) {
-        if(response.getStatusCode() == StatusCode.OK) {
-            TempMemory.saveUserId(getApplication().getApplicationContext(),response.getUserId());
+    public void onReturn(int statusCode) {
+        if(statusCode == StatusCode.OK) {
             isRegistered.setValue(true);
         }else{
             showError.setValue(true);

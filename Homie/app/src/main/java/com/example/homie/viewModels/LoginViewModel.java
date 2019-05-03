@@ -75,9 +75,8 @@ public class LoginViewModel extends AndroidViewModel implements AuthCallBack{
     }
 
     @Override
-    public void onReturn(AuthDRO response) {
-        if (response.getStatusCode() == 0) {
-            TempMemory.saveUserId(getApplication().getApplicationContext(),response.getUserId());
+    public void onReturn(int statusCode) {
+        if (statusCode == 0) {
             isLoggedIn.setValue(true);
         }else{
             showError.setValue(true);

@@ -26,21 +26,21 @@ public class RegisterRequest implements RegisterCallback {
                 .build();
 
         RetrofitAPI client = retrofit.create(RetrofitAPI.class);
-        Call<AuthDRO> call = client.createAccount(user);
+        Call<Integer> call = client.createAccount(user);
         call.enqueue(this);
     }
 
     @Override
-    public void onResponse(Call<AuthDRO> call, Response<AuthDRO> response) {
+    public void onResponse(Call<Integer> call, Response<Integer> response) {
         if(response.code() == 200){
             callBack.onReturn(response.body());
         }else {
-           callBack.onReturn(new AuthDRO(StatusCode.NOT_OK));
+           callBack.onReturn(StatusCode.NOT_OK);
         }
     }
 
     @Override
-    public void onFailure(Call<AuthDRO> call, Throwable t) {
-        callBack.onReturn(new AuthDRO(StatusCode.NOT_OK));
+    public void onFailure(Call<Integer> call, Throwable t) {
+        callBack.onReturn(StatusCode.NOT_OK);
     }
 }

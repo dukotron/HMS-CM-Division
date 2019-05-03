@@ -12,6 +12,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.example.homie.R;
@@ -24,6 +25,7 @@ public class RegisterActivity extends AppCompatActivity {
     EditText lastName;
     EditText email;
     EditText password;
+    ProgressBar progressBar;
 
     RegisterViewModel viewModel;
 
@@ -36,6 +38,7 @@ public class RegisterActivity extends AppCompatActivity {
         lastName = findViewById(R.id.lastName);
         email = findViewById(R.id.emailRegister);
         password = findViewById(R.id.passwordRegister);
+        progressBar = findViewById(R.id.progressBar_register);
 
         initRegisterButton();
         initPasswordButton();
@@ -50,6 +53,7 @@ public class RegisterActivity extends AppCompatActivity {
             @Override
             public void onChanged(@Nullable Boolean aBoolean) {
                 if (aBoolean) {
+                    progressBar.setVisibility(View.GONE);
                     startActivity(new Intent(RegisterActivity.this, MainActivity.class));
                     finish();
                 }
@@ -60,6 +64,7 @@ public class RegisterActivity extends AppCompatActivity {
             @Override
             public void onChanged(@Nullable Boolean aBoolean) {
                 if (!aBoolean) {
+                    progressBar.setVisibility(View.GONE);
                     firstName.setError("Wrong First Name");
                 }
             }
@@ -69,6 +74,7 @@ public class RegisterActivity extends AppCompatActivity {
             @Override
             public void onChanged(@Nullable Boolean aBoolean) {
                 if (!aBoolean) {
+                    progressBar.setVisibility(View.GONE);
                     lastName.setError("Wrong Last Name");
                 }
             }
@@ -78,6 +84,7 @@ public class RegisterActivity extends AppCompatActivity {
             @Override
             public void onChanged(@Nullable Boolean aBoolean) {
                 if (!aBoolean) {
+                    progressBar.setVisibility(View.GONE);
                     email.setError("Wrong Email");
                 }
             }
@@ -87,6 +94,7 @@ public class RegisterActivity extends AppCompatActivity {
             @Override
             public void onChanged(@Nullable Boolean aBoolean) {
                 if (!aBoolean) {
+                    progressBar.setVisibility(View.GONE);
                     password.setError("Wrong Password");
                 }
             }
@@ -96,6 +104,7 @@ public class RegisterActivity extends AppCompatActivity {
             @Override
             public void onChanged(@Nullable Boolean aBoolean) {
                 if (aBoolean) {
+                    progressBar.setVisibility(View.GONE);
                     Toast.makeText(RegisterActivity.this, "Some error occurred!", Toast.LENGTH_LONG).show();
                 }
             }
@@ -108,6 +117,7 @@ public class RegisterActivity extends AppCompatActivity {
         registerBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                progressBar.setVisibility(View.VISIBLE);
                 viewModel.registerUser(firstName.getText().toString().trim(), lastName.getText().toString().trim(),
                         email.getText().toString().trim(), password.getText().toString().trim());
             }
