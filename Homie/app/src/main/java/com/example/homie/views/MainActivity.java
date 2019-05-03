@@ -94,7 +94,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 break;
 
             case R.id.setting:
-                Intent intent = new Intent(this, SettingsActivity.class);
+                Intent intent = new Intent(this, PreferencesActivity.class);
                 this.startActivity(intent);
                 break;
 

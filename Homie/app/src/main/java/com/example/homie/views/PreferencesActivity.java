@@ -1,24 +1,23 @@
 package com.example.homie.views;
 
-import android.os.Bundle;
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.ActionBar;
-import androidx.appcompat.app.AppCompatActivity;
-import com.example.homie.R;
-import com.example.homie.viewModels.MainViewModel;
 import android.content.Intent;
-
-import com.google.android.material.navigation.NavigationView;
-import androidx.core.view.GravityCompat;
-import androidx.drawerlayout.widget.DrawerLayout;
-import androidx.appcompat.app.ActionBarDrawerToggle;
-import androidx.appcompat.widget.Toolbar;
-
+import android.os.Bundle;
 import android.view.MenuItem;
 import android.widget.Toast;
 
-public class SettingsActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.preference.PreferenceFragmentCompat;
+
+import com.example.homie.R;
+import com.example.homie.viewModels.MainViewModel;
+import com.google.android.material.navigation.NavigationView;
+
+public class PreferencesActivity extends AppCompatActivity {
 
     private Toolbar toolbar;
     private DrawerLayout drawerLayout;
@@ -26,17 +25,32 @@ public class SettingsActivity extends AppCompatActivity
     DrawerLayout drawer;
     NavigationView navigationView;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.settings_layout);
-
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-
-
+        setContentView(R.layout.settings_activity);
+        getSupportFragmentManager()
+                .beginTransaction()
+                .replace(R.id.settings, new SettingsFragment())
+                .commit();
+        ActionBar actionBar = getSupportActionBar();
+        if (actionBar != null) {
+            actionBar.setDisplayHomeAsUpEnabled(true);
+        }
     }
+
+    public static class SettingsFragment extends PreferenceFragmentCompat {
+        @Override
+        public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
+            setPreferencesFromResource(R.xml.root_preferences, rootKey);
+        }
+    }
+
+
+
+
+    
+    // OTHER STUFF FROM HERE ON
 
 
     @Override
@@ -50,7 +64,7 @@ public class SettingsActivity extends AppCompatActivity
     }
 
 
-    @Override
+    //@Override
     public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
         switch(menuItem.getItemId()){
             case R.id.logout:
@@ -58,7 +72,7 @@ public class SettingsActivity extends AppCompatActivity
                 break;
 
             case R.id.setting:
-                Intent intent = new Intent(this, SettingsActivity.class);
+                Intent intent = new Intent(this, PreferencesActivity.class);
                 this.startActivity(intent);
                 break;
 
@@ -71,4 +85,3 @@ public class SettingsActivity extends AppCompatActivity
         return false;
     }
 }
-
