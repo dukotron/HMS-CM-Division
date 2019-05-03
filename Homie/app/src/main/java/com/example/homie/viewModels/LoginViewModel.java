@@ -6,9 +6,9 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.annotation.NonNull;
 
 import com.example.homie.DRO.AuthDRO;
-import com.example.homie.repository.UserRepository;
-import com.example.homie.viewModel.util.InputDataValidator;
-import com.example.homie.viewModel.util.TempMemory;
+import com.example.homie.repositories.UserRepository;
+import com.example.homie.viewModels.util.InputDataValidator;
+import com.example.homie.viewModels.util.TempMemory;
 
 public class LoginViewModel extends AndroidViewModel implements AuthCallBack{
 
