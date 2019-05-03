@@ -38,8 +38,5 @@ public class SensorsViewModel extends AndroidViewModel implements MovementSensor
         if(response.getStatusCode() == StatusCode.OK){
             movementData.setValue(response.getSensorDataList());
         }
-
     }
-
-
 }

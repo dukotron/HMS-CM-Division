@@ -105,25 +105,21 @@ public class SensorsActivity extends AppCompatActivity {
             entries.add(e);
         }
 
-        //setup chart
+        // setup chart
         LineDataSet lineDataSet = new LineDataSet(entries, "Daily average");
-        // disable circles
-        // lineDataSet.setDrawCircles(false);
         lineDataSet.setCircleRadius(2);
         LineData lineData = new LineData(lineDataSet);
-
+        // set value formatter for x axis to show dates
         ValueFormatter xAxisFormatter = new DateAxisValueFormatter(referenceTimestamp);
         XAxis xAxis = movementLineChart.getXAxis();
         xAxis.setValueFormatter(xAxisFormatter);
-
+        // stile the chart
         movementLineChart.getAxisLeft().setTextColor(Color.WHITE);
         movementLineChart.getXAxis().setTextColor(Color.WHITE);
-
         movementLineChart.getAxisRight().setEnabled(false);
-
-        int trans = getResources().getColor(R.color.transparent);
-        movementCharts.setBackgroundColor(trans);
-
+        int bgColor = getResources().getColor(R.color.transparent);
+        movementCharts.setBackgroundColor(bgColor);
+        // set data and notify the chart
         movementLineChart.setData(lineData);
         movementLineChart.invalidate();
     }
