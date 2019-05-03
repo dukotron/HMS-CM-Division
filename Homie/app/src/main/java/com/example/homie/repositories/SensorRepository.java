@@ -20,7 +20,7 @@ public class SensorRepository {
         return instance;
     }
 
-    public void getMovementData(int userId, MovementSensorCallBack viewModel) {
-        connection.getMovementData(userId, viewModel);
+    public void getMovementData(MovementSensorCallBack viewModel) {
+        connection.getMovementData( viewModel);
     }
 }

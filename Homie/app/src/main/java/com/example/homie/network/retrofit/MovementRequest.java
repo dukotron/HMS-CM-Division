@@ -8,6 +8,8 @@ import com.example.homie.viewModels.MovementSensorCallBack;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
+import okhttp3.OkHttpClient;
+import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Call;
 import retrofit2.Response;
 import retrofit2.Retrofit;
@@ -20,8 +22,15 @@ public class MovementRequest implements MovementCallback {
     MovementSensorCallBack callBack;
 
     @Override
-    public void start(int userId, MovementSensorCallBack callBack) {
+    public void start(String token, MovementSensorCallBack callBack) {
         this.callBack = callBack;
+
+        HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
+
+        interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
+        OkHttpClient.Builder httpClient=new OkHttpClient.Builder().addInterceptor(interceptor);
+
+
 
         Gson gson = new GsonBuilder()
                 .setDateFormat("yyyy-MM-dd'T'HH:mm:ss")
@@ -30,10 +39,11 @@ public class MovementRequest implements MovementCallback {
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(BASE_URL)
                 .addConverterFactory(GsonConverterFactory.create(gson))
+                .client(httpClient.build())
                 .build();
 
         RetrofitAPI client = retrofit.create(RetrofitAPI.class);
-        Call<MovementDRO> call = client.getMovementData(userId);
+        Call<MovementDRO> call = client.getMovementData(token);
         call.enqueue(this);
 
     }

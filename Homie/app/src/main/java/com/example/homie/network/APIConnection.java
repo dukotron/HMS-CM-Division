@@ -1,6 +1,8 @@
 package com.example.homie.network;
 
 
+import android.util.Log;
+
 import androidx.annotation.NonNull;
 
 import com.example.homie.DTO.UserRegisterDTO;
@@ -45,11 +47,11 @@ public class APIConnection implements NetworkConnection {
                 }
             }
         });
-
     }
 
     @Override
-    public void getMovementData(int userId, MovementSensorCallBack viewModel) {
-        new MovementRequest().start(userId, viewModel);
+    public void getMovementData(final MovementSensorCallBack viewModel) {
+        String token = "Bearer "+auth.getCurrentUser().getIdToken(false).getResult().getToken();
+        new MovementRequest().start(token, viewModel);
     }
 }
