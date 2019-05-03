@@ -52,6 +52,7 @@ public class APIConnection implements NetworkConnection {
     @Override
     public void getMovementData(final MovementSensorCallBack viewModel) {
         String token = "Bearer "+auth.getCurrentUser().getIdToken(false).getResult().getToken();
-        new MovementRequest().start(token, viewModel);
+        String userId = auth.getCurrentUser().getUid();
+        new MovementRequest().start(token, userId, viewModel);
     }
 }

@@ -8,6 +8,7 @@ import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
 import retrofit2.http.POST;
+import retrofit2.http.Query;
 
 public interface RetrofitAPI {
 
@@ -16,7 +17,7 @@ public interface RetrofitAPI {
     Call<Integer> createAccount(@Body UserRegisterDTO user);
 
     @GET("api/movement/dailyavg")
-    Call<MovementDRO> getMovementData(@Header("Authorization") String token);
+    Call<MovementDRO> getMovementData(@Header("Authorization") String token, @Query("userId") String userId);
 
 
 }

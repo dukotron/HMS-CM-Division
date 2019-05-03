@@ -7,5 +7,5 @@ import retrofit2.Callback;
 
 public interface MovementCallback extends Callback<MovementDRO> {
 
-    void start(String userId, MovementSensorCallBack callBack);
+    void start(String token, String userId,  MovementSensorCallBack callBack);
 }

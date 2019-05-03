@@ -22,15 +22,8 @@ public class MovementRequest implements MovementCallback {
     MovementSensorCallBack callBack;
 
     @Override
-    public void start(String token, MovementSensorCallBack callBack) {
+    public void start(String token, String userId, MovementSensorCallBack callBack) {
         this.callBack = callBack;
-
-        HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
-
-        interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
-        OkHttpClient.Builder httpClient=new OkHttpClient.Builder().addInterceptor(interceptor);
-
-
 
         Gson gson = new GsonBuilder()
                 .setDateFormat("yyyy-MM-dd'T'HH:mm:ss")
@@ -39,11 +32,10 @@ public class MovementRequest implements MovementCallback {
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(BASE_URL)
                 .addConverterFactory(GsonConverterFactory.create(gson))
-                .client(httpClient.build())
                 .build();
 
         RetrofitAPI client = retrofit.create(RetrofitAPI.class);
-        Call<MovementDRO> call = client.getMovementData(token);
+        Call<MovementDRO> call = client.getMovementData(token, userId);
         call.enqueue(this);
 
     }
@@ -53,13 +45,12 @@ public class MovementRequest implements MovementCallback {
     public void onResponse(Call<MovementDRO> call, Response<MovementDRO> response) {
         if (response.code() == 200) {
             callBack.onReturn(response.body());
-            Log.d("MovementRequest", response.body().toString());
         }
     }
 
     @Override
     public void onFailure(Call<MovementDRO> call, Throwable t) {
-        Log.d("MovementRequest",t.toString());
+        Log.d("MovementRequest", t.toString());
 
     }
 }
