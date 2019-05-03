@@ -1,4 +1,4 @@
-package com.example.homie.view;
+package com.example.homie.views;
 
 import android.os.Bundle;
 import androidx.annotation.NonNull;
@@ -12,8 +12,8 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.homie.adapters.DevicesAdapter;
-import com.example.homie.model.CurrentData;
-import com.example.homie.model.Device;
+import com.example.homie.models.CurrentData;
+import com.example.homie.models.Device;
 import com.example.homie.R;
 
 import java.util.ArrayList;

@@ -2,7 +2,7 @@ package com.example.homie.network.retrofit;
 
 import com.example.homie.DRO.AuthDRO;
 import com.example.homie.DTO.UserLoginDTO;
-import com.example.homie.viewModel.AuthCallBack;
+import com.example.homie.viewModels.AuthCallBack;
 
 
 import retrofit2.Callback;

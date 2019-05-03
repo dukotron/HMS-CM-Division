@@ -1,4 +1,4 @@
-package com.example.homie.viewModel;
+package com.example.homie.viewModels;
 
 import android.app.Application;
 import androidx.lifecycle.AndroidViewModel;
@@ -8,7 +8,7 @@ import androidx.annotation.NonNull;
 
 import com.example.homie.DRO.MovementDRO;
 import com.example.homie.DRO.SensorData;
-import com.example.homie.repository.SensorRepository;
+import com.example.homie.repositories.SensorRepository;
 
 import java.util.List;
 

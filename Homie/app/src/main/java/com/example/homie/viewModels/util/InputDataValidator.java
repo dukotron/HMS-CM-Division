@@ -1,4 +1,4 @@
-package com.example.homie.viewModel.util;
+package com.example.homie.viewModels.util;
 
 import android.util.Patterns;
 

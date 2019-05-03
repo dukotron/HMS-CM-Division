@@ -1,4 +1,4 @@
-package com.example.homie.view;
+package com.example.homie.views;
 
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
@@ -20,7 +20,7 @@ import android.view.MenuItem;
 import android.widget.Toast;
 
 import com.example.homie.R;
-import com.example.homie.viewModel.MainViewModel;
+import com.example.homie.viewModels.MainViewModel;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 

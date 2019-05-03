@@ -12,7 +12,7 @@
         android:supportsRtl="true"
         android:usesCleartextTraffic="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".view.MainActivity">
+        <activity android:name=".views.MainActivity">
 
         </activity>
 
@@ -24,15 +24,12 @@
               <!--<category android:name="android.intent.category.LAUNCHER" />-->
           <!--</intent-filter>-->
         </activity>
-
-        <activity android:name=".view.SensorsActivity">
-
-        </activity>
-        <activity android:name=".view.TestSensorsActivity">
+       
+        <activity android:name=".views.SensorsActivity">
 
         </activity>
         <activity
-            android:name=".view.LoginActivity"
+            android:name=".views.LoginActivity"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -41,7 +38,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".view.RegisterActivity"
+            android:name=".views.RegisterActivity"
             android:screenOrientation="portrait">
         </activity>
     </application>

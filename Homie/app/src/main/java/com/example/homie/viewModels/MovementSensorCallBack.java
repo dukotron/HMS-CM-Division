@@ -1,8 +1,6 @@
-package com.example.homie.viewModel;
+package com.example.homie.viewModels;
 
 import com.example.homie.DRO.MovementDRO;
-
-import java.util.List;
 
 public interface MovementSensorCallBack {
 

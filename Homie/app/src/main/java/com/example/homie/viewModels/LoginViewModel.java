@@ -1,4 +1,4 @@
-package com.example.homie.viewModel;
+package com.example.homie.viewModels;
 
 import android.app.Application;
 import androidx.lifecycle.AndroidViewModel;
@@ -8,60 +8,43 @@ import androidx.annotation.NonNull;
 import com.example.homie.DRO.AuthDRO;
 import com.example.homie.repository.UserRepository;
 import com.example.homie.viewModel.util.InputDataValidator;
-import com.example.homie.viewModel.util.StatusCode;
 import com.example.homie.viewModel.util.TempMemory;
 
-public class RegisterViewModel extends AndroidViewModel implements AuthCallBack {
-    private MutableLiveData<Boolean> isValidFirstName;
-    private MutableLiveData<Boolean> isValidLastName;
+public class LoginViewModel extends AndroidViewModel implements AuthCallBack{
+
     private MutableLiveData<Boolean> isValidEmail;
     private MutableLiveData<Boolean> isValidPassword;
-
-    private MutableLiveData<Boolean> isRegistered;
-
+    private MutableLiveData<Boolean> isLoggedIn;
     private MutableLiveData<Boolean> showError;
 
     private UserRepository userRepository;
 
-    //TODO move IP address to separate configuration class
-
-
-    public RegisterViewModel(@NonNull Application application) {
+    public LoginViewModel(@NonNull Application application) {
         super(application);
         userRepository = UserRepository.getInstance();
 
-        isValidFirstName = new MutableLiveData<>();
-        isValidLastName = new MutableLiveData<>();
         isValidEmail = new MutableLiveData<>();
         isValidPassword = new MutableLiveData<>();
-        isRegistered = new MutableLiveData<>();
+        isLoggedIn = new MutableLiveData<>();
         showError = new MutableLiveData<>();
 
-        isValidFirstName.setValue(true);
-        isValidLastName.setValue(true);
         isValidEmail.setValue(true);
         isValidPassword.setValue(true);
-        isRegistered.setValue(false);
+        isLoggedIn.setValue(false);
         showError.setValue(false);
     }
 
-    public void registerUser(String firstName, String lastName, String email, String password) {
-        if (checkEnteredData(firstName, lastName, email, password)) {
-            userRepository.createAccount(firstName, lastName, email, password, this);
+    public void loginUser(String email, String password) {
+
+        if (checkEnteredData(email, password)) {
+            userRepository.loginAccount(email, password, this);
         }
+       // isLoggedIn.setValue(true);
+
     }
 
-    boolean checkEnteredData(String firstName, String lastName, String email, String password) {
+    private boolean checkEnteredData(String email, String password) {
         boolean valid = true;
-        if (!InputDataValidator.isStringValid(firstName)) {
-            isValidFirstName.setValue(false);
-            valid = false;
-        }
-
-        if (!InputDataValidator.isStringValid(lastName)) {
-            isValidLastName.setValue(false);
-            valid = false;
-        }
 
         if (!InputDataValidator.isEmailValid(email)) {
             isValidEmail.setValue(false);
@@ -75,14 +58,6 @@ public class RegisterViewModel extends AndroidViewModel implements AuthCallBack 
         return valid;
     }
 
-    public MutableLiveData<Boolean> getIsValidFirstName() {
-        return isValidFirstName;
-    }
-
-    public MutableLiveData<Boolean> getIsValidLastName() {
-        return isValidLastName;
-    }
-
     public MutableLiveData<Boolean> getIsValidEmail() {
         return isValidEmail;
     }
@@ -91,8 +66,8 @@ public class RegisterViewModel extends AndroidViewModel implements AuthCallBack 
         return isValidPassword;
     }
 
-    public MutableLiveData<Boolean> getIsRegistered() {
-        return isRegistered;
+    public MutableLiveData<Boolean> getIsLoggedIn() {
+        return isLoggedIn;
     }
 
     public MutableLiveData<Boolean> getShowError() {
@@ -101,11 +76,13 @@ public class RegisterViewModel extends AndroidViewModel implements AuthCallBack 
 
     @Override
     public void onReturn(AuthDRO response) {
-        if(response.getStatusCode() == StatusCode.OK) {
+        if (response.getStatusCode() == 0) {
             TempMemory.saveUserId(getApplication().getApplicationContext(),response.getUserId());
-            isRegistered.setValue(true);
+            isLoggedIn.setValue(true);
         }else{
             showError.setValue(true);
         }
     }
+
+
 }

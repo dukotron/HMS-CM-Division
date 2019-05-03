@@ -1,4 +1,4 @@
-package com.example.homie.model;
+package com.example.homie.models;
 
 import com.thoughtbot.expandablerecyclerview.models.ExpandableGroup;
 

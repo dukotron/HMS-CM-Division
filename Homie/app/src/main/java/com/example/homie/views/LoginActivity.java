@@ -1,4 +1,4 @@
-package com.example.homie.view;
+package com.example.homie.views;
 
 import android.content.Intent;
 import androidx.annotation.Nullable;
@@ -12,7 +12,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.homie.R;
-import com.example.homie.viewModel.LoginViewModel;
+import com.example.homie.viewModels.LoginViewModel;
 
 
 public class LoginActivity extends AppCompatActivity {

@@ -6,8 +6,8 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.homie.R;
-import com.example.homie.model.Sensor;
-import com.example.homie.model.SensorContent;
+import com.example.homie.models.Sensor;
+import com.example.homie.models.SensorContent;
 import com.thoughtbot.expandablerecyclerview.ExpandableRecyclerViewAdapter;
 import com.thoughtbot.expandablerecyclerview.models.ExpandableGroup;
 

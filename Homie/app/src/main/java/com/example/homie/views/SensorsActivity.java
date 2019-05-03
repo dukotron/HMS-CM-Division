@@ -1,4 +1,4 @@
-package com.example.homie.view;
+package com.example.homie.views;
 
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
@@ -14,7 +14,8 @@ import android.widget.TextView;
 
 import com.example.homie.DRO.SensorData;
 import com.example.homie.R;
-import com.example.homie.viewModel.SensorsViewModel;
+import com.example.homie.viewModels.SensorsViewModel;
+import com.example.homie.views.formatters.DateAxisValueFormatter;
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.components.XAxis;
 import com.github.mikephil.charting.data.Entry;
@@ -26,7 +27,7 @@ import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
-public class TestSensorsActivity extends AppCompatActivity {
+public class SensorsActivity extends AppCompatActivity {
 
     private String deviceTitle;
 
@@ -40,7 +41,7 @@ public class TestSensorsActivity extends AppCompatActivity {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.test_activity_sensors_list);
+        setContentView(R.layout.activity_sensors_list);
 
         deviceTitle = getIntent().getExtras().getString("deviceTitle");
         initToolbar();

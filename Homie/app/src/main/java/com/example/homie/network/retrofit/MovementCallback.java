@@ -1,9 +1,7 @@
 package com.example.homie.network.retrofit;
 
 import com.example.homie.DRO.MovementDRO;
-import com.example.homie.viewModel.MovementSensorCallBack;
-
-import java.util.List;
+import com.example.homie.viewModels.MovementSensorCallBack;
 
 import retrofit2.Callback;
 

@@ -1,4 +1,4 @@
-package com.example.homie.viewModel;
+package com.example.homie.viewModels;
 
 import com.example.homie.DRO.AuthDRO;
 

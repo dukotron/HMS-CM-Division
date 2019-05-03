@@ -1,11 +1,11 @@
-package com.example.homie.view;
+package com.example.homie.views;
 
 import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import com.example.homie.R;
-import com.example.homie.viewModel.MainViewModel;
+import com.example.homie.viewModels.MainViewModel;
 import android.content.Intent;
 
 import com.google.android.material.navigation.NavigationView;

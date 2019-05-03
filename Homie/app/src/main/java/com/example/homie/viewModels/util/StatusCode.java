@@ -1,4 +1,4 @@
-package com.example.homie.viewModel.util;
+package com.example.homie.viewModels.util;
 
 public class StatusCode {
     public static final int OK = 0;

@@ -1,12 +1,12 @@
-package com.example.homie.viewModel;
+package com.example.homie.viewModels;
 
 import android.app.Application;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.MutableLiveData;
 import androidx.annotation.NonNull;
 
-import com.example.homie.repository.UserRepository;
-import com.example.homie.viewModel.util.TempMemory;
+import com.example.homie.repositories.UserRepository;
+import com.example.homie.viewModels.util.TempMemory;
 
 public class MainViewModel extends AndroidViewModel {
 
