@@ -1,9 +1,9 @@
-package com.example.homie.repository;
+package com.example.homie.repositories;
 
 
 import com.example.homie.network.APIConnection;
 import com.example.homie.network.NetworkConnection;
-import com.example.homie.viewModel.AuthCallBack;
+import com.example.homie.viewModels.AuthCallBack;
 
 public class UserRepository {
 

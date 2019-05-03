@@ -1,14 +1,10 @@
 package com.example.homie.network.retrofit;
 
-import android.util.Log;
-
 import com.example.homie.DRO.AuthDRO;
 import com.example.homie.DTO.UserRegisterDTO;
-import com.example.homie.viewModel.AuthCallBack;
-import com.example.homie.viewModel.util.StatusCode;
+import com.example.homie.viewModels.AuthCallBack;
+import com.example.homie.viewModels.util.StatusCode;
 
-import okhttp3.OkHttpClient;
-import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Call;
 import retrofit2.Response;
 import retrofit2.Retrofit;

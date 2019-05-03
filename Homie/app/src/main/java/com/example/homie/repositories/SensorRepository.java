@@ -1,8 +1,8 @@
-package com.example.homie.repository;
+package com.example.homie.repositories;
 
 import com.example.homie.network.APIConnection;
 import com.example.homie.network.NetworkConnection;
-import com.example.homie.viewModel.MovementSensorCallBack;
+import com.example.homie.viewModels.MovementSensorCallBack;
 
 public class SensorRepository {
 

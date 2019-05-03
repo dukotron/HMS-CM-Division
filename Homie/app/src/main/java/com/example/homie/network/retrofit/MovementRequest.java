@@ -4,11 +4,9 @@ package com.example.homie.network.retrofit;
 import android.util.Log;
 
 import com.example.homie.DRO.MovementDRO;
-import com.example.homie.viewModel.MovementSensorCallBack;
+import com.example.homie.viewModels.MovementSensorCallBack;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-
-import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Response;

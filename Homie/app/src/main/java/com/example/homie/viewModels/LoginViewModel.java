@@ -1,18 +1,14 @@
-package com.example.homie.viewModel;
+package com.example.homie.viewModels;
 
 import android.app.Application;
 import android.arch.lifecycle.AndroidViewModel;
 import android.arch.lifecycle.MutableLiveData;
 import android.support.annotation.NonNull;
-import android.util.Log;
 
 import com.example.homie.DRO.AuthDRO;
-import com.example.homie.DRO.MovementDRO;
-import com.example.homie.network.retrofit.MovementRequest;
-import com.example.homie.repository.UserRepository;
-import com.example.homie.viewModel.util.InputDataValidator;
-import com.example.homie.viewModel.util.StatusCode;
-import com.example.homie.viewModel.util.TempMemory;
+import com.example.homie.repositories.UserRepository;
+import com.example.homie.viewModels.util.InputDataValidator;
+import com.example.homie.viewModels.util.TempMemory;
 
 public class LoginViewModel extends AndroidViewModel implements AuthCallBack{
 

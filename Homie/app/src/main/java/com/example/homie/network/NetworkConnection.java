@@ -1,7 +1,7 @@
 package com.example.homie.network;
 
-import com.example.homie.viewModel.AuthCallBack;
-import com.example.homie.viewModel.MovementSensorCallBack;
+import com.example.homie.viewModels.AuthCallBack;
+import com.example.homie.viewModels.MovementSensorCallBack;
 
 public interface NetworkConnection {
 

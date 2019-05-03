@@ -1,4 +1,4 @@
-package com.example.homie.view;
+package com.example.homie.views;
 
 
 import android.arch.lifecycle.Observer;
@@ -15,7 +15,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.homie.R;
-import com.example.homie.viewModel.RegisterViewModel;
+import com.example.homie.viewModels.RegisterViewModel;
 
 
 public class RegisterActivity extends AppCompatActivity {

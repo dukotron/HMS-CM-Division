@@ -5,8 +5,8 @@ import com.example.homie.DTO.UserRegisterDTO;
 import com.example.homie.network.retrofit.LoginRequest;
 import com.example.homie.network.retrofit.MovementRequest;
 import com.example.homie.network.retrofit.RegisterRequest;
-import com.example.homie.viewModel.AuthCallBack;
-import com.example.homie.viewModel.MovementSensorCallBack;
+import com.example.homie.viewModels.AuthCallBack;
+import com.example.homie.viewModels.MovementSensorCallBack;
 
 public class APIConnection implements NetworkConnection {
 

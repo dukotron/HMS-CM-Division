@@ -1,25 +1,173 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@drawable/gradient">
+    android:background="@drawable/gradient"
+    >
 
-    <LinearLayout
+    <include
+        layout="@layout/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        >
 
-        <include
-            layout="@layout/toolbar"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            >
 
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/recycler_view_sensors_list"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            <TextView
+                android:id="@+id/movement_sensor"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:gravity="center"
+                android:text="movement"
+                android:textSize="25sp"
+                android:background="@drawable/transparent_background"
+                android:textColor="@color/colorWhite"/>
 
-    </LinearLayout>
+            <LinearLayout
 
-</RelativeLayout>
+                android:id="@+id/movement_sensor_charts"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:visibility="gone">
+
+                <com.github.mikephil.charting.charts.LineChart
+                    android:id="@+id/movement_sensor_line_chart"
+                    android:layout_width="match_parent"
+                    android:layout_height="300dp" />
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/co_sensor"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:gravity="center"
+                android:text="CO2"
+                android:textSize="25sp"
+                android:background="@drawable/transparent_background"
+                android:textColor="@color/colorWhite"/>
+
+            <LinearLayout
+                android:id="@+id/co_sensor_charts"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:visibility="gone">
+
+                <com.github.mikephil.charting.charts.LineChart
+                    android:id="@+id/co_sensor_chart"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/temperature_sensor"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:gravity="center"
+                android:text="temperature"
+                android:textSize="25sp"
+                android:background="@drawable/transparent_background"
+                android:textColor="@color/colorWhite"/>
+
+            <LinearLayout
+                android:id="@+id/temperature_sensor_charts"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:visibility="gone">
+
+                <com.github.mikephil.charting.charts.LineChart
+                    android:id="@+id/temperature_sensor_line_chart"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/humidity_sensor"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:gravity="center"
+                android:text="humidity"
+                android:textSize="25sp"
+                android:background="@drawable/transparent_background"
+                android:textColor="@color/colorWhite"/>
+
+            <LinearLayout
+                android:id="@+id/humidity_sensor_charts"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:visibility="gone">
+
+                <com.github.mikephil.charting.charts.LineChart
+                    android:id="@+id/humidity_sensor_line_chart"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/noise_sensor"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:gravity="center"
+                android:text="noise"
+                android:textSize="25sp"
+                android:background="@drawable/transparent_background"
+                android:textColor="@color/colorWhite"/>
+
+            <LinearLayout
+                android:id="@+id/noise_sensor_charts"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:visibility="gone">
+
+                <com.github.mikephil.charting.charts.LineChart
+                    android:id="@+id/noise_sensor_line_chart"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/light_sensor"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:gravity="center"
+                android:text="light"
+                android:textSize="25sp"
+                android:background="@drawable/transparent_background"
+                android:textColor="@color/colorWhite"/>
+
+            <LinearLayout
+                android:id="@+id/light_sensor_charts"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:visibility="gone">
+
+                <com.github.mikephil.charting.charts.LineChart
+                    android:id="@+id/light_sensor_line_chart"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</LinearLayout>

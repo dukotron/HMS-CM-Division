@@ -1,13 +1,12 @@
-package com.example.homie.view;
+package com.example.homie.views.formatters;
 
-import com.github.mikephil.charting.charts.BarLineChartBase;
 import com.github.mikephil.charting.formatter.ValueFormatter;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-class DateAxisValueFormatter extends ValueFormatter {
+public class DateAxisValueFormatter extends ValueFormatter {
 
     private long referenceTimestamp; // minimum timestamp in your data set
     private DateFormat dataFormat;

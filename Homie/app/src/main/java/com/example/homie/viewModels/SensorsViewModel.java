@@ -1,4 +1,4 @@
-package com.example.homie.viewModel;
+package com.example.homie.viewModels;
 
 import android.app.Application;
 import android.arch.lifecycle.AndroidViewModel;
@@ -6,13 +6,10 @@ import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.MutableLiveData;
 import android.support.annotation.NonNull;
 
-import com.example.homie.DRO.AuthDRO;
 import com.example.homie.DRO.MovementDRO;
 import com.example.homie.DRO.SensorData;
-import com.example.homie.repository.SensorRepository;
-import com.example.homie.viewModel.util.TempMemory;
+import com.example.homie.repositories.SensorRepository;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class SensorsViewModel extends AndroidViewModel implements MovementSensorCallBack{
