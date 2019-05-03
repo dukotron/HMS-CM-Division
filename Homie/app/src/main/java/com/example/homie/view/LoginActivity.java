@@ -1,30 +1,18 @@
 package com.example.homie.view;
 
 import android.content.Intent;
-import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
-import android.arch.lifecycle.Observer;
-import android.arch.lifecycle.ViewModelProviders;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProviders;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.example.homie.DRO.AuthDRO;
-import com.example.homie.DRO.MovementDRO;
-import com.example.homie.DTO.UserLoginDTO;
 import com.example.homie.R;
-import com.example.homie.network.retrofit.LoginRequest;
-import com.example.homie.network.retrofit.MovementRequest;
-import com.example.homie.viewModel.AuthCallBack;
 import com.example.homie.viewModel.LoginViewModel;
-import com.example.homie.viewModel.MovementSensorCallBack;
-
-import java.util.List;
-
-import okhttp3.Response;
 
 
 public class LoginActivity extends AppCompatActivity {
