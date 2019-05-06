@@ -31,7 +31,7 @@ public class SensorsViewModel extends AndroidViewModel implements SensorDataCall
         return movementData;
     }
 
-    public LiveData<List<SensorData>> getCo2Data() {
+    public LiveData<List<SensorData>> getCoData() {
         return co2Data;
     }
 
@@ -39,7 +39,7 @@ public class SensorsViewModel extends AndroidViewModel implements SensorDataCall
         sensorRepository.getMovementData(this);
     }
 
-    public void loadCo2Data() {
+    public void loadCoData() {
         sensorRepository.getCo2Data(this);
     }
 
