@@ -50,38 +50,5 @@ public class PreferencesActivity extends AppCompatActivity {
 
 
     
-    // OTHER STUFF FROM HERE ON
 
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()){
-            case android.R.id.home:
-                drawerLayout.openDrawer(GravityCompat.START);
-                return true;
-        }
-        return super.onOptionsItemSelected(item);
-    }
-
-
-    //@Override
-    public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
-        switch(menuItem.getItemId()){
-            case R.id.logout:
-                viewModel.logoutUser();
-                break;
-
-            case R.id.setting:
-                Intent intent = new Intent(this, PreferencesActivity.class);
-                this.startActivity(intent);
-                break;
-
-            default:
-                Toast.makeText(this, "Menu Item Works!!!", Toast.LENGTH_SHORT).show();
-                break;
-        }
-        menuItem.setChecked(true);
-        drawerLayout.closeDrawer(GravityCompat.START);
-        return false;
-    }
 }
