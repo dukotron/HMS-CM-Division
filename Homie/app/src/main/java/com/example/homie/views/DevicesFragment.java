@@ -71,6 +71,7 @@ public class DevicesFragment extends Fragment {
         a.add(data);
         device = new Device("bedroom", a);
         devices.add(device);
+
         /*
         devices.add(new Device("Bedroom", "32w" ));
         devices.add(new Device("Kitchen", "123wr" ));

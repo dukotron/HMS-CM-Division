@@ -6,7 +6,7 @@ import com.google.gson.annotations.SerializedName;
 import java.io.Serializable;
 import java.util.List;
 
-public class MovementDRO implements Serializable {
+public class SensorDRO implements Serializable {
 
     @Expose
     @SerializedName("StatusCode")
@@ -15,11 +15,11 @@ public class MovementDRO implements Serializable {
     @Expose
     private List<SensorData> sensorData;
 
-    public MovementDRO(int statusCode) {
+    public SensorDRO(int statusCode) {
         this.statusCode = statusCode;
     }
 
-    public MovementDRO(int statusCode, List<SensorData> sensorData) {
+    public SensorDRO(int statusCode, List<SensorData> sensorData) {
         this.statusCode = statusCode;
         this.sensorData = sensorData;
     }
@@ -33,7 +33,7 @@ public class MovementDRO implements Serializable {
 
     @Override
     public String toString() {
-        return "MovementDRO{" +
+        return "SensorDRO{" +
                 "statusCode=" + statusCode +
                 ", sensorData=" + sensorData +
                 '}';

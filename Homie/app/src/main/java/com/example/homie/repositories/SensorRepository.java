@@ -2,7 +2,7 @@ package com.example.homie.repositories;
 
 import com.example.homie.network.APIConnection;
 import com.example.homie.network.NetworkConnection;
-import com.example.homie.viewModels.MovementSensorCallBack;
+import com.example.homie.viewModels.SensorDataCallBack;
 
 public class SensorRepository {
 
@@ -20,7 +20,11 @@ public class SensorRepository {
         return instance;
     }
 
-    public void getMovementData(MovementSensorCallBack viewModel) {
+    public void getMovementData(SensorDataCallBack viewModel) {
         connection.getMovementData( viewModel);
+    }
+
+    public void getCo2Data(SensorDataCallBack viewModel) {
+        connection.getCo2(viewModel);
     }
 }

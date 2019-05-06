@@ -6,37 +6,55 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.annotation.NonNull;
 
-import com.example.homie.DRO.MovementDRO;
+import com.example.homie.DRO.SensorDRO;
 import com.example.homie.DRO.SensorData;
+import com.example.homie.models.Sensor;
 import com.example.homie.repositories.SensorRepository;
 import com.example.homie.viewModels.util.StatusCode;
 
 import java.util.List;
 
-public class SensorsViewModel extends AndroidViewModel implements MovementSensorCallBack{
+public class SensorsViewModel extends AndroidViewModel implements SensorDataCallBack {
 
     private SensorRepository sensorRepository;
     private MutableLiveData<List<SensorData>> movementData;
+    private MutableLiveData<List<SensorData>> co2Data;
 
     public SensorsViewModel(@NonNull Application application) {
         super(application);
         sensorRepository = SensorRepository.getInstance();
         movementData = new MutableLiveData<>();
+        co2Data = new MutableLiveData<>();
     }
 
     public LiveData<List<SensorData>> getMovementData() {
         return movementData;
     }
 
+    public LiveData<List<SensorData>> getCoData() {
+        return co2Data;
+    }
+
     public void loadMovementData(){
         sensorRepository.getMovementData(this);
+    }
 
+    public void loadCoData() {
+        sensorRepository.getCo2Data(this);
+    }
+
+
+    @Override
+    public void onReturnMovementData(SensorDRO response) {
+        if(response.getStatusCode() == StatusCode.OK){
+            movementData.setValue(response.getSensorDataList());
+        }
     }
 
     @Override
-    public void onReturn(MovementDRO response) {
+    public void onReturnCo2Data(SensorDRO response) {
         if(response.getStatusCode() == StatusCode.OK){
-            movementData.setValue(response.getSensorDataList());
+            co2Data.setValue(response.getSensorDataList());
         }
     }
 }

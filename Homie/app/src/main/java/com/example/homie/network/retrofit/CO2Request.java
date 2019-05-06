@@ -1,5 +1,6 @@
 package com.example.homie.network.retrofit;
 
+import android.util.Log;
 
 import com.example.homie.DRO.SensorDRO;
 import com.example.homie.viewModels.SensorDataCallBack;
@@ -13,9 +14,9 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 import static com.example.homie.network.util.NetworkConfig.BASE_URL;
 
-public class MovementRequest implements MovementCallback {
+public class CO2Request implements CO2Callback {
 
-    SensorDataCallBack callBack;
+    private SensorDataCallBack callBack;
 
     @Override
     public void start(String token, String userId, SensorDataCallBack callBack) {
@@ -31,19 +32,19 @@ public class MovementRequest implements MovementCallback {
                 .build();
 
         RetrofitAPI client = retrofit.create(RetrofitAPI.class);
-        Call<SensorDRO> call = client.getMovementData(token, userId);
+        Call<SensorDRO> call = client.getCo2Data(token, userId);
         call.enqueue(this);
-
     }
-
 
     @Override
     public void onResponse(Call<SensorDRO> call, Response<SensorDRO> response) {
         if (response.code() == 200) {
-            callBack.onReturnMovementData(response.body());
+            callBack.onReturnCo2Data(response.body());
         }
     }
 
     @Override
-    public void onFailure(Call<SensorDRO> call, Throwable t) {}
+    public void onFailure(Call<SensorDRO> call, Throwable t) {
+        Log.d("Co2Request", t.toString());
+    }
 }
