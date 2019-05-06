@@ -27,4 +27,12 @@ public class SensorRepository {
     public void getCo2Data(SensorDataCallBack viewModel) {
         connection.getCo2(viewModel);
     }
+
+    public void getTemperatureData(SensorDataCallBack viewModel) {
+        connection.getTemperatureData(viewModel);
+    }
+
+    public void getHumidityData(SensorDataCallBack viewModel) {
+        connection.getHumidityData(viewModel);
+    }
 }

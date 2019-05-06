@@ -92,10 +92,10 @@
                 android:orientation="vertical"
                 android:visibility="gone">
 
-                <com.github.mikephil.charting.charts.LineChart
-                    android:id="@+id/temperature_sensor_line_chart"
+                <com.github.mikephil.charting.charts.BarChart
+                    android:id="@+id/temperature_sensor_bar_chart"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent" />
+                    android:layout_height="300dp" />
 
             </LinearLayout>
 
@@ -119,7 +119,7 @@
                 <com.github.mikephil.charting.charts.LineChart
                     android:id="@+id/humidity_sensor_line_chart"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent" />
+                    android:layout_height="300dp" />
 
             </LinearLayout>
 
