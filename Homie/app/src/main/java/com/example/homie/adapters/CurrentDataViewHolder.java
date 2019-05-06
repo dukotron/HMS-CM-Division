@@ -4,7 +4,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.example.homie.R;
-import com.example.homie.model.CurrentData;
+import com.example.homie.models.CurrentData;
 import com.thoughtbot.expandablerecyclerview.viewholders.ChildViewHolder;
 
 public class CurrentDataViewHolder extends ChildViewHolder {

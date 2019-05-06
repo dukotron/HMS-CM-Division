@@ -6,49 +6,26 @@ import com.google.gson.annotations.SerializedName;
 import java.io.Serializable;
 
 public class UserRegisterDTO implements Serializable {
-    @SerializedName("FirstName")
+    @SerializedName("UserId")
     @Expose
-    private String firstName;
-    @SerializedName("LastName")
-    @Expose
-    private String lastName;
-    @SerializedName("Email")
-    @Expose
-    private String email;
-    @SerializedName("Password")
-    @Expose
-    private String password;
+    private String userId;
 
-    public UserRegisterDTO(String firstName, String lastName, String email, String password) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.email = email;
-        this.password = password;
+    public UserRegisterDTO(String userId) {
+        this.userId = userId;
     }
 
-    public String getFirstName() {
-        return firstName;
+    public String getUserId() {
+        return userId;
     }
 
-    public String getLastName() {
-        return lastName;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public String getPassword() {
-        return password;
+    public void setUserId(String userId) {
+        this.userId = userId;
     }
 
     @Override
     public String toString() {
         return "UserRegisterDTO{" +
-                "firstName='" + firstName + '\'' +
-                ", lastName='" + lastName + '\'' +
-                ", email='" + email + '\'' +
-                ", password='" + password + '\'' +
+                "UserId='" + userId +
                 '}';
     }
 }
