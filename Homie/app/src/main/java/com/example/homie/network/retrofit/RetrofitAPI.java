@@ -22,6 +22,12 @@ public interface RetrofitAPI {
     @GET("api/movement/???")
     Call<SensorDRO> getCo2Data(@Header("Authorization") String token, @Query("userId") String userId);
 
+    @GET("api/temperature/???")
+    Call<SensorDRO> getTemperatureData(@Header("Authorization") String token, @Query("userId") String userId);
+
+    @GET("api/humidity/???")
+    Call<SensorDRO> getHumidityData(@Header("Authorization") String token, @Query("userId") String userId);
+
 
 }
 

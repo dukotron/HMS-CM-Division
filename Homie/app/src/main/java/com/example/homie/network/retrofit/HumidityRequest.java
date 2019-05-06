@@ -14,7 +14,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 import static com.example.homie.network.util.NetworkConfig.BASE_URL;
 
-public class CO2Request implements SensorCallback {
+public class HumidityRequest implements SensorCallback {
 
     private SensorDataCallBack callBack;
 
@@ -32,19 +32,19 @@ public class CO2Request implements SensorCallback {
                 .build();
 
         RetrofitAPI client = retrofit.create(RetrofitAPI.class);
-        Call<SensorDRO> call = client.getCo2Data(token, userId);
+        Call<SensorDRO> call = client.getHumidityData(token, userId);
         call.enqueue(this);
     }
 
     @Override
     public void onResponse(Call<SensorDRO> call, Response<SensorDRO> response) {
         if (response.code() == 200) {
-            callBack.onReturnCo2Data(response.body());
+            callBack.onReturnHumidityData(response.body());
         }
     }
 
     @Override
     public void onFailure(Call<SensorDRO> call, Throwable t) {
-        Log.d("Co2Request", t.toString());
+        Log.d("HumidityRequest", t.toString());
     }
 }

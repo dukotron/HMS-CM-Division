@@ -13,7 +13,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 import static com.example.homie.network.util.NetworkConfig.BASE_URL;
 
-public class MovementRequest implements MovementCallback {
+public class MovementRequest implements SensorCallback {
 
     SensorDataCallBack callBack;
 

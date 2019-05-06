@@ -5,8 +5,10 @@ import androidx.annotation.NonNull;
 
 import com.example.homie.DTO.UserRegisterDTO;
 import com.example.homie.network.retrofit.CO2Request;
+import com.example.homie.network.retrofit.HumidityRequest;
 import com.example.homie.network.retrofit.MovementRequest;
 import com.example.homie.network.retrofit.RegisterRequest;
+import com.example.homie.network.retrofit.TemperatureRequest;
 import com.example.homie.viewModels.AuthCallBack;
 import com.example.homie.viewModels.SensorDataCallBack;
 import com.example.homie.viewModels.util.StatusCode;
@@ -62,5 +64,19 @@ public class APIConnection implements NetworkConnection {
         String token = "Bearer "+auth.getCurrentUser().getIdToken(false).getResult().getToken();
         String userId = auth.getCurrentUser().getUid();
         new CO2Request().start(token, userId, callBack);
+    }
+
+    @Override
+    public void getTemperatureData(final SensorDataCallBack callBack) {
+        String token = "Bearer "+auth.getCurrentUser().getIdToken(false).getResult().getToken();
+        String userId = auth.getCurrentUser().getUid();
+        new TemperatureRequest().start(token, userId, callBack);
+    }
+
+    @Override
+    public void getHumidityData(final SensorDataCallBack callBack) {
+        String token = "Bearer "+auth.getCurrentUser().getIdToken(false).getResult().getToken();
+        String userId = auth.getCurrentUser().getUid();
+        new HumidityRequest().start(token, userId, callBack);
     }
 }
