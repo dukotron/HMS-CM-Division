@@ -31,9 +31,11 @@ public class APIConnection implements NetworkConnection {
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if(task.isSuccessful()){
                     viewModel.onReturn(StatusCode.OK);
+                    //Log.d("TOKEN","Bearer "+auth.getCurrentUser().getIdToken(false).getResult().getToken());
                 }
             }
         });
+
     }
 
     @Override

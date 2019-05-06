@@ -16,8 +16,12 @@ import com.example.homie.DRO.SensorData;
 import com.example.homie.R;
 import com.example.homie.viewModels.SensorsViewModel;
 import com.example.homie.views.formatters.DateAxisValueFormatter;
+import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.components.XAxis;
+import com.github.mikephil.charting.data.BarData;
+import com.github.mikephil.charting.data.BarDataSet;
+import com.github.mikephil.charting.data.BarEntry;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
@@ -36,6 +40,11 @@ public class SensorsActivity extends AppCompatActivity {
     private LineChart movementLineChart;
     private List<SensorData> movementData;
 
+    private TextView coSensorTitle;
+    private LinearLayout coCharts;
+    private BarChart coBarChart;
+    private List<SensorData> coData;
+
     private SensorsViewModel viewModel;
 
     @Override
@@ -49,7 +58,9 @@ public class SensorsActivity extends AppCompatActivity {
 
         initMovementCharts();
         initMovementData();
-        //setupMovementSensorData();
+
+        initCoCharts();
+        initCoData();
     }
 
     private void initToolbar() {
@@ -65,6 +76,16 @@ public class SensorsActivity extends AppCompatActivity {
                 if (sensorsData != null && sensorsData.size() != 0) {
                     movementData = sensorsData;
                     setupMovementSensorData();
+                }
+            }
+        });
+
+        viewModel.getCoData().observe(this, new Observer<List<SensorData>>(){
+            @Override
+            public void onChanged(@Nullable List<SensorData> sensorsData) {
+                if (sensorsData != null && sensorsData.size() != 0) {
+                    coData = sensorsData;
+                    setupCoSensorData();
                 }
             }
         });
@@ -84,7 +105,6 @@ public class SensorsActivity extends AppCompatActivity {
                 }
             }
         });
-        //TODO to be continued
     }
 
     private void initMovementData() {
@@ -124,4 +144,58 @@ public class SensorsActivity extends AppCompatActivity {
         movementLineChart.invalidate();
     }
 
+    private void initCoCharts(){
+        coBarChart = findViewById(R.id.co_sensor_bar_chart);
+        coCharts = findViewById(R.id.co_sensor_charts);
+        coSensorTitle = findViewById(R.id.co_sensor);
+        coSensorTitle.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(coCharts.getVisibility() == View.GONE){
+                    coCharts.setVisibility(View.VISIBLE);
+                }else{
+                    coCharts.setVisibility(View.GONE);
+                }
+            }
+        });
+    }
+
+    private void initCoData(){
+        viewModel.loadCoData();
+    }
+
+    private void setupCoSensorData(){
+        // remember first item's timestamp - referenceTimestamp
+        long referenceTimestamp = (new Timestamp(coData.get(0).getDate().getTime())).getTime();
+
+        List<BarEntry> entries = new ArrayList<>(coData.size() + 1);
+        BarEntry e;
+        for (int i = 0; i < coData.size(); i++) {
+            SensorData sensorEntry = coData.get(i);
+            //convert SensorData timestamps to short timestamps
+            float Xnew = (new Timestamp(sensorEntry.getDate().getTime())).getTime() - referenceTimestamp;
+            e = new BarEntry(Xnew, sensorEntry.getValue());
+            entries.add(e);
+        }
+
+        // setup chart
+        BarDataSet barDataSet = new BarDataSet(entries, "Daily average");
+        BarData barData = new BarData(barDataSet);
+        // set value formatter for x axis to show dates
+        ValueFormatter xAxisFormatter = new DateAxisValueFormatter(referenceTimestamp);
+        XAxis xAxis = coBarChart.getXAxis();
+        xAxis.setValueFormatter(xAxisFormatter);
+        // stile the chart
+        barData.setBarWidth(0.9f);
+
+        coBarChart.getAxisLeft().setTextColor(Color.WHITE);
+        coBarChart.getXAxis().setTextColor(Color.WHITE);
+        coBarChart.getAxisRight().setEnabled(false);
+        int bgColor = getResources().getColor(R.color.transparent);
+        coBarChart.setBackgroundColor(bgColor);
+        // set data and notify the chart
+        coBarChart.setData(barData);
+        coBarChart.setFitBars(true);
+        coBarChart.invalidate();
+    }
 }

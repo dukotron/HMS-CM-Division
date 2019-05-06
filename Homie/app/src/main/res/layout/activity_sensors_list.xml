@@ -68,10 +68,10 @@
                 android:orientation="vertical"
                 android:visibility="gone">
 
-                <com.github.mikephil.charting.charts.LineChart
-                    android:id="@+id/co_sensor_chart"
+                <com.github.mikephil.charting.charts.BarChart
+                    android:id="@+id/co_sensor_bar_chart"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent" />
+                    android:layout_height="300dp" />
 
             </LinearLayout>
 
