@@ -1,6 +1,6 @@
 package com.example.homie.network.retrofit;
 
-import com.example.homie.DRO.MovementDRO;
+import com.example.homie.DRO.SensorDRO;
 import com.example.homie.DTO.UserRegisterDTO;
 
 import retrofit2.Call;
@@ -17,7 +17,10 @@ public interface RetrofitAPI {
     Call<Integer> createAccount(@Body UserRegisterDTO user);
 
     @GET("api/movement/dailyavg")
-    Call<MovementDRO> getMovementData(@Header("Authorization") String token, @Query("userId") String userId);
+    Call<SensorDRO> getMovementData(@Header("Authorization") String token, @Query("userId") String userId);
+
+    @GET("api/movement/???")
+    Call<SensorDRO> getCo2Data(@Header("Authorization") String token, @Query("userId") String userId);
 
 
 }

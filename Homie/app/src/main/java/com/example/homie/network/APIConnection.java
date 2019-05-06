@@ -1,15 +1,14 @@
 package com.example.homie.network;
 
 
-import android.util.Log;
-
 import androidx.annotation.NonNull;
 
 import com.example.homie.DTO.UserRegisterDTO;
+import com.example.homie.network.retrofit.CO2Request;
 import com.example.homie.network.retrofit.MovementRequest;
 import com.example.homie.network.retrofit.RegisterRequest;
 import com.example.homie.viewModels.AuthCallBack;
-import com.example.homie.viewModels.MovementSensorCallBack;
+import com.example.homie.viewModels.SensorDataCallBack;
 import com.example.homie.viewModels.util.StatusCode;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -52,9 +51,16 @@ public class APIConnection implements NetworkConnection {
     }
 
     @Override
-    public void getMovementData(final MovementSensorCallBack viewModel) {
+    public void getMovementData(final SensorDataCallBack viewModel) {
         String token = "Bearer "+auth.getCurrentUser().getIdToken(false).getResult().getToken();
         String userId = auth.getCurrentUser().getUid();
         new MovementRequest().start(token, userId, viewModel);
+    }
+
+    @Override
+    public void getCo2(final SensorDataCallBack callBack) {
+        String token = "Bearer "+auth.getCurrentUser().getIdToken(false).getResult().getToken();
+        String userId = auth.getCurrentUser().getUid();
+        new CO2Request().start(token, userId, callBack);
     }
 }

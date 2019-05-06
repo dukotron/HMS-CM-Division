@@ -89,7 +89,7 @@ public class LoginActivity extends AppCompatActivity {
 
 //    void testMovRequest() {
 //        MovementRequest request = new MovementRequest();
-//        request.start(1234, (MovementSensorCallBack) this);
+//        request.start(1234, (SensorDataCallBack) this);
 //    }
 //
 //    void testLoginRequest() {

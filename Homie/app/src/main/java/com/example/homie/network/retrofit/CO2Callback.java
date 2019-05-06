@@ -5,7 +5,7 @@ import com.example.homie.viewModels.SensorDataCallBack;
 
 import retrofit2.Callback;
 
-public interface MovementCallback extends Callback<SensorDRO> {
+public interface CO2Callback extends Callback<SensorDRO> {
 
     void start(String token, String userId,  SensorDataCallBack callBack);
 }
