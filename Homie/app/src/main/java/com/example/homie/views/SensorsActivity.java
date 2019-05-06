@@ -45,6 +45,11 @@ public class SensorsActivity extends AppCompatActivity {
     private BarChart coBarChart;
     private List<SensorData> coData;
 
+    private TextView temperatureSensorTitle;
+    private LinearLayout temperatureCharts;
+    private BarChart temperatureBarChart;
+    private List<SensorData> temperatureData;
+
     private SensorsViewModel viewModel;
 
     @Override
@@ -61,6 +66,9 @@ public class SensorsActivity extends AppCompatActivity {
 
         initCoCharts();
         initCoData();
+
+        initTemperatureCharts();
+        initTemperatureData();
     }
 
     private void initToolbar() {
@@ -86,6 +94,16 @@ public class SensorsActivity extends AppCompatActivity {
                 if (sensorsData != null && sensorsData.size() != 0) {
                     coData = sensorsData;
                     setupCoSensorData();
+                }
+            }
+        });
+
+        viewModel.getTemperatureData().observe(this, new Observer<List<SensorData>>(){
+            @Override
+            public void onChanged(@Nullable List<SensorData> sensorsData) {
+                if (sensorsData != null && sensorsData.size() != 0) {
+                    temperatureData = sensorsData;
+                    setupTemperatureSensorData();
                 }
             }
         });
@@ -197,5 +215,62 @@ public class SensorsActivity extends AppCompatActivity {
         coBarChart.setData(barData);
         coBarChart.setFitBars(true);
         coBarChart.invalidate();
+    }
+
+    private void initTemperatureCharts(){
+        temperatureBarChart = findViewById(R.id.temperature_sensor_bar_chart);
+        temperatureCharts = findViewById(R.id.temperature_sensor_charts);
+        temperatureSensorTitle = findViewById(R.id.temperature_sensor);
+        temperatureSensorTitle.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(temperatureCharts.getVisibility() == View.GONE){
+                    temperatureCharts.setVisibility(View.VISIBLE);
+                }else{
+                    temperatureCharts.setVisibility(View.GONE);
+                }
+            }
+        });
+    }
+
+    private void initTemperatureData(){
+        viewModel.loadTemperatureData();
+    }
+
+    private void setupTemperatureSensorData(){
+        // remember first item's timestamp - referenceTimestamp
+        long referenceTimestamp = (new Timestamp(temperatureData.get(0).getDate().getTime())).getTime();
+
+        List<BarEntry> entries = new ArrayList<>(temperatureData.size() + 1);
+        BarEntry e;
+        for (int i = 0; i < temperatureData.size(); i++) {
+            SensorData sensorEntry = temperatureData.get(i);
+            //convert SensorData timestamps to short timestamps
+            float Xnew = (new Timestamp(sensorEntry.getDate().getTime())).getTime() - referenceTimestamp;
+            e = new BarEntry(Xnew, sensorEntry.getValue());
+            entries.add(e);
+        }
+
+        // setup chart
+        BarDataSet barDataSet = new BarDataSet(entries, "Daily average");
+        barDataSet.setColor(Color.RED);
+        BarData barData = new BarData(barDataSet);
+        // set value formatter for x axis to show dates
+        ValueFormatter xAxisFormatter = new DateAxisValueFormatter(referenceTimestamp);
+        XAxis xAxis = temperatureBarChart.getXAxis();
+        xAxis.setValueFormatter(xAxisFormatter);
+        // stile the chart
+        barData.setBarWidth(0.5f);
+
+        temperatureBarChart.getAxisLeft().setTextColor(Color.WHITE);
+        temperatureBarChart.getXAxis().setTextColor(Color.WHITE);
+        temperatureBarChart.getAxisRight().setEnabled(false);
+        int bgColor = getResources().getColor(R.color.transparent);
+        temperatureBarChart.setBackgroundColor(bgColor);
+        // set data and notify the chart
+        temperatureBarChart.setData(barData);
+        temperatureBarChart.setFitBars(true);
+        temperatureBarChart.setDrawBarShadow(false);
+        temperatureBarChart.invalidate();
     }
 }
