@@ -1,14 +1,10 @@
 package com.example.homie.network.retrofit;
 
 
-import android.util.Log;
-
-import com.example.homie.DRO.MovementDRO;
-import com.example.homie.viewModel.MovementSensorCallBack;
+import com.example.homie.DRO.SensorDRO;
+import com.example.homie.viewModels.SensorDataCallBack;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-
-import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Response;
@@ -17,12 +13,12 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 import static com.example.homie.network.util.NetworkConfig.BASE_URL;
 
-public class MovementRequest implements MovementCallback {
+public class MovementRequest implements SensorCallback {
 
-    MovementSensorCallBack callBack;
+    SensorDataCallBack callBack;
 
     @Override
-    public void start(int userId, MovementSensorCallBack callBack) {
+    public void start(String token, String userId, SensorDataCallBack callBack) {
         this.callBack = callBack;
 
         Gson gson = new GsonBuilder()
@@ -35,23 +31,19 @@ public class MovementRequest implements MovementCallback {
                 .build();
 
         RetrofitAPI client = retrofit.create(RetrofitAPI.class);
-        Call<MovementDRO> call = client.getMovementData(userId);
+        Call<SensorDRO> call = client.getMovementData(token, userId);
         call.enqueue(this);
 
     }
 
 
     @Override
-    public void onResponse(Call<MovementDRO> call, Response<MovementDRO> response) {
+    public void onResponse(Call<SensorDRO> call, Response<SensorDRO> response) {
         if (response.code() == 200) {
-            callBack.onReturn(response.body());
-            Log.d("MovementRequest", response.body().toString());
+            callBack.onReturnMovementData(response.body());
         }
     }
 
     @Override
-    public void onFailure(Call<MovementDRO> call, Throwable t) {
-        Log.d("MovementRequest",t.toString());
-
-    }
+    public void onFailure(Call<SensorDRO> call, Throwable t) {}
 }
