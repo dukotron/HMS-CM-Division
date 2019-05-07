@@ -7,5 +7,5 @@ import retrofit2.Callback;
 
 public interface SensorCallback extends Callback<SensorDRO> {
 
-    void start(String token, String userId,  SensorDataCallBack callBack);
+    void start(String token, String userId, SensorDataCallBack callBack, String dateFrom, String dateTo);
 }

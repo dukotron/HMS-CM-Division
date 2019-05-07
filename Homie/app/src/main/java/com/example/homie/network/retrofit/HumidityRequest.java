@@ -19,7 +19,7 @@ public class HumidityRequest implements SensorCallback {
     private SensorDataCallBack callBack;
 
     @Override
-    public void start(String token, String userId, SensorDataCallBack callBack) {
+    public void start(String token, String userId, SensorDataCallBack callBack,  String dateFrom, String dateTo) {
         this.callBack = callBack;
 
         Gson gson = new GsonBuilder()
@@ -32,7 +32,7 @@ public class HumidityRequest implements SensorCallback {
                 .build();
 
         RetrofitAPI client = retrofit.create(RetrofitAPI.class);
-        Call<SensorDRO> call = client.getHumidityData(token, userId);
+        Call<SensorDRO> call = client.getHumidityData(token, userId, dateFrom, dateTo);
         call.enqueue(this);
     }
 

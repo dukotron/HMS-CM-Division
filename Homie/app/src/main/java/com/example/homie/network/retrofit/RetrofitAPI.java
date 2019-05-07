@@ -17,16 +17,16 @@ public interface RetrofitAPI {
     Call<Integer> createAccount(@Body UserRegisterDTO user);
 
     @GET("api/movement/dailyavg")
-    Call<SensorDRO> getMovementData(@Header("Authorization") String token, @Query("userId") String userId);
+    Call<SensorDRO> getMovementData(@Header("Authorization") String token, @Query("userId") String userId, @Query("from") String dateFrom, @Query("to") String dateTo);
 
     @GET("api/movement/???")
-    Call<SensorDRO> getCo2Data(@Header("Authorization") String token, @Query("userId") String userId);
+    Call<SensorDRO> getCo2Data(@Header("Authorization") String token, @Query("userId") String userId, @Query("from") String dateFrom, @Query("to") String dateTo);
 
     @GET("api/temperature/???")
-    Call<SensorDRO> getTemperatureData(@Header("Authorization") String token, @Query("userId") String userId);
+    Call<SensorDRO> getTemperatureData(@Header("Authorization") String token, @Query("userId") String userId, @Query("from") String dateFrom, @Query("to") String dateTo);
 
     @GET("api/humidity/???")
-    Call<SensorDRO> getHumidityData(@Header("Authorization") String token, @Query("userId") String userId);
+    Call<SensorDRO> getHumidityData(@Header("Authorization") String token, @Query("userId") String userId, @Query("from") String dateFrom, @Query("to") String dateTo);
 
 
 }
