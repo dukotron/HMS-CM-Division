@@ -33,4 +33,8 @@ public class UserRepository {
     public void logoutAccount(String userId){
         //TODO network code for logout
     }
+
+    public void setAtHome(boolean atHome){
+        connection.setAtHome(atHome);
+    }
 }

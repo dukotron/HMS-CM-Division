@@ -11,4 +11,5 @@ public interface NetworkConnection {
     void getCo2(SensorDataCallBack callBack);
     void getTemperatureData(SensorDataCallBack callBack);
     void getHumidityData(SensorDataCallBack callBack);
+    void setAtHome(boolean atHome);
 }

@@ -28,6 +28,7 @@ public interface RetrofitAPI {
     @GET("api/humidity/???")
     Call<SensorDRO> getHumidityData(@Header("Authorization") String token, @Query("userId") String userId);
 
-
+    @POST("api/preferences/atHome")
+    Call<String> setAtHome(@Header("Authorization") String token, @Query("userId") String userId, @Body boolean atHome);
 }
 
