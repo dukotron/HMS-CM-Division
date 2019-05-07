@@ -1,6 +1,8 @@
 package com.example.homie.network;
 
 
+import android.util.Log;
+
 import androidx.annotation.NonNull;
 
 import com.example.homie.DTO.UserRegisterDTO;
@@ -16,6 +18,9 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.iid.FirebaseInstanceId;
+import com.google.firebase.iid.InstanceIdResult;
+import com.google.firebase.messaging.FirebaseMessagingService;
 
 public class APIConnection implements NetworkConnection {
 
@@ -32,7 +37,17 @@ public class APIConnection implements NetworkConnection {
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if(task.isSuccessful()){
                     viewModel.onReturn(StatusCode.OK);
+                    // get User session token
                     //Log.d("TOKEN","Bearer "+auth.getCurrentUser().getIdToken(false).getResult().getToken());
+                    // get User notification token
+                    /*
+                    FirebaseInstanceId.getInstance().getInstanceId().addOnCompleteListener(new OnCompleteListener<InstanceIdResult>() {
+                        @Override
+                        public void onComplete(@NonNull Task<InstanceIdResult> task) {
+                            Log.d("NotificationsTOKEN",""+ task.getResult().getToken());
+                        }
+                    });
+                    */
                 }
             }
         });
