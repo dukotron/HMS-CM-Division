@@ -113,7 +113,7 @@ public class SensorsActivity extends AppCompatActivity {
         dateWeekAgo = day + "-" + month + "-" + year;
 
         styleCharts();
-
+        //TODO refactor DRY;  get hourly avrg
         initMovementCharts();
         initMovementData();
 

@@ -1,5 +1,6 @@
 package com.example.homie.views;
 
+import android.content.Intent;
 import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -8,6 +9,9 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -49,6 +53,21 @@ public class DevicesFragment extends Fragment {
     public void onResume() {
         super.onResume();
         getDevicesInfo();
+    }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        inflater.inflate(R.menu.options_menu, menu);
+        super.onCreateOptionsMenu(menu, inflater);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item){
+        if(item.getItemId() == R.id.option_add_device){
+            startActivity(new Intent(getContext(), AddDeviceActivity.class));
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     private void getDevicesInfo() {

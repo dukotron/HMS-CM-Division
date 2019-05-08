@@ -6,7 +6,7 @@ import com.google.gson.annotations.SerializedName;
 import java.io.Serializable;
 
 public class AuthDRO implements Serializable {
-
+//TODO is not needed anymore
     @Expose
     private int statusCode;
     @SerializedName("UserId")
