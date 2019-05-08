@@ -112,6 +112,8 @@ public class SensorsActivity extends AppCompatActivity {
         year = cldr.get(Calendar.YEAR);
         dateWeekAgo = day + "-" + month + "-" + year;
 
+        styleCharts();
+
         initMovementCharts();
         initMovementData();
 
@@ -186,6 +188,10 @@ public class SensorsActivity extends AppCompatActivity {
         });
     }
 
+    private void styleCharts(){
+
+    }
+
     private void initMovementCharts() {
         movementLineChart = findViewById(R.id.movement_sensor_line_chart);
         movementCharts = findViewById(R.id.movement_sensor_charts);
@@ -245,7 +251,7 @@ public class SensorsActivity extends AppCompatActivity {
         ValueFormatter xAxisFormatter = new DateAxisValueFormatter(referenceTimestamp);
         XAxis xAxis = movementLineChart.getXAxis();
         xAxis.setValueFormatter(xAxisFormatter);
-        // stile the chart
+        // style the chart
         movementLineChart.getAxisLeft().setTextColor(Color.WHITE);
         movementLineChart.getXAxis().setTextColor(Color.WHITE);
         movementLineChart.getAxisRight().setEnabled(false);
@@ -288,7 +294,7 @@ public class SensorsActivity extends AppCompatActivity {
             viewModel.loadCoData(dateFormat.parse(coDateFrom.getText().toString()),
                     dateFormat.parse(coDateTo.getText().toString()));
         } catch (ParseException e) {
-            e.printStackTrace();
+            Toast.makeText(this, "Some error occurred", Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -313,7 +319,7 @@ public class SensorsActivity extends AppCompatActivity {
         ValueFormatter xAxisFormatter = new DateAxisValueFormatter(referenceTimestamp);
         XAxis xAxis = coBarChart.getXAxis();
         xAxis.setValueFormatter(xAxisFormatter);
-        // stile the chart
+        // style the chart
         barData.setBarWidth(0.9f);
 
         coBarChart.getAxisLeft().setTextColor(Color.WHITE);
@@ -359,7 +365,7 @@ public class SensorsActivity extends AppCompatActivity {
             viewModel.loadTemperatureData(dateFormat.parse(temperatureDateFrom.getText().toString()),
                     dateFormat.parse(temperatureDateTo.getText().toString()));
         } catch (ParseException e) {
-            e.printStackTrace();
+            Toast.makeText(this, "Some error occurred", Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -385,7 +391,7 @@ public class SensorsActivity extends AppCompatActivity {
         ValueFormatter xAxisFormatter = new DateAxisValueFormatter(referenceTimestamp);
         XAxis xAxis = temperatureBarChart.getXAxis();
         xAxis.setValueFormatter(xAxisFormatter);
-        // stile the chart
+        // style the chart
         barData.setBarWidth(0.5f);
 
         temperatureBarChart.getAxisLeft().setTextColor(Color.WHITE);
@@ -432,7 +438,7 @@ public class SensorsActivity extends AppCompatActivity {
             viewModel.loadHumidityData(dateFormat.parse(humidityDateFrom.getText().toString()),
                     dateFormat.parse(humidityDateTo.getText().toString()));
         } catch (ParseException e) {
-            e.printStackTrace();
+            Toast.makeText(this, "Some error occurred", Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -458,7 +464,7 @@ public class SensorsActivity extends AppCompatActivity {
         ValueFormatter xAxisFormatter = new DateAxisValueFormatter(referenceTimestamp);
         XAxis xAxis = humidityLineChart.getXAxis();
         xAxis.setValueFormatter(xAxisFormatter);
-        // stile the chart
+        // style the chart
         humidityLineChart.getAxisLeft().setTextColor(Color.WHITE);
         humidityLineChart.getXAxis().setTextColor(Color.WHITE);
         humidityLineChart.getAxisRight().setEnabled(false);
@@ -501,7 +507,7 @@ public class SensorsActivity extends AppCompatActivity {
             viewModel.loadLightData(dateFormat.parse(lightDateFrom.getText().toString()),
                     dateFormat.parse(lightDateTo.getText().toString()));
         } catch (ParseException e) {
-            e.printStackTrace();
+            Toast.makeText(this, "Some error occurred", Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -527,7 +533,7 @@ public class SensorsActivity extends AppCompatActivity {
         ValueFormatter xAxisFormatter = new DateAxisValueFormatter(referenceTimestamp);
         XAxis xAxis = lightLineChart.getXAxis();
         xAxis.setValueFormatter(xAxisFormatter);
-        // stile the chart
+        // style the chart
         lightLineChart.getAxisLeft().setTextColor(Color.WHITE);
         lightLineChart.getXAxis().setTextColor(Color.WHITE);
         lightLineChart.getAxisRight().setEnabled(false);

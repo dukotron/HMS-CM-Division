@@ -20,6 +20,7 @@ public class SensorsViewModel extends AndroidViewModel implements SensorDataCall
 
     private SensorRepository sensorRepository;
     private MutableLiveData<List<SensorData>> movementData;
+    private MutableLiveData<List<SensorData>> movementHourlyData;
     private MutableLiveData<List<SensorData>> co2Data;
     private MutableLiveData<List<SensorData>> temperatureData;
     private MutableLiveData<List<SensorData>> humidityData;
