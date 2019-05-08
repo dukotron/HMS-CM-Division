@@ -23,8 +23,6 @@ public class SensorsViewModel extends AndroidViewModel implements SensorDataCall
     private MutableLiveData<List<SensorData>> co2Data;
     private MutableLiveData<List<SensorData>> temperatureData;
     private MutableLiveData<List<SensorData>> humidityData;
-    private MutableLiveData<Date> dateFrom;
-    private MutableLiveData<Date> dateTo;
 
     public SensorsViewModel(@NonNull Application application) {
         super(application);
@@ -33,8 +31,6 @@ public class SensorsViewModel extends AndroidViewModel implements SensorDataCall
         co2Data = new MutableLiveData<>();
         temperatureData = new MutableLiveData<>();
         humidityData = new MutableLiveData<>();
-        dateFrom = new MutableLiveData<>();
-        dateTo = new MutableLiveData<>();
     }
 
     public LiveData<List<SensorData>> getMovementData() {
@@ -53,21 +49,21 @@ public class SensorsViewModel extends AndroidViewModel implements SensorDataCall
         return temperatureData;
     }
 
-    public void loadMovementData(){
-        Date date = new Date();
-        date.setTime(System.currentTimeMillis());
-        dateFrom.setValue(date);
-        sensorRepository.getMovementData(this, dateFrom.getValue(), dateTo.getValue()); }
+    public void loadMovementData(Date dateFrom, Date dateTo){
+        sensorRepository.getMovementData(this, dateFrom, dateTo);
+    }
 
-    public void loadCoData() {
-        sensorRepository.getCo2Data(this, dateFrom.getValue(), dateTo.getValue()); }
+    public void loadCoData(Date dateFrom, Date dateTo) {
+        sensorRepository.getCo2Data(this, dateFrom, dateTo);
+    }
 
-    public void loadTemperatureData() {
-        sensorRepository.getTemperatureData(this, dateFrom.getValue(), dateTo.getValue());}
+    public void loadTemperatureData(Date dateFrom, Date dateTo) {
+        sensorRepository.getTemperatureData(this, dateFrom, dateTo);
+    }
 
-    public void loadHumidityData() {
-        sensorRepository.getHumidityData(this, dateFrom.getValue(), dateTo.getValue());}
-
+    public void loadHumidityData(Date dateFrom, Date dateTo) {
+        sensorRepository.getHumidityData(this, dateFrom, dateTo);
+    }
 
     @Override
     public void onReturnMovementData(SensorDRO response) {

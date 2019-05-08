@@ -1,4 +1,4 @@
-package com.example.homie.viewModels.util;
+package com.example.homie.network.util;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;

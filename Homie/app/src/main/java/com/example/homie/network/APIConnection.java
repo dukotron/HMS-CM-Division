@@ -11,15 +11,13 @@ import com.example.homie.network.retrofit.RegisterRequest;
 import com.example.homie.network.retrofit.TemperatureRequest;
 import com.example.homie.viewModels.AuthCallBack;
 import com.example.homie.viewModels.SensorDataCallBack;
-import com.example.homie.viewModels.util.DateFormatConverter;
+import com.example.homie.network.util.DateFormatConverter;
 import com.example.homie.viewModels.util.StatusCode;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class APIConnection implements NetworkConnection {

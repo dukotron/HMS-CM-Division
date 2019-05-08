@@ -2,13 +2,18 @@ package com.example.homie.views;
 
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
+
+import android.app.DatePickerDialog;
 import android.graphics.Color;
 import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.Toolbar;
 
+import android.text.InputType;
 import android.view.View;
+import android.widget.DatePicker;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -29,6 +34,7 @@ import com.github.mikephil.charting.formatter.ValueFormatter;
 
 import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 public class SensorsActivity extends AppCompatActivity {
@@ -36,6 +42,8 @@ public class SensorsActivity extends AppCompatActivity {
     private String deviceTitle;
 
     private TextView movementSensorTitle;
+    private EditText movementDateFrom;
+    private EditText movementDateTo;
     private LinearLayout movementCharts;
     private LineChart movementLineChart;
     private List<SensorData> movementData;
@@ -67,16 +75,16 @@ public class SensorsActivity extends AppCompatActivity {
         initViewModel();
 
         initMovementCharts();
-        initMovementData();
+        //initMovementData();
 
         initCoCharts();
-        initCoData();
+        //initCoData();
 
         initTemperatureCharts();
-        initTemperatureData();
+        //initTemperatureData();
 
         initHumidityCharts();
-        initHumidityData();
+        //initHumidityData();
     }
 
     private void initToolbar() {
@@ -141,12 +149,14 @@ public class SensorsActivity extends AppCompatActivity {
                 }
             }
         });
+        movementDateFrom = findViewById(R.id.movement_date_from);
+        movementDateTo = findViewById(R.id.movement_date_to);
     }
-
+/*
     private void initMovementData() {
         viewModel.loadMovementData();
     }
-
+*/
     private void setupMovementSensorData() {
         // remember first item's timestamp - referenceTimestamp
         long referenceTimestamp = (new Timestamp(movementData.get(0).getDate().getTime())).getTime();
@@ -195,11 +205,11 @@ public class SensorsActivity extends AppCompatActivity {
             }
         });
     }
-
+/*
     private void initCoData(){
         viewModel.loadCoData();
     }
-
+*/
     private void setupCoSensorData(){
         // remember first item's timestamp - referenceTimestamp
         long referenceTimestamp = (new Timestamp(coData.get(0).getDate().getTime())).getTime();
@@ -250,11 +260,11 @@ public class SensorsActivity extends AppCompatActivity {
             }
         });
     }
-
+/*
     private void initTemperatureData(){
         viewModel.loadTemperatureData();
     }
-
+*/
     private void setupTemperatureSensorData(){
         // remember first item's timestamp - referenceTimestamp
         long referenceTimestamp = (new Timestamp(temperatureData.get(0).getDate().getTime())).getTime();
@@ -307,11 +317,11 @@ public class SensorsActivity extends AppCompatActivity {
             }
         });
     }
-
+/*
     private void initHumidityData(){
         viewModel.loadHumidityData();
     }
-
+*/
     private void setupHumiditySensorData(){
         // remember first item's timestamp - referenceTimestamp
         long referenceTimestamp = (new Timestamp(humidityData.get(0).getDate().getTime())).getTime();
