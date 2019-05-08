@@ -54,21 +54,41 @@ public class SensorsActivity extends AppCompatActivity {
     private List<SensorData> movementData;
 
     private TextView coSensorTitle;
+    private EditText coDateFrom;
+    private EditText coDateTo;
+    private Button coBtn;
     private LinearLayout coCharts;
     private BarChart coBarChart;
     private List<SensorData> coData;
 
     private TextView temperatureSensorTitle;
+    private EditText temperatureDateFrom;
+    private EditText temperatureDateTo;
+    private Button temperatureBtn;
     private LinearLayout temperatureCharts;
     private BarChart temperatureBarChart;
     private List<SensorData> temperatureData;
 
     private TextView humiditySensorTitle;
+    private EditText humidityDateFrom;
+    private EditText humidityDateTo;
+    private Button humidityBtn;
     private LinearLayout humidityCharts;
     private LineChart humidityLineChart;
     private List<SensorData> humidityData;
 
+    private TextView lightSensorTitle;
+    private EditText lightDateFrom;
+    private EditText lightDateTo;
+    private Button lightBtn;
+    private LinearLayout lightCharts;
+    private LineChart lightLineChart;
+    private List<SensorData> lightData;
+
     private SensorsViewModel viewModel;
+
+    private String dateToday;
+    private String dateWeekAgo;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -81,11 +101,22 @@ public class SensorsActivity extends AppCompatActivity {
 
         dateFormat = new SimpleDateFormat("dd-MM-yyyy");
 
+        final Calendar cldr = Calendar.getInstance();
+        int day = cldr.get(Calendar.DAY_OF_MONTH);
+        int month = cldr.get(Calendar.MONTH) + 1; // months start from 0
+        int year = cldr.get(Calendar.YEAR);
+        dateToday = day + "-" + month + "-" + year;
+        cldr.add(Calendar.DATE, -7);
+        day = cldr.get(Calendar.DAY_OF_MONTH);
+        month = cldr.get(Calendar.MONTH) + 1;
+        year = cldr.get(Calendar.YEAR);
+        dateWeekAgo = day + "-" + month + "-" + year;
+
         initMovementCharts();
         initMovementData();
 
         initCoCharts();
-        //initCoData();
+        initCoData();
 
         initTemperatureCharts();
         //initTemperatureData();
@@ -156,18 +187,10 @@ public class SensorsActivity extends AppCompatActivity {
                 }
             }
         });
-        final Calendar cldr = Calendar.getInstance();
-        int day = cldr.get(Calendar.DAY_OF_MONTH);
-        int month = cldr.get(Calendar.MONTH) + 1;
-        int year = cldr.get(Calendar.YEAR);
         movementDateTo = findViewById(R.id.movement_date_to);
-        movementDateTo.setText(day + "-" + month + "-" + year);
-        cldr.add(Calendar.DATE, -7);
-        day = cldr.get(Calendar.DAY_OF_MONTH);
-        month = cldr.get(Calendar.MONTH) + 1;
-        year = cldr.get(Calendar.YEAR);
+        movementDateTo.setText(dateToday);
         movementDateFrom = findViewById(R.id.movement_date_from);
-        movementDateFrom.setText(day + "-" + month + "-" + year);
+        movementDateFrom.setText(dateWeekAgo);
         movementBtn = findViewById(R.id.movement_btn_show);
         movementBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -188,7 +211,6 @@ public class SensorsActivity extends AppCompatActivity {
     }
 
     private void setupMovementSensorData() {
-        Toast.makeText(this, "YEEEEEe", Toast.LENGTH_SHORT).show();
         // remember first item's timestamp - referenceTimestamp
         long referenceTimestamp = (new Timestamp(movementData.get(0).getDate().getTime())).getTime();
 
@@ -235,13 +257,28 @@ public class SensorsActivity extends AppCompatActivity {
                 }
             }
         });
+        coDateTo = findViewById(R.id.co_date_to);
+        coDateTo.setText(dateToday);
+        coDateFrom = findViewById(R.id.co_date_from);
+        coDateFrom.setText(dateWeekAgo);
+        coBtn = findViewById(R.id.co_btn_show);
+        coBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                initCoData();
+            }
+        });
     }
 
-    /*
-        private void initCoData(){
-            viewModel.loadCoData();
+    private void initCoData() {
+        try {
+            viewModel.loadCoData(dateFormat.parse(coDateFrom.getText().toString()),
+                    dateFormat.parse(coDateTo.getText().toString()));
+        } catch (ParseException e) {
+            e.printStackTrace();
         }
-    */
+    }
+
     private void setupCoSensorData() {
         // remember first item's timestamp - referenceTimestamp
         long referenceTimestamp = (new Timestamp(coData.get(0).getDate().getTime())).getTime();
@@ -291,13 +328,28 @@ public class SensorsActivity extends AppCompatActivity {
                 }
             }
         });
+        temperatureDateTo = findViewById(R.id.temperature_date_to);
+        temperatureDateTo.setText(dateToday);
+        temperatureDateFrom = findViewById(R.id.temperature_date_from);
+        temperatureDateFrom.setText(dateWeekAgo);
+        temperatureBtn = findViewById(R.id.temperature_btn_show);
+        temperatureBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                initTemperatureData();
+            }
+        });
     }
 
-    /*
-        private void initTemperatureData(){
-            viewModel.loadTemperatureData();
+    private void initTemperatureData() {
+        try {
+            viewModel.loadTemperatureData(dateFormat.parse(temperatureDateFrom.getText().toString()),
+                    dateFormat.parse(temperatureDateTo.getText().toString()));
+        } catch (ParseException e) {
+            e.printStackTrace();
         }
-    */
+    }
+
     private void setupTemperatureSensorData() {
         // remember first item's timestamp - referenceTimestamp
         long referenceTimestamp = (new Timestamp(temperatureData.get(0).getDate().getTime())).getTime();
@@ -349,13 +401,28 @@ public class SensorsActivity extends AppCompatActivity {
                 }
             }
         });
+        humidityDateTo = findViewById(R.id.humidity_date_to);
+        humidityDateTo.setText(dateToday);
+        humidityDateFrom = findViewById(R.id.humidity_date_from);
+        humidityDateFrom.setText(dateWeekAgo);
+        humidityBtn = findViewById(R.id.humidity_btn_show);
+        humidityBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                initHumidityData();
+            }
+        });
     }
 
-    /*
-        private void initHumidityData(){
-            viewModel.loadHumidityData();
+    private void initHumidityData() {
+        try {
+            viewModel.loadHumidityData(dateFormat.parse(humidityDateFrom.getText().toString()),
+                    dateFormat.parse(humidityDateTo.getText().toString()));
+        } catch (ParseException e) {
+            e.printStackTrace();
         }
-    */
+    }
+
     private void setupHumiditySensorData() {
         // remember first item's timestamp - referenceTimestamp
         long referenceTimestamp = (new Timestamp(humidityData.get(0).getDate().getTime())).getTime();
