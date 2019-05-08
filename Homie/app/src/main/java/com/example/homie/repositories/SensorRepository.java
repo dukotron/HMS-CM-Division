@@ -4,6 +4,8 @@ import com.example.homie.network.APIConnection;
 import com.example.homie.network.NetworkConnection;
 import com.example.homie.viewModels.SensorDataCallBack;
 
+import java.util.Date;
+
 public class SensorRepository {
 
     private NetworkConnection connection;
@@ -20,19 +22,19 @@ public class SensorRepository {
         return instance;
     }
 
-    public void getMovementData(SensorDataCallBack viewModel) {
-        connection.getMovementData( viewModel);
+    public void getMovementData(SensorDataCallBack viewModel, Date dateFrom, Date dateTo) {
+        connection.getMovementData(viewModel, dateFrom, dateTo);
     }
 
-    public void getCo2Data(SensorDataCallBack viewModel) {
-        connection.getCo2(viewModel);
+    public void getCo2Data(SensorDataCallBack viewModel,Date dateFrom, Date dateTo) {
+        connection.getCo2(viewModel, dateFrom, dateTo);
     }
 
-    public void getTemperatureData(SensorDataCallBack viewModel) {
-        connection.getTemperatureData(viewModel);
+    public void getTemperatureData(SensorDataCallBack viewModel, Date dateFrom, Date dateTo) {
+        connection.getTemperatureData(viewModel, dateFrom, dateTo);
     }
 
-    public void getHumidityData(SensorDataCallBack viewModel) {
-        connection.getHumidityData(viewModel);
+    public void getHumidityData(SensorDataCallBack viewModel, Date dateFrom, Date dateTo) {
+        connection.getHumidityData(viewModel, dateFrom, dateTo);
     }
 }

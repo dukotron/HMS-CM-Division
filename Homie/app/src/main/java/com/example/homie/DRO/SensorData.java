@@ -10,7 +10,7 @@ public class SensorData implements Serializable {
     @SerializedName("TimeStamp")
     private Date date;
     @SerializedName("Value")
-    private int value;
+    private float value;
 
 
     public SensorData(Date date, int value) {
@@ -22,7 +22,7 @@ public class SensorData implements Serializable {
         return date;
     }
 
-    public int getValue() {
+    public float getValue() {
         return value;
     }
 

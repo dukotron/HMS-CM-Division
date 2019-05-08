@@ -2,15 +2,20 @@ package com.example.homie.views;
 
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
+
 import android.graphics.Color;
 import android.os.Bundle;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.Toolbar;
 
 import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.homie.DRO.SensorData;
 import com.example.homie.R;
@@ -28,14 +33,22 @@ import com.github.mikephil.charting.data.LineDataSet;
 import com.github.mikephil.charting.formatter.ValueFormatter;
 
 import java.sql.Timestamp;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 public class SensorsActivity extends AppCompatActivity {
 
     private String deviceTitle;
+    private DateFormat dateFormat;
 
     private TextView movementSensorTitle;
+    private EditText movementDateFrom;
+    private EditText movementDateTo;
+    private Button movementBtn;
     private LinearLayout movementCharts;
     private LineChart movementLineChart;
     private List<SensorData> movementData;
@@ -66,17 +79,19 @@ public class SensorsActivity extends AppCompatActivity {
         initToolbar();
         initViewModel();
 
+        dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+
         initMovementCharts();
         initMovementData();
 
         initCoCharts();
-        initCoData();
+        //initCoData();
 
         initTemperatureCharts();
-        initTemperatureData();
+        //initTemperatureData();
 
         initHumidityCharts();
-        initHumidityData();
+        //initHumidityData();
     }
 
     private void initToolbar() {
@@ -96,7 +111,7 @@ public class SensorsActivity extends AppCompatActivity {
             }
         });
 
-        viewModel.getCoData().observe(this, new Observer<List<SensorData>>(){
+        viewModel.getCoData().observe(this, new Observer<List<SensorData>>() {
             @Override
             public void onChanged(@Nullable List<SensorData> sensorsData) {
                 if (sensorsData != null && sensorsData.size() != 0) {
@@ -106,7 +121,7 @@ public class SensorsActivity extends AppCompatActivity {
             }
         });
 
-        viewModel.getTemperatureData().observe(this, new Observer<List<SensorData>>(){
+        viewModel.getTemperatureData().observe(this, new Observer<List<SensorData>>() {
             @Override
             public void onChanged(@Nullable List<SensorData> sensorsData) {
                 if (sensorsData != null && sensorsData.size() != 0) {
@@ -141,13 +156,39 @@ public class SensorsActivity extends AppCompatActivity {
                 }
             }
         });
+        final Calendar cldr = Calendar.getInstance();
+        int day = cldr.get(Calendar.DAY_OF_MONTH);
+        int month = cldr.get(Calendar.MONTH) + 1;
+        int year = cldr.get(Calendar.YEAR);
+        movementDateTo = findViewById(R.id.movement_date_to);
+        movementDateTo.setText(day + "-" + month + "-" + year);
+        cldr.add(Calendar.DATE, -7);
+        day = cldr.get(Calendar.DAY_OF_MONTH);
+        month = cldr.get(Calendar.MONTH) + 1;
+        year = cldr.get(Calendar.YEAR);
+        movementDateFrom = findViewById(R.id.movement_date_from);
+        movementDateFrom.setText(day + "-" + month + "-" + year);
+        movementBtn = findViewById(R.id.movement_btn_show);
+        movementBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                initMovementData();
+            }
+        });
     }
 
     private void initMovementData() {
-        viewModel.loadMovementData();
+
+        try {
+            viewModel.loadMovementData(dateFormat.parse(movementDateFrom.getText().toString()),
+                    dateFormat.parse(movementDateTo.getText().toString()));
+        } catch (ParseException e) {
+            Toast.makeText(this, "Some error occurred", Toast.LENGTH_SHORT).show();
+        }
     }
 
     private void setupMovementSensorData() {
+        Toast.makeText(this, "YEEEEEe", Toast.LENGTH_SHORT).show();
         // remember first item's timestamp - referenceTimestamp
         long referenceTimestamp = (new Timestamp(movementData.get(0).getDate().getTime())).getTime();
 
@@ -180,27 +221,28 @@ public class SensorsActivity extends AppCompatActivity {
         movementLineChart.invalidate();
     }
 
-    private void initCoCharts(){
+    private void initCoCharts() {
         coBarChart = findViewById(R.id.co_sensor_bar_chart);
         coCharts = findViewById(R.id.co_sensor_charts);
         coSensorTitle = findViewById(R.id.co_sensor);
         coSensorTitle.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(coCharts.getVisibility() == View.GONE){
+                if (coCharts.getVisibility() == View.GONE) {
                     coCharts.setVisibility(View.VISIBLE);
-                }else{
+                } else {
                     coCharts.setVisibility(View.GONE);
                 }
             }
         });
     }
 
-    private void initCoData(){
-        viewModel.loadCoData();
-    }
-
-    private void setupCoSensorData(){
+    /*
+        private void initCoData(){
+            viewModel.loadCoData();
+        }
+    */
+    private void setupCoSensorData() {
         // remember first item's timestamp - referenceTimestamp
         long referenceTimestamp = (new Timestamp(coData.get(0).getDate().getTime())).getTime();
 
@@ -235,27 +277,28 @@ public class SensorsActivity extends AppCompatActivity {
         coBarChart.invalidate();
     }
 
-    private void initTemperatureCharts(){
+    private void initTemperatureCharts() {
         temperatureBarChart = findViewById(R.id.temperature_sensor_bar_chart);
         temperatureCharts = findViewById(R.id.temperature_sensor_charts);
         temperatureSensorTitle = findViewById(R.id.temperature_sensor);
         temperatureSensorTitle.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(temperatureCharts.getVisibility() == View.GONE){
+                if (temperatureCharts.getVisibility() == View.GONE) {
                     temperatureCharts.setVisibility(View.VISIBLE);
-                }else{
+                } else {
                     temperatureCharts.setVisibility(View.GONE);
                 }
             }
         });
     }
 
-    private void initTemperatureData(){
-        viewModel.loadTemperatureData();
-    }
-
-    private void setupTemperatureSensorData(){
+    /*
+        private void initTemperatureData(){
+            viewModel.loadTemperatureData();
+        }
+    */
+    private void setupTemperatureSensorData() {
         // remember first item's timestamp - referenceTimestamp
         long referenceTimestamp = (new Timestamp(temperatureData.get(0).getDate().getTime())).getTime();
 
@@ -292,7 +335,7 @@ public class SensorsActivity extends AppCompatActivity {
         temperatureBarChart.invalidate();
     }
 
-    private void initHumidityCharts(){
+    private void initHumidityCharts() {
         humidityLineChart = findViewById(R.id.humidity_sensor_line_chart);
         humidityCharts = findViewById(R.id.humidity_sensor_charts);
         humiditySensorTitle = findViewById(R.id.humidity_sensor);
@@ -308,11 +351,12 @@ public class SensorsActivity extends AppCompatActivity {
         });
     }
 
-    private void initHumidityData(){
-        viewModel.loadHumidityData();
-    }
-
-    private void setupHumiditySensorData(){
+    /*
+        private void initHumidityData(){
+            viewModel.loadHumidityData();
+        }
+    */
+    private void setupHumiditySensorData() {
         // remember first item's timestamp - referenceTimestamp
         long referenceTimestamp = (new Timestamp(humidityData.get(0).getDate().getTime())).getTime();
 

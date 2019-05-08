@@ -12,6 +12,8 @@ import com.example.homie.models.Sensor;
 import com.example.homie.repositories.SensorRepository;
 import com.example.homie.viewModels.util.StatusCode;
 
+import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
 
 public class SensorsViewModel extends AndroidViewModel implements SensorDataCallBack {
@@ -47,18 +49,21 @@ public class SensorsViewModel extends AndroidViewModel implements SensorDataCall
         return temperatureData;
     }
 
-    public void loadMovementData(){
-        sensorRepository.getMovementData(this);
+    public void loadMovementData(Date dateFrom, Date dateTo){
+        sensorRepository.getMovementData(this, dateFrom, dateTo);
     }
 
-    public void loadCoData() {
-        sensorRepository.getCo2Data(this);
+    public void loadCoData(Date dateFrom, Date dateTo) {
+        sensorRepository.getCo2Data(this, dateFrom, dateTo);
     }
 
-    public void loadTemperatureData() {sensorRepository.getTemperatureData(this);}
+    public void loadTemperatureData(Date dateFrom, Date dateTo) {
+        sensorRepository.getTemperatureData(this, dateFrom, dateTo);
+    }
 
-    public void loadHumidityData() { sensorRepository.getHumidityData(this);}
-
+    public void loadHumidityData(Date dateFrom, Date dateTo) {
+        sensorRepository.getHumidityData(this, dateFrom, dateTo);
+    }
 
     @Override
     public void onReturnMovementData(SensorDRO response) {
