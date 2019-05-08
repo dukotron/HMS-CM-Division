@@ -19,7 +19,7 @@ public interface RetrofitAPI {
     @GET("api/movement/dailyavg")
     Call<SensorDRO> getMovementData(@Header("Authorization") String token, @Query("userId") String userId, @Query("from") String dateFrom, @Query("to") String dateTo);
 
-    @GET("api/movement/???")
+    @GET("api/co/???")
     Call<SensorDRO> getCo2Data(@Header("Authorization") String token, @Query("userId") String userId, @Query("from") String dateFrom, @Query("to") String dateTo);
 
     @GET("api/temperature/???")
@@ -27,6 +27,9 @@ public interface RetrofitAPI {
 
     @GET("api/humidity/???")
     Call<SensorDRO> getHumidityData(@Header("Authorization") String token, @Query("userId") String userId, @Query("from") String dateFrom, @Query("to") String dateTo);
+
+    @GET("api/humidity/???")
+    Call<SensorDRO> getLightData(@Header("Authorization") String token, @Query("userId") String userId, @Query("from") String dateFrom, @Query("to") String dateTo);
 
     @POST("api/preferences/atHome")
     Call<String> setAtHome(@Header("Authorization") String token, @Query("userId") String userId, @Body boolean atHome);

@@ -37,4 +37,8 @@ public class SensorRepository {
     public void getHumidityData(SensorDataCallBack viewModel, Date dateFrom, Date dateTo) {
         connection.getHumidityData(viewModel, dateFrom, dateTo);
     }
+
+    public void getLightData(SensorDataCallBack viewModel, Date dateFrom, Date dateTo) {
+        connection.getLightData(viewModel, dateFrom, dateTo);
+    }
 }

@@ -23,6 +23,7 @@ public class SensorsViewModel extends AndroidViewModel implements SensorDataCall
     private MutableLiveData<List<SensorData>> co2Data;
     private MutableLiveData<List<SensorData>> temperatureData;
     private MutableLiveData<List<SensorData>> humidityData;
+    private MutableLiveData<List<SensorData>> lightData;
 
     public SensorsViewModel(@NonNull Application application) {
         super(application);
@@ -31,6 +32,7 @@ public class SensorsViewModel extends AndroidViewModel implements SensorDataCall
         co2Data = new MutableLiveData<>();
         temperatureData = new MutableLiveData<>();
         humidityData = new MutableLiveData<>();
+        lightData = new MutableLiveData<>();
     }
 
     public LiveData<List<SensorData>> getMovementData() {
@@ -49,6 +51,8 @@ public class SensorsViewModel extends AndroidViewModel implements SensorDataCall
         return temperatureData;
     }
 
+    public LiveData<List<SensorData>> getLightData() {return lightData; }
+
     public void loadMovementData(Date dateFrom, Date dateTo){
         sensorRepository.getMovementData(this, dateFrom, dateTo);
     }
@@ -63,6 +67,10 @@ public class SensorsViewModel extends AndroidViewModel implements SensorDataCall
 
     public void loadHumidityData(Date dateFrom, Date dateTo) {
         sensorRepository.getHumidityData(this, dateFrom, dateTo);
+    }
+
+    public void loadLightData(Date dateFrom, Date dateTo) {
+        sensorRepository.getLightData(this, dateFrom, dateTo);
     }
 
     @Override
@@ -90,6 +98,13 @@ public class SensorsViewModel extends AndroidViewModel implements SensorDataCall
     public void onReturnTemperatureData(SensorDRO response) {
         if(response.getStatusCode() == StatusCode.OK){
             temperatureData.setValue(response.getSensorDataList());
+        }
+    }
+
+    @Override
+    public void onReturnLightData(SensorDRO response) {
+        if(response.getStatusCode() == StatusCode.OK){
+            lightData.setValue(response.getSensorDataList());
         }
     }
 }

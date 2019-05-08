@@ -8,6 +8,7 @@ import androidx.annotation.NonNull;
 import com.example.homie.DTO.UserRegisterDTO;
 import com.example.homie.network.retrofit.CO2Request;
 import com.example.homie.network.retrofit.HumidityRequest;
+import com.example.homie.network.retrofit.LightRequest;
 import com.example.homie.network.retrofit.MovementRequest;
 import com.example.homie.network.retrofit.RegisterRequest;
 import com.example.homie.network.retrofit.SettingsRequest;
@@ -97,6 +98,15 @@ public class APIConnection implements NetworkConnection {
         String from = DateFormatConverter.convertDateToDotNetFormat(dateFrom);
         String to = DateFormatConverter.convertDateToDotNetFormat(dateTo);
         new HumidityRequest().start(token, userId, callBack, from, to);
+    }
+
+    @Override
+    public void getLightData(SensorDataCallBack callBack, Date dateFrom, Date dateTo) {
+        String token = "Bearer "+auth.getCurrentUser().getIdToken(false).getResult().getToken();
+        String userId = auth.getCurrentUser().getUid();
+        String from = DateFormatConverter.convertDateToDotNetFormat(dateFrom);
+        String to = DateFormatConverter.convertDateToDotNetFormat(dateTo);
+        new LightRequest().start(token, userId, callBack, from, to);
     }
 
     @Override

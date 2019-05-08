@@ -8,4 +8,5 @@ public interface SensorDataCallBack {
     void onReturnCo2Data(SensorDRO response);
     void onReturnHumidityData(SensorDRO response);
     void onReturnTemperatureData(SensorDRO response);
+    void onReturnLightData(SensorDRO response);
 }

@@ -14,4 +14,5 @@ public interface NetworkConnection {
     void getCo2(SensorDataCallBack callBack, Date dateFrom, Date dateTo);
     void getTemperatureData(SensorDataCallBack callBack, Date dateFrom, Date dateTo);
     void getHumidityData(SensorDataCallBack callBack, Date dateFrom, Date dateTo);
+    void getLightData(SensorDataCallBack callBack, Date dateFrom, Date dateTo);
 }
