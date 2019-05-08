@@ -119,10 +119,13 @@ public class SensorsActivity extends AppCompatActivity {
         initCoData();
 
         initTemperatureCharts();
-        //initTemperatureData();
+        initTemperatureData();
 
         initHumidityCharts();
-        //initHumidityData();
+        initHumidityData();
+
+        initLightCharts();
+        initLightData();
     }
 
     private void initToolbar() {
@@ -168,6 +171,16 @@ public class SensorsActivity extends AppCompatActivity {
                 if (sensorsData != null && sensorsData.size() != 0) {
                     humidityData = sensorsData;
                     setupHumiditySensorData();
+                }
+            }
+        });
+
+        viewModel.getLightData().observe(this, new Observer<List<SensorData>>() {
+            @Override
+            public void onChanged(List<SensorData> sensorsData) {
+                if(sensorsData != null && sensorsData.size() != 0 ){
+                    lightData = sensorsData;
+                    setupLightSensorData();
                 }
             }
         });
@@ -443,7 +456,7 @@ public class SensorsActivity extends AppCompatActivity {
         LineData lineData = new LineData(lineDataSet);
         // set value formatter for x axis to show dates
         ValueFormatter xAxisFormatter = new DateAxisValueFormatter(referenceTimestamp);
-        XAxis xAxis = movementLineChart.getXAxis();
+        XAxis xAxis = humidityLineChart.getXAxis();
         xAxis.setValueFormatter(xAxisFormatter);
         // stile the chart
         humidityLineChart.getAxisLeft().setTextColor(Color.WHITE);
@@ -454,5 +467,74 @@ public class SensorsActivity extends AppCompatActivity {
         // set data and notify the chart
         humidityLineChart.setData(lineData);
         humidityLineChart.invalidate();
+    }
+
+    private void initLightCharts(){
+        lightLineChart = findViewById(R.id.light_sensor_line_chart);
+        lightCharts = findViewById(R.id.light_sensor_charts);
+        lightSensorTitle = findViewById(R.id.light_sensor);
+        lightSensorTitle.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (lightCharts.getVisibility() == View.GONE) {
+                    lightCharts.setVisibility(View.VISIBLE);
+                } else {
+                    lightCharts.setVisibility(View.GONE);
+                }
+            }
+        });
+        lightDateTo = findViewById(R.id.light_date_to);
+        lightDateTo.setText(dateToday);
+        lightDateFrom = findViewById(R.id.light_date_from);
+        lightDateFrom.setText(dateWeekAgo);
+        lightBtn = findViewById(R.id.light_btn_show);
+        lightBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                initLightData();
+            }
+        });
+    }
+
+    private void initLightData(){
+        try {
+            viewModel.loadLightData(dateFormat.parse(lightDateFrom.getText().toString()),
+                    dateFormat.parse(lightDateTo.getText().toString()));
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void setupLightSensorData(){
+        // remember first item's timestamp - referenceTimestamp
+        long referenceTimestamp = (new Timestamp(lightData.get(0).getDate().getTime())).getTime();
+
+        List<Entry> entries = new ArrayList<>(lightData.size() + 1);
+        Entry e;
+        for (int i = 0; i < lightData.size(); i++) {
+            SensorData sensorEntry = lightData.get(i);
+            //convert SensorData timestamps to short timestamps
+            float Xnew = (new Timestamp(sensorEntry.getDate().getTime())).getTime() - referenceTimestamp;
+            e = new Entry(Xnew, sensorEntry.getValue());
+            entries.add(e);
+        }
+
+        // setup chart
+        LineDataSet lineDataSet = new LineDataSet(entries, "Daily average");
+        lineDataSet.setCircleRadius(2);
+        LineData lineData = new LineData(lineDataSet);
+        // set value formatter for x axis to show dates
+        ValueFormatter xAxisFormatter = new DateAxisValueFormatter(referenceTimestamp);
+        XAxis xAxis = lightLineChart.getXAxis();
+        xAxis.setValueFormatter(xAxisFormatter);
+        // stile the chart
+        lightLineChart.getAxisLeft().setTextColor(Color.WHITE);
+        lightLineChart.getXAxis().setTextColor(Color.WHITE);
+        lightLineChart.getAxisRight().setEnabled(false);
+        int bgColor = getResources().getColor(R.color.transparent);
+        lightLineChart.setBackgroundColor(bgColor);
+        // set data and notify the chart
+        lightLineChart.setData(lineData);
+        lightLineChart.invalidate();
     }
 }
