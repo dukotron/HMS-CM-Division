@@ -27,11 +27,6 @@ public class MovementRequest implements SensorCallback {
     public void start(String token, String userId, SensorDataCallBack callBack, String dateFrom, String dateTo) {
         this.callBack = callBack;
 
-        HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
-
-        interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
-        OkHttpClient.Builder httpClient=new OkHttpClient.Builder().addInterceptor(interceptor);
-
         Gson gson = new GsonBuilder()
                 .setDateFormat("yyyy-MM-dd'T'HH:mm:ss")
                 .create();
@@ -39,7 +34,6 @@ public class MovementRequest implements SensorCallback {
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(BASE_URL)
                 .addConverterFactory(GsonConverterFactory.create(gson))
-                .client(httpClient.build())
                 .build();
 
         RetrofitAPI client = retrofit.create(RetrofitAPI.class);

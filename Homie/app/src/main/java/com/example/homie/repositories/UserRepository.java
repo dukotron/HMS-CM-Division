@@ -1,10 +1,10 @@
 package com.example.homie.repositories;
 
-
 import com.example.homie.network.APIConnection;
 import com.example.homie.network.NetworkConnection;
 import com.example.homie.viewModels.AddDeviceCallback;
 import com.example.homie.viewModels.AuthCallBack;
+import com.example.homie.viewModels.DevicesCallback;
 
 public class UserRepository {
 
@@ -37,6 +37,10 @@ public class UserRepository {
 
     public void addDevice(String deviceLocation, String deviceId, AddDeviceCallback viewModel) {
         connection.addDevice(deviceLocation, deviceId, viewModel);
+    }
+
+    public void getUserDevices(DevicesCallback viewModel){
+        connection.getUserDevices(viewModel);
     }
 
     public void setAtHome(boolean atHome) {

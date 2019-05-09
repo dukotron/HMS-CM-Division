@@ -5,6 +5,8 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
+import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -19,6 +21,7 @@ import com.example.homie.adapters.DevicesAdapter;
 import com.example.homie.models.CurrentData;
 import com.example.homie.models.Device;
 import com.example.homie.R;
+import com.example.homie.viewModels.DevicesViewModel;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,9 +32,12 @@ public class DevicesFragment extends Fragment {
     private DevicesAdapter adapter;
     private List<Device> devices;
 
+    private DevicesViewModel viewModel;
+
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        viewModel = ViewModelProviders.of(this).get(DevicesViewModel.class);
     }
 
     @Override
@@ -70,7 +76,8 @@ public class DevicesFragment extends Fragment {
     }
 
     private void getDevicesInfo() {
-        //TODO get devices info logic code
+        List<?> devicesDRO = viewModel.getAllDevices();
+
         devices = new ArrayList<>();
         CurrentData data = new CurrentData("CO2", "322");
         ArrayList<CurrentData> a = new ArrayList<>();
@@ -90,24 +97,7 @@ public class DevicesFragment extends Fragment {
         device = new Device("bedroom", a);
         devices.add(device);
 
-        /*
-        devices.add(new Device("Bedroom", "32w" ));
-        devices.add(new Device("Kitchen", "123wr" ));
-        devices.add(new Device("Hallway", "123");
-        devices.add(new Device("Bathroom", "213fds" ));
-        devices.add(new Device("Office", "123x" ));
-        devices.add(new Device("Living Room", "2313ng" ));
-        devices.add(new Device("Living Room", "13yt" ));
-        devices.add(new Device("Living Room", "32h" ));
-        devices.add(new Device("Kitchen", "43fe" ));
-        devices.add(new Device("Hallway", "54f" ));
-        devices.add(new Device("Bathroom", "5e" ));
-        devices.add(new Device("Office", "fg" ));
-        devices.add(new Device("Kitchen", "t34" ));
-        devices.add(new Device("Hallway", "2dr" ));
-        devices.add(new Device("Bathroom", "43er" ));
-        devices.add(new Device("Office", "343e" ));
-        */
+
     }
 
     private void initRecycleView(View view) {

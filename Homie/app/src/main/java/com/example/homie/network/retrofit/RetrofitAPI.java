@@ -1,5 +1,6 @@
 package com.example.homie.network.retrofit;
 
+import com.example.homie.DRO.DevicesListDRO;
 import com.example.homie.DRO.SensorDRO;
 import com.example.homie.DTO.AddDeviceDTO;
 import com.example.homie.DTO.UserRegisterDTO;
@@ -20,6 +21,9 @@ public interface RetrofitAPI {
 
     @PUT("api/device/updateOwnerAndLoc")
     Call<Integer> addDeviceForUser(@Header("Authorization") String token, @Body AddDeviceDTO deviceInfo );
+
+    @GET("api/device/getUserDevices")
+    Call<DevicesListDRO> getUserDevices(@Header("Authorization") String token, @Query("userId") String userId);
 
     @GET("api/movement/dailyavg")
     Call<SensorDRO> getMovementData(@Header("Authorization") String token, @Query("userId") String userId, @Query("from") String dateFrom, @Query("to") String dateTo);

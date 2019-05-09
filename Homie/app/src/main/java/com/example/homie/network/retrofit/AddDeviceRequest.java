@@ -2,8 +2,10 @@ package com.example.homie.network.retrofit;
 
 import android.util.Log;
 
+import com.example.homie.DRO.DevicesListDRO;
 import com.example.homie.DTO.AddDeviceDTO;
 import com.example.homie.viewModels.AddDeviceCallback;
+import com.example.homie.viewModels.DevicesCallback;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -13,12 +15,13 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 import static com.example.homie.network.util.NetworkConfig.BASE_URL;
 
-public class AddDeviceRequest implements Callback<Integer> {
+public class AddDeviceRequest implements Callback<Integer>{
 
-    private AddDeviceCallback callback;
+    private AddDeviceCallback addDeviceCallback;
+
 
     public void addDevice(String token, AddDeviceDTO deviceInfo, AddDeviceCallback callback) {
-        this.callback = callback;
+        this.addDeviceCallback = callback;
 
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(BASE_URL)
@@ -33,7 +36,7 @@ public class AddDeviceRequest implements Callback<Integer> {
     @Override
     public void onResponse(Call<Integer> call, Response<Integer> response) {
         if (response.isSuccessful() && response.body() != null) {
-            callback.onReturn(response.body());
+            addDeviceCallback.onReturn(response.body());
         }
         Log.d("ADDING DEVICE",""+response.body());
     }
