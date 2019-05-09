@@ -1,6 +1,7 @@
 package com.example.homie.viewModels;
 
 import android.app.Application;
+
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.MutableLiveData;
 import androidx.annotation.NonNull;
@@ -22,9 +23,6 @@ public class RegisterViewModel extends AndroidViewModel implements AuthCallBack 
     private MutableLiveData<Boolean> showError;
 
     private UserRepository userRepository;
-
-    //TODO move IP address to separate configuration class
-
 
     public RegisterViewModel(@NonNull Application application) {
         super(application);
@@ -101,9 +99,9 @@ public class RegisterViewModel extends AndroidViewModel implements AuthCallBack 
 
     @Override
     public void onReturn(int statusCode) {
-        if(statusCode == StatusCode.OK) {
+        if (statusCode == StatusCode.OK) {
             isRegistered.setValue(true);
-        }else{
+        } else {
             showError.setValue(true);
         }
     }

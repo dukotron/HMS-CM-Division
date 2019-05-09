@@ -6,7 +6,6 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.annotation.NonNull;
 
 import com.example.homie.repositories.UserRepository;
-import com.example.homie.viewModels.util.TempMemory;
 
 public class MainViewModel extends AndroidViewModel {
 
@@ -25,7 +24,8 @@ public class MainViewModel extends AndroidViewModel {
     }
 
     public void logoutUser(){
-        userRepository.logoutAccount(TempMemory.getUserId(getApplication().getApplicationContext()));
+        userRepository.logoutAccount();
+        isLoggedOut.setValue(true);
     }
 
     public MutableLiveData<Boolean> getIsLoggedOut() {

@@ -1,7 +1,7 @@
 package com.example.homie.DTO;
 
 public class UserLoginDTO {
-
+//TODO delete
     public String email;
     public String password;
 

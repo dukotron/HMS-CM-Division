@@ -13,23 +13,39 @@
         android:orientation="horizontal"
         app:layout_constraintGuide_percent="0.2" />
 
+    <ProgressBar
+        android:id="@+id/progressBar_add_device"
+        style="?android:attr/progressBarStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:visibility="gone"/>
+
     <EditText
         android:id="@+id/add_device_location"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:inputType="textPersonName"
         android:layout_marginStart="8dp"
         android:layout_marginTop="0dp"
         android:layout_marginEnd="8dp"
-        android:ems="10"
         android:hint="Location of device"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/guideline5" />
 
     <EditText
-        android:id="@+id/editText"
+        android:id="@+id/add_device_id"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:inputType="text"
         android:layout_marginStart="8dp"
         android:layout_marginTop="20dp"
         android:layout_marginEnd="8dp"
@@ -41,16 +57,16 @@
         app:layout_constraintTop_toBottomOf="@+id/add_device_location" />
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/add_device_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="20dp"
         android:layout_marginEnd="8dp"
-        android:text="Button"
+        android:text="Add Device"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editText" />
+        app:layout_constraintTop_toBottomOf="@+id/add_device_id" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

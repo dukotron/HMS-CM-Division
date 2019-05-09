@@ -5,7 +5,9 @@ import android.util.Log;
 
 import androidx.annotation.NonNull;
 
+import com.example.homie.DTO.AddDeviceDTO;
 import com.example.homie.DTO.UserRegisterDTO;
+import com.example.homie.network.retrofit.AddDeviceRequest;
 import com.example.homie.network.retrofit.CO2Request;
 import com.example.homie.network.retrofit.HumidityRequest;
 import com.example.homie.network.retrofit.LightRequest;
@@ -13,6 +15,7 @@ import com.example.homie.network.retrofit.MovementRequest;
 import com.example.homie.network.retrofit.RegisterRequest;
 import com.example.homie.network.retrofit.SettingsRequest;
 import com.example.homie.network.retrofit.TemperatureRequest;
+import com.example.homie.viewModels.AddDeviceCallback;
 import com.example.homie.viewModels.AuthCallBack;
 import com.example.homie.viewModels.SensorDataCallBack;
 import com.example.homie.network.util.DateFormatConverter;
@@ -33,35 +36,46 @@ public class APIConnection implements NetworkConnection {
     }
 
     @Override
-    public void loginAccount(String email, String password, final AuthCallBack viewModel) {
+    public void loginAccount(String email, String password, final AuthCallBack callBack) {
         auth.signInWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if (task.isSuccessful()) {
-                    viewModel.onReturn(StatusCode.OK);
+                    callBack.onReturn(StatusCode.OK);
                     Log.d("TOKEN", "Bearer " + auth.getCurrentUser().getIdToken(false).getResult().getToken());
                 }
             }
         });
-
     }
 
     @Override
-    public void createAccount(final String firstName, final String lastName, final String email, final String password, final AuthCallBack viewModel) {
+    public void logoutAccount() {
+        auth.signOut();
+    }
+
+    @Override
+    public void createAccount(final String firstName, final String lastName, final String email, final String password, final AuthCallBack callBack) {
         auth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if (task.isSuccessful()) {
                     String userId = auth.getCurrentUser().getUid();
-                    new RegisterRequest().start(new UserRegisterDTO(userId), viewModel);
+                    new RegisterRequest().start(new UserRegisterDTO(userId), callBack);
                 }
             }
         });
     }
 
     @Override
-    public void getMovementData(final SensorDataCallBack viewModel, Date dateFrom, Date dateTo) {
-        String token = "Bearer "+auth.getCurrentUser().getIdToken(false).getResult().getToken();
+    public void addDevice(String deviceLocation, String deviceId, AddDeviceCallback callback) {
+        String token = "Bearer " + auth.getCurrentUser().getIdToken(false).getResult().getToken();
+        String userId = auth.getCurrentUser().getUid();
+        new AddDeviceRequest().addDevice(token, new AddDeviceDTO(deviceId,userId,deviceLocation), callback);
+    }
+
+    @Override
+    public void getMovementData(final SensorDataCallBack callBack, Date dateFrom, Date dateTo) {
+        String token = "Bearer " + auth.getCurrentUser().getIdToken(false).getResult().getToken();
         String userId = auth.getCurrentUser().getUid();
         String from = DateFormatConverter.convertDateToDotNetFormat(dateFrom);
         String to = DateFormatConverter.convertDateToDotNetFormat(dateTo);
@@ -70,12 +84,12 @@ public class APIConnection implements NetworkConnection {
 //        String userId = "bEU0lty14bevfkFoiXUIfCGAoJ32";
 //        String from = "2017-09-08T19:01:55.714942";
 //        String to = "2019-09-08T19:01:55.714942";
-        new MovementRequest().start(token, userId, viewModel, from, to);
+        new MovementRequest().start(token, userId, callBack, from, to);
     }
 
     @Override
     public void getCo2(final SensorDataCallBack callBack, Date dateFrom, Date dateTo) {
-        String token = "Bearer "+auth.getCurrentUser().getIdToken(false).getResult().getToken();
+        String token = "Bearer " + auth.getCurrentUser().getIdToken(false).getResult().getToken();
         String userId = auth.getCurrentUser().getUid();
         String from = DateFormatConverter.convertDateToDotNetFormat(dateFrom);
         String to = DateFormatConverter.convertDateToDotNetFormat(dateTo);
@@ -84,7 +98,7 @@ public class APIConnection implements NetworkConnection {
 
     @Override
     public void getTemperatureData(final SensorDataCallBack callBack, Date dateFrom, Date dateTo) {
-        String token = "Bearer "+auth.getCurrentUser().getIdToken(false).getResult().getToken();
+        String token = "Bearer " + auth.getCurrentUser().getIdToken(false).getResult().getToken();
         String userId = auth.getCurrentUser().getUid();
         String from = DateFormatConverter.convertDateToDotNetFormat(dateFrom);
         String to = DateFormatConverter.convertDateToDotNetFormat(dateTo);
@@ -93,7 +107,7 @@ public class APIConnection implements NetworkConnection {
 
     @Override
     public void getHumidityData(final SensorDataCallBack callBack, Date dateFrom, Date dateTo) {
-        String token = "Bearer "+auth.getCurrentUser().getIdToken(false).getResult().getToken();
+        String token = "Bearer " + auth.getCurrentUser().getIdToken(false).getResult().getToken();
         String userId = auth.getCurrentUser().getUid();
         String from = DateFormatConverter.convertDateToDotNetFormat(dateFrom);
         String to = DateFormatConverter.convertDateToDotNetFormat(dateTo);
@@ -102,7 +116,7 @@ public class APIConnection implements NetworkConnection {
 
     @Override
     public void getLightData(SensorDataCallBack callBack, Date dateFrom, Date dateTo) {
-        String token = "Bearer "+auth.getCurrentUser().getIdToken(false).getResult().getToken();
+        String token = "Bearer " + auth.getCurrentUser().getIdToken(false).getResult().getToken();
         String userId = auth.getCurrentUser().getUid();
         String from = DateFormatConverter.convertDateToDotNetFormat(dateFrom);
         String to = DateFormatConverter.convertDateToDotNetFormat(dateTo);

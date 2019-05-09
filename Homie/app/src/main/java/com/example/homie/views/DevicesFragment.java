@@ -29,8 +29,6 @@ public class DevicesFragment extends Fragment {
     private DevicesAdapter adapter;
     private List<Device> devices;
 
-    //TODO viewModel class for the fragment
-
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,6 +36,7 @@ public class DevicesFragment extends Fragment {
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        setHasOptionsMenu(true);
         return inflater.inflate(R.layout.fragment_devices_list, container, false);
     }
 
