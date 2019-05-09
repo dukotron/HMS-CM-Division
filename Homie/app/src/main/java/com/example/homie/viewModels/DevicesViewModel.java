@@ -1,6 +1,7 @@
 package com.example.homie.viewModels;
 
 import android.app.Application;
+import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
@@ -41,7 +42,7 @@ public class DevicesViewModel extends AndroidViewModel implements DevicesCallbac
     @Override
     public void onReturn(DevicesListDRO userDevices) {
         if (userDevices.getStatusCode() == StatusCode.OK) {
-            if (userDevices.getDevices() != null) {
+            if (userDevices.getDevices() == null) {
                 showError.setValue("You don't have devices");
                 return;
             }
@@ -51,40 +52,21 @@ public class DevicesViewModel extends AndroidViewModel implements DevicesCallbac
     }
 
     private void processDevices() {
+
         List<Device> devicesTemp = new ArrayList<>(devicesDRO.size() + 1);
         CurrentData data;
-        ArrayList<CurrentData> a = new ArrayList<>();
         for (int i = 0; i < devicesDRO.size(); i++) {
             DeviceData deviceData = devicesDRO.get(i);
             List<Sensor> sensors = deviceData.getSensors();
+            ArrayList<CurrentData> a = new ArrayList<>();
             for (int j = 0; j < sensors.size(); j++) {
-                data = new CurrentData(sensors.get(i).getType(),
-                        "" + sensors.get(i).getData().get(0).getValue());
+                data = new CurrentData(sensors.get(j).getType(),
+                        "" + sensors.get(j).getData().get(0).getValue());
                 a.add(data);
             }
             devicesTemp.add(new Device(deviceData.getLocation(), deviceData.getId(), a));
         }
         devices.setValue(devicesTemp);
-        /*
-        devices = new ArrayList<>();
-        CurrentData data = new CurrentData("CO2", "322");
-        ArrayList<CurrentData> a = new ArrayList<>();
-        a.add(data);
-        data = new CurrentData("Temperature", "22");
-        a.add(data);
-        Device device = new Device("hallway", a);
-        devices.add(device);
-        data = new CurrentData("Temperature", "22");
-        a = new ArrayList<>();
-        a.add(data);
-        device = new Device("living", a);
-        devices.add(device);
-        data = new CurrentData("CO2", "122");
-        a = new ArrayList<>();
-        a.add(data);
-        device = new Device("bedroom", a);
-        devices.add(device);
-        */
     }
 
     public LiveData<String> getShowError() {

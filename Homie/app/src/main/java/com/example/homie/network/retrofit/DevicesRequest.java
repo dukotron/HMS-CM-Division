@@ -1,8 +1,14 @@
 package com.example.homie.network.retrofit;
 
+import android.util.Log;
+
 import com.example.homie.DRO.DevicesListDRO;
 import com.example.homie.viewModels.DevicesCallback;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
+import okhttp3.OkHttpClient;
+import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -18,9 +24,13 @@ public class DevicesRequest implements Callback<DevicesListDRO> {
     public void getAllDevices(String token, String userId,DevicesCallback callback){
         this.callback = callback;
 
+        Gson gson = new GsonBuilder()
+                .setDateFormat("yyyy-MM-dd'T'HH:mm:ss")
+                .create();
+
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(BASE_URL)
-                .addConverterFactory(GsonConverterFactory.create())
+                .addConverterFactory(GsonConverterFactory.create(gson))
                 .build();
 
         RetrofitAPI client = retrofit.create(RetrofitAPI.class);
@@ -30,7 +40,9 @@ public class DevicesRequest implements Callback<DevicesListDRO> {
 
     @Override
     public void onResponse(Call<DevicesListDRO> call, Response<DevicesListDRO> response) {
-
+        if(response.isSuccessful() && response.body() != null){
+            callback.onReturn(response.body());
+        }
     }
 
     @Override

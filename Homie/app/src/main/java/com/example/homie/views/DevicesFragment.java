@@ -19,7 +19,6 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.example.homie.adapters.DevicesAdapter;
-import com.example.homie.models.CurrentData;
 import com.example.homie.models.Device;
 import com.example.homie.R;
 import com.example.homie.viewModels.DevicesViewModel;
@@ -38,6 +37,20 @@ public class DevicesFragment extends Fragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+    }
+
+    @Override
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        setHasOptionsMenu(true);
+        return inflater.inflate(R.layout.fragment_devices_list, container, false);
+    }
+
+    @Override
+    public void onViewCreated(@NonNull final View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+        devices = new ArrayList<>();
+
         viewModel = ViewModelProviders.of(this).get(DevicesViewModel.class);
         viewModel.getShowError().observe(this, new Observer<String>() {
             @Override
@@ -49,26 +62,14 @@ public class DevicesFragment extends Fragment {
             @Override
             public void onChanged(List<Device> devicesList) {
                 devices = new ArrayList<>(devicesList.size()+1);
+
                 for (int i = 0; i < devicesList.size(); i++) {
                     devices.add(devicesList.get(i));
-                    adapter.notifyDataSetChanged();
                 }
+                initRecycleView(view);
+                adapter.notifyDataSetChanged();
             }
         });
-    }
-
-    @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        setHasOptionsMenu(true);
-        return inflater.inflate(R.layout.fragment_devices_list, container, false);
-    }
-
-    @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-
-        getDevicesInfo();
-        initRecycleView(view);
     }
 
     @Override
@@ -94,13 +95,11 @@ public class DevicesFragment extends Fragment {
 
     private void getDevicesInfo() {
         viewModel.loadAllDevices();
-
     }
 
     private void initRecycleView(View view) {
         recyclerView = view.findViewById(R.id.recycler_view_devices_list);
-        devices = new ArrayList<>();
-        adapter = new DevicesAdapter(devices,getContext());
+        adapter = new DevicesAdapter(devices,getContext(),devices);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         recyclerView.setAdapter(adapter);
     }

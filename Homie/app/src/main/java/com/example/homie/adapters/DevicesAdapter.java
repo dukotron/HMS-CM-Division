@@ -20,9 +20,9 @@ public class DevicesAdapter extends ExpandableRecyclerViewAdapter<DeviceViewHold
     private Context context;
     private List<Device> devices;
 
-    public DevicesAdapter(List<? extends ExpandableGroup> groups, Context context) {
+    public DevicesAdapter(List<? extends ExpandableGroup> groups, Context context, List<Device> devices) {
         super(groups);
-        devices = (List<Device>) groups;
+        this.devices = devices;
         this.context = context;
     }
 
