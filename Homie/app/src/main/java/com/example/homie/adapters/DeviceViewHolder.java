@@ -31,7 +31,7 @@ public class DeviceViewHolder extends GroupViewHolder {
     public ImageButton getArrow(){
         return arrow;
     }
-
+/*
     @Override
     public void expand() {
         animateExpand();
@@ -57,4 +57,5 @@ public class DeviceViewHolder extends GroupViewHolder {
         rotate.setFillAfter(true);
         arrow.setAnimation(rotate);
     }
+    */
 }

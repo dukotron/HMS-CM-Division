@@ -6,7 +6,14 @@ import java.util.List;
 
 public class Device extends ExpandableGroup<CurrentData> {
 
-    public Device(String title, List<CurrentData> items) {
+    private String id;
+
+    public Device(String title, String id, List<CurrentData> items) {
         super(title, items);
+        this.id = id;
+    }
+
+    public String getId() {
+        return id;
     }
 }
