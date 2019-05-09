@@ -8,6 +8,7 @@ import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
 import retrofit2.http.POST;
+import retrofit2.http.PUT;
 import retrofit2.http.Query;
 
 public interface RetrofitAPI {
@@ -28,6 +29,7 @@ public interface RetrofitAPI {
     @GET("api/humidity/???")
     Call<SensorDRO> getHumidityData(@Header("Authorization") String token, @Query("userId") String userId);
 
-
+    @PUT("api/user/notificationToken")
+    Call<Integer> setNotificationToken(@Header("Authorization") String tokenAuth, @Query("userId") String userId, @Query("token") String tokenNotif);
 }
 
