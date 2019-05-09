@@ -9,6 +9,7 @@ import com.example.homie.DTO.AddDeviceDTO;
 import com.example.homie.DTO.UserRegisterDTO;
 import com.example.homie.network.retrofit.AddDeviceRequest;
 import com.example.homie.network.retrofit.CO2Request;
+import com.example.homie.network.retrofit.DeleteDeviceRequest;
 import com.example.homie.network.retrofit.DevicesRequest;
 import com.example.homie.network.retrofit.HumidityRequest;
 import com.example.homie.network.retrofit.LightRequest;
@@ -18,6 +19,7 @@ import com.example.homie.network.retrofit.SettingsRequest;
 import com.example.homie.network.retrofit.TemperatureRequest;
 import com.example.homie.viewModels.AddDeviceCallback;
 import com.example.homie.viewModels.AuthCallBack;
+import com.example.homie.viewModels.DeleteDeviceCallback;
 import com.example.homie.viewModels.DevicesCallback;
 import com.example.homie.viewModels.SensorDataCallBack;
 import com.example.homie.network.util.DateFormatConverter;
@@ -69,17 +71,23 @@ public class APIConnection implements NetworkConnection {
     }
 
     @Override
-    public void getUserDevices(DevicesCallback callback){
+    public void getUserDevices(DevicesCallback callback) {
         String token = "Bearer " + auth.getCurrentUser().getIdToken(false).getResult().getToken();
         String userId = auth.getCurrentUser().getUid();
-        new DevicesRequest().getAllDevices(token,userId,callback);
+        new DevicesRequest().getAllDevices(token, userId, callback);
     }
 
     @Override
     public void addDevice(String deviceLocation, String deviceId, AddDeviceCallback callback) {
         String token = "Bearer " + auth.getCurrentUser().getIdToken(false).getResult().getToken();
         String userId = auth.getCurrentUser().getUid();
-        new AddDeviceRequest().addDevice(token, new AddDeviceDTO(deviceId,userId,deviceLocation), callback);
+        new AddDeviceRequest().addDevice(token, new AddDeviceDTO(deviceId, userId, deviceLocation), callback);
+    }
+
+    @Override
+    public void deleteDevice(String deviceId, DeleteDeviceCallback callback) {
+        String token = "Bearer " + auth.getCurrentUser().getIdToken(false).getResult().getToken();
+        new DeleteDeviceRequest().deleteDevice(token, deviceId, callback);
     }
 
     @Override

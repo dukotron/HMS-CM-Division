@@ -7,6 +7,7 @@ import com.example.homie.DTO.UserRegisterDTO;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
+import retrofit2.http.DELETE;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
 import retrofit2.http.POST;
@@ -20,7 +21,10 @@ public interface RetrofitAPI {
     Call<Integer> createAccount(@Body UserRegisterDTO user);
 
     @PUT("api/device/updateOwnerAndLoc")
-    Call<Integer> addDeviceForUser(@Header("Authorization") String token, @Body AddDeviceDTO deviceInfo );
+    Call<Integer> addDeviceForUser(@Header("Authorization") String token, @Body AddDeviceDTO deviceInfo);
+
+    @DELETE("api/device/deleteOwnerAndLoc")
+    Call<Integer> deleteDeviceForUser(@Header("Authorization") String token, @Query("deviceId") String deviceId);
 
     @GET("api/device/getUserDevices")
     Call<DevicesListDRO> getUserDevices(@Header("Authorization") String token, @Query("userId") String userId);

@@ -2,6 +2,7 @@ package com.example.homie.network;
 
 import com.example.homie.viewModels.AddDeviceCallback;
 import com.example.homie.viewModels.AuthCallBack;
+import com.example.homie.viewModels.DeleteDeviceCallback;
 import com.example.homie.viewModels.DevicesCallback;
 import com.example.homie.viewModels.SensorDataCallBack;
 
@@ -20,6 +21,8 @@ public interface NetworkConnection {
     void getUserDevices(DevicesCallback callback);
 
     void addDevice(String deviceLocation, String deviceId, AddDeviceCallback callback);
+
+    void deleteDevice(String deviceId, DeleteDeviceCallback callback);
 
     void getMovementData(SensorDataCallBack callBack, Date dateFrom, Date dateTo);
 

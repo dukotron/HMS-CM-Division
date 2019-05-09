@@ -39,6 +39,10 @@ public class UserRepository {
         connection.addDevice(deviceLocation, deviceId, viewModel);
     }
 
+    public void deleteDevice(String deviceId){
+        connection.deleteDevice(deviceId);
+    }
+
     public void getUserDevices(DevicesCallback viewModel){
         connection.getUserDevices(viewModel);
     }

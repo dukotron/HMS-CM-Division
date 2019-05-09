@@ -4,6 +4,7 @@ import android.app.Application;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
+import androidx.core.view.ViewCompat;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
@@ -19,7 +20,7 @@ import com.example.homie.viewModels.util.StatusCode;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DevicesViewModel extends AndroidViewModel implements DevicesCallback {
+public class DevicesViewModel extends AndroidViewModel implements DevicesCallback, DeleteDeviceCallback {
 
     private MutableLiveData<List<Device>> devices;
     private MutableLiveData<String> showError;
@@ -39,6 +40,10 @@ public class DevicesViewModel extends AndroidViewModel implements DevicesCallbac
         userRepository.getUserDevices(this);
     }
 
+    public void deleteDevice(String deviceId) {
+        userRepository.deleteDevice(deviceId);
+    }
+
     @Override
     public void onReturn(DevicesListDRO userDevices) {
         if (userDevices.getStatusCode() == StatusCode.OK) {
@@ -48,6 +53,16 @@ public class DevicesViewModel extends AndroidViewModel implements DevicesCallbac
             }
             devicesDRO = userDevices.getDevices();
             processDevices();
+        }
+    }
+
+    @Override
+    public void onDelete(int statusCode){
+        if(statusCode == StatusCode.OK){
+            loadAllDevices();
+            showError.setValue("Device was deleted");
+        }else{
+            showError.setValue("Device wasn't deleted");
         }
     }
 

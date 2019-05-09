@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import com.example.homie.R;
 import com.example.homie.models.CurrentData;
 import com.example.homie.models.Device;
+import com.example.homie.viewModels.DevicesViewModel;
 import com.example.homie.views.SensorsActivity;
 import com.thoughtbot.expandablerecyclerview.ExpandableRecyclerViewAdapter;
 import com.thoughtbot.expandablerecyclerview.models.ExpandableGroup;
@@ -19,11 +20,14 @@ public class DevicesAdapter extends ExpandableRecyclerViewAdapter<DeviceViewHold
 
     private Context context;
     private List<Device> devices;
+    private DevicesViewModel viewModel;
 
-    public DevicesAdapter(List<? extends ExpandableGroup> groups, Context context, List<Device> devices) {
+    public DevicesAdapter(List<? extends ExpandableGroup> groups, Context context,
+                          List<Device> devices, DevicesViewModel viewModel) {
         super(groups);
         this.devices = devices;
         this.context = context;
+        this.viewModel = viewModel;
     }
 
     @Override
@@ -59,6 +63,12 @@ public class DevicesAdapter extends ExpandableRecyclerViewAdapter<DeviceViewHold
                 intent.putExtra("deviceTitle", group.getTitle());
                 intent.putExtra("deviceId", devices.get(flatPosition).getId());
                 context.startActivity(intent);
+            }
+        });
+        holder.getDelete().setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                viewModel.deleteDevice(devices.get(flatPosition).getId());
             }
         });
     }

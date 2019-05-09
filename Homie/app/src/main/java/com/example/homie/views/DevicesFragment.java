@@ -2,6 +2,7 @@ package com.example.homie.views;
 
 import android.content.Intent;
 import android.os.Bundle;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
@@ -61,7 +62,7 @@ public class DevicesFragment extends Fragment {
         viewModel.getDevices().observe(this, new Observer<List<Device>>() {
             @Override
             public void onChanged(List<Device> devicesList) {
-                devices = new ArrayList<>(devicesList.size()+1);
+                devices = new ArrayList<>(devicesList.size() + 1);
 
                 for (int i = 0; i < devicesList.size(); i++) {
                     devices.add(devicesList.get(i));
@@ -85,8 +86,8 @@ public class DevicesFragment extends Fragment {
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item){
-        if(item.getItemId() == R.id.option_add_device){
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == R.id.option_add_device) {
             startActivity(new Intent(getContext(), AddDeviceActivity.class));
             return true;
         }
@@ -99,7 +100,8 @@ public class DevicesFragment extends Fragment {
 
     private void initRecycleView(View view) {
         recyclerView = view.findViewById(R.id.recycler_view_devices_list);
-        adapter = new DevicesAdapter(devices,getContext(),devices);
+        // weird fix using library
+        adapter = new DevicesAdapter(devices, getContext(), devices, viewModel);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         recyclerView.setAdapter(adapter);
     }

@@ -17,11 +17,13 @@ public class DeviceViewHolder extends GroupViewHolder {
 
     private TextView deviceTitle;
     private ImageButton arrow;
+    private ImageButton delete;
 
     public DeviceViewHolder(View itemView) {
         super(itemView);
         deviceTitle = itemView.findViewById(R.id.list_item_device_title);
         arrow = itemView.findViewById(R.id.list_item_device_arrow);
+        delete = itemView.findViewById(R.id.list_item_device_delete);
     }
 
     public void setDeviceTitle(ExpandableGroup group){
@@ -31,31 +33,9 @@ public class DeviceViewHolder extends GroupViewHolder {
     public ImageButton getArrow(){
         return arrow;
     }
-/*
-    @Override
-    public void expand() {
-        animateExpand();
+
+    public ImageButton getDelete(){
+        return delete;
     }
 
-    @Override
-    public void collapse() {
-        animateCollapse();
-    }
-
-    private void animateExpand() {
-        RotateAnimation rotate =
-                new RotateAnimation(0, 360, RELATIVE_TO_SELF, 0.5f, RELATIVE_TO_SELF, 0.5f);
-        rotate.setDuration(300);
-        rotate.setFillAfter(true);
-        arrow.setAnimation(rotate);
-    }
-
-    private void animateCollapse() {
-        RotateAnimation rotate =
-                new RotateAnimation(360, 0, RELATIVE_TO_SELF, 0.5f, RELATIVE_TO_SELF, 0.5f);
-        rotate.setDuration(300);
-        rotate.setFillAfter(true);
-        arrow.setAnimation(rotate);
-    }
-    */
 }
