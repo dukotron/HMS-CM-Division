@@ -17,8 +17,54 @@
 
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
-    <style name="sensor_list_style">
-        <!-- //TODO created style for sensor list to not repeat-->
+    <style name="sensor_list_sensor_title_style">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">60dp</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textSize">25sp</item>
+        <item name="android:background">@drawable/transparent_background</item>
+        <item name="android:textColor">@color/colorWhite</item>
+    </style>
+    
+    <style name="sensor_list_show_button_style">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">30dp</item>
+        <item name="android:layout_gravity">center</item>
+        <item name="android:text">Show</item>
+        <item name="android:textColor">@color/colorWhite</item>
+        <item name="android:background">@color/transparent</item>
+    </style>
+
+    <style name="sensor_list_sensor_charts_style">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:orientation">vertical</item>
+        <item name="android:visibility">gone</item>
+    </style>
+
+    <style name="sensor_list_frame_for_date_style">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:orientation">horizontal</item>
+        <item name="android:gravity">center</item>
+    </style>
+
+    <style name="sensor_list_date_text_style">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:layout_marginRight">20dp</item>
+        <item name="android:textColor">@color/colorWhite</item>
+    </style>
+
+    <style name="sensor_list_date_edit_style">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:ems">7</item>
+        <item name="android:hint">"dd/mm/yyyy</item>
+        <item name="android:inputType">date</item>
+        <item name="android:textColor">@color/colorWhite</item>
+        <item name="android:backgroundTint">@color/colorWhite</item>
     </style>
 
 </resources>
