@@ -15,9 +15,9 @@ public class DeviceData {
     private String location;
     @SerializedName("Sensors")
     @Expose
-    private List<SensorData> sensors;
+    private List<Sensor> sensors;
 
-    public DeviceData(String id, String location, List<SensorData> sensors) {
+    public DeviceData(String id, String location, List<Sensor> sensors) {
         this.id = id;
         this.location = location;
         this.sensors = sensors;
@@ -39,11 +39,11 @@ public class DeviceData {
         this.location = location;
     }
 
-    public List<SensorData> getSensors() {
+    public List<Sensor> getSensors() {
         return sensors;
     }
 
-    public void setSensors(List<SensorData> sensors) {
+    public void setSensors(List<Sensor> sensors) {
         this.sensors = sensors;
     }
 }

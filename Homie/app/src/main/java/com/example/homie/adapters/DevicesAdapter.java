@@ -15,33 +15,35 @@ import com.thoughtbot.expandablerecyclerview.models.ExpandableGroup;
 
 import java.util.List;
 
-public class DevicesAdapter extends ExpandableRecyclerViewAdapter<DeviceViewHolder,CurrentDataViewHolder> {
+public class DevicesAdapter extends ExpandableRecyclerViewAdapter<DeviceViewHolder, CurrentDataViewHolder> {
 
     private Context context;
+    private List<Device> devices;
 
-    public DevicesAdapter(List<? extends ExpandableGroup> groups, Context context) {
+    public DevicesAdapter(List<? extends ExpandableGroup> groups, Context context, List<Device> devices) {
         super(groups);
+        this.devices = devices;
         this.context = context;
     }
 
     @Override
     public DeviceViewHolder onCreateGroupViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.list_item_device,parent,false);
+                .inflate(R.layout.list_item_device, parent, false);
         return new DeviceViewHolder(view);
     }
 
     @Override
     public CurrentDataViewHolder onCreateChildViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.list_item_current_data,parent,false);
+                .inflate(R.layout.list_item_current_data, parent, false);
         return new CurrentDataViewHolder(view);
     }
 
     @Override
     public void onBindChildViewHolder(CurrentDataViewHolder holder, int flatPosition,
                                       ExpandableGroup group, int childIndex) {
-        final CurrentData currentData = ((Device)group).getItems().get(childIndex);
+        final CurrentData currentData = ((Device) group).getItems().get(childIndex);
         holder.setDataType(currentData.getDataType());
         holder.setDataValue(currentData.getDataValue());
     }
@@ -54,7 +56,8 @@ public class DevicesAdapter extends ExpandableRecyclerViewAdapter<DeviceViewHold
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(context, SensorsActivity.class);
-                intent.putExtra("deviceTitle",group.getTitle());
+                intent.putExtra("deviceTitle", group.getTitle());
+                intent.putExtra("deviceId", devices.get(flatPosition).getId());
                 context.startActivity(intent);
             }
         });

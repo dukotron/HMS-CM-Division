@@ -43,6 +43,7 @@ import java.util.List;
 public class SensorsActivity extends AppCompatActivity {
 
     private String deviceTitle;
+    private String deviceId;
     private DateFormat dateFormat;
 
     private TextView movementSensorTitle;
@@ -96,6 +97,8 @@ public class SensorsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_sensors_list);
 
         deviceTitle = getIntent().getExtras().getString("deviceTitle");
+        deviceId = getIntent().getExtras().getString("deviceId");
+
         initToolbar();
         initViewModel();
 
