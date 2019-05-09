@@ -26,74 +26,42 @@
 
             <TextView
                 android:id="@+id/movement_sensor"
-                android:layout_width="match_parent"
-                android:layout_height="60dp"
-                android:gravity="center"
                 android:text="movement"
-                android:textSize="25sp"
-                android:background="@drawable/transparent_background"
-                android:textColor="@color/colorWhite"/>
+                style="@style/sensor_list_sensor_title_style"/>
 
             <LinearLayout
                 android:id="@+id/movement_sensor_charts"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:visibility="gone">
+                style="@style/sensor_list_sensor_charts_style">
 
                 <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:gravity="center">
+                    style="@style/sensor_list_frame_for_date_style">
 
                     <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
                         android:text="From:"
-                        android:textSize="20sp"
-                        android:layout_marginRight="20dp"/>
+                        style="@style/sensor_list_date_text_style"/>
 
                     <EditText
                         android:id="@+id/movement_date_from"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:ems="7"
-                        android:hint="dd/mm/yyyy"
-                        android:inputType="date"/>
+                        style="@style/sensor_list_date_edit_style"/>
 
                 </LinearLayout>
 
                 <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:gravity="center">
+                    style="@style/sensor_list_frame_for_date_style">
 
                     <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
                         android:text="To:"
-                        android:textSize="20sp"
-                        android:layout_marginRight="20dp"/>
+                        style="@style/sensor_list_date_text_style"/>
 
                     <EditText
                         android:id="@+id/movement_date_to"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:ems="7"
-                        android:hint="dd/mm/yyyy"
-                        android:inputType="date"/>
+                        style="@style/sensor_list_date_edit_style"/>
 
                 </LinearLayout>
 
                 <Button
                     android:id="@+id/movement_btn_show"
-                    android:layout_width="wrap_content"
-                    android:layout_height="30dp"
-                    android:layout_gravity="center"
-                    android:text="Show"
-                    android:background="@color/transparent"/>
+                    style="@style/sensor_list_show_button_style"/>
 
                 <com.github.mikephil.charting.charts.LineChart
                     android:id="@+id/movement_sensor_line_chart"
@@ -104,74 +72,42 @@
 
             <TextView
                 android:id="@+id/co_sensor"
-                android:layout_width="match_parent"
-                android:layout_height="60dp"
-                android:gravity="center"
                 android:text="CO2"
-                android:textSize="25sp"
-                android:background="@drawable/transparent_background"
-                android:textColor="@color/colorWhite"/>
+                style="@style/sensor_list_sensor_title_style"/>
 
             <LinearLayout
                 android:id="@+id/co_sensor_charts"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:visibility="gone">
+                style="@style/sensor_list_sensor_charts_style">
 
                 <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:gravity="center">
+                    style="@style/sensor_list_frame_for_date_style">
 
                     <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
                         android:text="From:"
-                        android:textSize="20sp"
-                        android:layout_marginRight="20dp"/>
+                        style="@style/sensor_list_date_text_style"/>
 
                     <EditText
                         android:id="@+id/co_date_from"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:ems="7"
-                        android:hint="dd/mm/yyyy"
-                        android:inputType="date"/>
+                        style="@style/sensor_list_date_edit_style"/>
 
                 </LinearLayout>
 
                 <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:gravity="center">
+                    style="@style/sensor_list_frame_for_date_style">
 
                     <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
                         android:text="To:"
-                        android:textSize="20sp"
-                        android:layout_marginRight="20dp"/>
+                        style="@style/sensor_list_date_text_style"/>
 
                     <EditText
                         android:id="@+id/co_date_to"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:ems="7"
-                        android:hint="dd/mm/yyyy"
-                        android:inputType="date"/>
+                        style="@style/sensor_list_date_edit_style"/>
 
                 </LinearLayout>
 
                 <Button
                     android:id="@+id/co_btn_show"
-                    android:layout_width="wrap_content"
-                    android:layout_height="30dp"
-                    android:layout_gravity="center"
-                    android:text="Show"
-                    android:background="@color/transparent"/>
+                    style="@style/sensor_list_show_button_style"/>
 
                 <com.github.mikephil.charting.charts.BarChart
                     android:id="@+id/co_sensor_bar_chart"
@@ -182,74 +118,42 @@
 
             <TextView
                 android:id="@+id/temperature_sensor"
-                android:layout_width="match_parent"
-                android:layout_height="60dp"
-                android:gravity="center"
                 android:text="temperature"
-                android:textSize="25sp"
-                android:background="@drawable/transparent_background"
-                android:textColor="@color/colorWhite"/>
+                style="@style/sensor_list_sensor_title_style"/>
 
             <LinearLayout
                 android:id="@+id/temperature_sensor_charts"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:visibility="gone">
+                style="@style/sensor_list_sensor_charts_style">
 
                 <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:gravity="center">
+                    style="@style/sensor_list_frame_for_date_style">
 
                     <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
                         android:text="From:"
-                        android:textSize="20sp"
-                        android:layout_marginRight="20dp"/>
+                        style="@style/sensor_list_date_text_style"/>
 
                     <EditText
                         android:id="@+id/temperature_date_from"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:ems="7"
-                        android:hint="dd/mm/yyyy"
-                        android:inputType="date"/>
+                        style="@style/sensor_list_date_edit_style"/>
 
                 </LinearLayout>
 
                 <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:gravity="center">
+                    style="@style/sensor_list_frame_for_date_style">
 
                     <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
                         android:text="To:"
-                        android:textSize="20sp"
-                        android:layout_marginRight="20dp"/>
+                        style="@style/sensor_list_date_text_style"/>
 
                     <EditText
                         android:id="@+id/temperature_date_to"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:ems="7"
-                        android:hint="dd/mm/yyyy"
-                        android:inputType="date"/>
+                        style="@style/sensor_list_date_edit_style"/>
 
                 </LinearLayout>
 
                 <Button
                     android:id="@+id/temperature_btn_show"
-                    android:layout_width="wrap_content"
-                    android:layout_height="30dp"
-                    android:layout_gravity="center"
-                    android:text="Show"
-                    android:background="@color/transparent"/>
+                    style="@style/sensor_list_show_button_style"/>
 
                 <com.github.mikephil.charting.charts.BarChart
                     android:id="@+id/temperature_sensor_bar_chart"
@@ -260,74 +164,42 @@
 
             <TextView
                 android:id="@+id/humidity_sensor"
-                android:layout_width="match_parent"
-                android:layout_height="60dp"
-                android:gravity="center"
                 android:text="humidity"
-                android:textSize="25sp"
-                android:background="@drawable/transparent_background"
-                android:textColor="@color/colorWhite"/>
+                style="@style/sensor_list_sensor_title_style"/>
 
             <LinearLayout
                 android:id="@+id/humidity_sensor_charts"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:visibility="gone">
+                style="@style/sensor_list_sensor_charts_style">
 
                 <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:gravity="center">
+                    style="@style/sensor_list_frame_for_date_style">
 
                     <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
                         android:text="From:"
-                        android:textSize="20sp"
-                        android:layout_marginRight="20dp"/>
+                        style="@style/sensor_list_date_text_style"/>
 
                     <EditText
                         android:id="@+id/humidity_date_from"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:ems="7"
-                        android:hint="dd/mm/yyyy"
-                        android:inputType="date"/>
+                        style="@style/sensor_list_date_edit_style"/>
 
                 </LinearLayout>
 
                 <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:gravity="center">
+                    style="@style/sensor_list_frame_for_date_style">
 
                     <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
                         android:text="To:"
-                        android:textSize="20sp"
-                        android:layout_marginRight="20dp"/>
+                        style="@style/sensor_list_date_text_style"/>
 
                     <EditText
                         android:id="@+id/humidity_date_to"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:ems="7"
-                        android:hint="dd/mm/yyyy"
-                        android:inputType="date"/>
+                        style="@style/sensor_list_date_edit_style"/>
 
                 </LinearLayout>
 
                 <Button
                     android:id="@+id/humidity_btn_show"
-                    android:layout_width="wrap_content"
-                    android:layout_height="30dp"
-                    android:layout_gravity="center"
-                    android:text="Show"
-                    android:background="@color/transparent"/>
+                    style="@style/sensor_list_show_button_style"/>
 
                 <com.github.mikephil.charting.charts.LineChart
                     android:id="@+id/humidity_sensor_line_chart"
@@ -416,74 +288,42 @@
 
             <TextView
                 android:id="@+id/light_sensor"
-                android:layout_width="match_parent"
-                android:layout_height="60dp"
-                android:gravity="center"
                 android:text="light"
-                android:textSize="25sp"
-                android:background="@drawable/transparent_background"
-                android:textColor="@color/colorWhite"/>
+                style="@style/sensor_list_sensor_title_style"/>
 
             <LinearLayout
                 android:id="@+id/light_sensor_charts"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:visibility="gone">
+                style="@style/sensor_list_sensor_charts_style">
 
                 <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:gravity="center">
+                    style="@style/sensor_list_frame_for_date_style">
 
                     <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
                         android:text="From:"
-                        android:textSize="20sp"
-                        android:layout_marginRight="20dp"/>
+                        style="@style/sensor_list_date_text_style"/>
 
                     <EditText
                         android:id="@+id/light_date_from"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:ems="7"
-                        android:hint="dd/mm/yyyy"
-                        android:inputType="date"/>
+                        style="@style/sensor_list_date_edit_style"/>
 
                 </LinearLayout>
 
                 <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:gravity="center">
+                    style="@style/sensor_list_frame_for_date_style">
 
                     <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
                         android:text="To:"
-                        android:textSize="20sp"
-                        android:layout_marginRight="20dp"/>
+                        style="@style/sensor_list_date_text_style"/>
 
                     <EditText
                         android:id="@+id/light_date_to"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:ems="7"
-                        android:hint="dd/mm/yyyy"
-                        android:inputType="date"/>
+                        style="@style/sensor_list_date_edit_style"/>
 
                 </LinearLayout>
 
                 <Button
                     android:id="@+id/light_btn_show"
-                    android:layout_width="wrap_content"
-                    android:layout_height="30dp"
-                    android:layout_gravity="center"
-                    android:text="Show"
-                    android:background="@color/transparent"/>
+                    style="@style/sensor_list_show_button_style"/>
 
                 <com.github.mikephil.charting.charts.LineChart
                     android:id="@+id/light_sensor_line_chart"
