@@ -7,22 +7,13 @@ import android.media.RingtoneManager;
 import androidx.core.app.NotificationCompat;
 
 import com.example.homie.R;
-import com.example.homie.network.retrofit.RetrofitAPI;
-import com.google.firebase.auth.FirebaseAuth;
+import com.example.homie.network.APIConnection;
+import com.example.homie.network.NotificationsService;
 import com.google.firebase.iid.FirebaseInstanceId;
-import com.google.firebase.iid.FirebaseInstanceIdService;
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
 
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
-
-import static com.example.homie.network.util.NetworkConfig.BASE_URL;
-
-public class HomieFirebaseMessagingService extends FirebaseMessagingService implements Callback<Integer> {
+public class HomieFirebaseMessagingService extends FirebaseMessagingService {
 
     @Override
     public void onMessageReceived(RemoteMessage remoteMessage) {
@@ -46,29 +37,8 @@ public class HomieFirebaseMessagingService extends FirebaseMessagingService impl
     @Override
     public void onNewToken(String s) {
         super.onNewToken(s);
-        String refreshedToken = FirebaseInstanceId.getInstance().getInstanceId().getResult().getToken();
-
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(BASE_URL)
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
-
-        RetrofitAPI client = retrofit.create(RetrofitAPI.class);
-
-        String token = "Bearer " + FirebaseAuth.getInstance().getCurrentUser().getIdToken(false).getResult().getToken();
-        String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
-
-        Call<Integer> call = client.setNotificationToken(token, userId, refreshedToken);
-        call.enqueue(this);
+        NotificationsService server = APIConnection.getInstance();
+        server.updateNotificationToken();
     }
 
-    @Override
-    public void onResponse(Call<Integer> call, Response<Integer> response) {
-
-    }
-
-    @Override
-    public void onFailure(Call<Integer> call, Throwable t) {
-
-    }
 }

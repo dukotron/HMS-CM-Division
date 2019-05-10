@@ -12,7 +12,7 @@ public class UserRepository {
 
 
     private UserRepository() {
-        connection = new APIConnection();
+        connection = APIConnection.getInstance();
     }
 
     public static UserRepository getInstance() {

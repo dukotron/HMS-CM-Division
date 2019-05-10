@@ -30,6 +30,6 @@ public interface RetrofitAPI {
     Call<SensorDRO> getHumidityData(@Header("Authorization") String token, @Query("userId") String userId);
 
     @PUT("api/user/notificationToken")
-    Call<Integer> setNotificationToken(@Header("Authorization") String tokenAuth, @Query("userId") String userId, @Query("token") String tokenNotif);
+    Call<Integer> setNotificationToken(@Header("Authorization") String tokenAuth, @Query("userId") String userId, @Query("token") String notificationToken);
 }
 

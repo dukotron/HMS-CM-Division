@@ -1,14 +1,13 @@
 package com.example.homie.network;
 
 
-import android.util.Log;
-
 import androidx.annotation.NonNull;
 
 import com.example.homie.DTO.UserRegisterDTO;
 import com.example.homie.network.retrofit.CO2Request;
 import com.example.homie.network.retrofit.HumidityRequest;
 import com.example.homie.network.retrofit.MovementRequest;
+import com.example.homie.network.retrofit.NotificationRequest;
 import com.example.homie.network.retrofit.RegisterRequest;
 import com.example.homie.network.retrofit.TemperatureRequest;
 import com.example.homie.viewModels.AuthCallBack;
@@ -22,21 +21,30 @@ import com.google.firebase.iid.FirebaseInstanceId;
 import com.google.firebase.iid.InstanceIdResult;
 import com.google.firebase.messaging.FirebaseMessagingService;
 
-public class APIConnection implements NetworkConnection {
+public class APIConnection implements NetworkConnection, NotificationsService {
 
     private FirebaseAuth auth;
+    private static APIConnection instance;
 
-    public APIConnection(){
+    private APIConnection() {
         auth = FirebaseAuth.getInstance();
+    }
+
+    public static APIConnection getInstance() {
+        if (instance == null) {
+            instance = new APIConnection();
+        }
+        return instance;
     }
 
     @Override
     public void loginAccount(String email, String password, final AuthCallBack viewModel) {
-        auth.signInWithEmailAndPassword(email,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+        auth.signInWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
-                if(task.isSuccessful()){
+                if (task.isSuccessful()) {
                     viewModel.onReturn(StatusCode.OK);
+                    updateNotificationToken();
                     // get User session token
                     //Log.d("TOKEN","Bearer "+auth.getCurrentUser().getIdToken(false).getResult().getToken());
                     // get User notification token
@@ -51,46 +59,54 @@ public class APIConnection implements NetworkConnection {
                 }
             }
         });
-
     }
 
     @Override
     public void createAccount(final String firstName, final String lastName, final String email, final String password, final AuthCallBack viewModel) {
-        auth.createUserWithEmailAndPassword(email,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+        auth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
-                if(task.isSuccessful()){
+                if (task.isSuccessful()) {
                     String userId = auth.getCurrentUser().getUid();
                     new RegisterRequest().start(new UserRegisterDTO(userId), viewModel);
+                    updateNotificationToken();
                 }
             }
         });
     }
 
     @Override
+    public void updateNotificationToken() {
+        String token = "Bearer " + auth.getCurrentUser().getIdToken(false).getResult().getToken();
+        String userId = auth.getCurrentUser().getUid();
+        String notificationToken = FirebaseInstanceId.getInstance().getInstanceId().getResult().getToken();
+        new NotificationRequest().setNotificationToken(token, userId, notificationToken);
+    }
+
+    @Override
     public void getMovementData(final SensorDataCallBack viewModel) {
-        String token = "Bearer "+auth.getCurrentUser().getIdToken(false).getResult().getToken();
+        String token = "Bearer " + auth.getCurrentUser().getIdToken(false).getResult().getToken();
         String userId = auth.getCurrentUser().getUid();
         new MovementRequest().start(token, userId, viewModel);
     }
 
     @Override
     public void getCo2(final SensorDataCallBack callBack) {
-        String token = "Bearer "+auth.getCurrentUser().getIdToken(false).getResult().getToken();
+        String token = "Bearer " + auth.getCurrentUser().getIdToken(false).getResult().getToken();
         String userId = auth.getCurrentUser().getUid();
         new CO2Request().start(token, userId, callBack);
     }
 
     @Override
     public void getTemperatureData(final SensorDataCallBack callBack) {
-        String token = "Bearer "+auth.getCurrentUser().getIdToken(false).getResult().getToken();
+        String token = "Bearer " + auth.getCurrentUser().getIdToken(false).getResult().getToken();
         String userId = auth.getCurrentUser().getUid();
         new TemperatureRequest().start(token, userId, callBack);
     }
 
     @Override
     public void getHumidityData(final SensorDataCallBack callBack) {
-        String token = "Bearer "+auth.getCurrentUser().getIdToken(false).getResult().getToken();
+        String token = "Bearer " + auth.getCurrentUser().getIdToken(false).getResult().getToken();
         String userId = auth.getCurrentUser().getUid();
         new HumidityRequest().start(token, userId, callBack);
     }
