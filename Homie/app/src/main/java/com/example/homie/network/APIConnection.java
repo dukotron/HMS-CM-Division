@@ -34,6 +34,8 @@ import com.google.firebase.iid.FirebaseInstanceId;
 import com.google.firebase.iid.InstanceIdResult;
 import com.google.firebase.messaging.FirebaseMessagingService;
 
+import java.util.Date;
+
 public class APIConnection implements NetworkConnection, NotificationsService {
 
     private FirebaseAuth auth;
@@ -75,7 +77,7 @@ public class APIConnection implements NetworkConnection, NotificationsService {
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if (task.isSuccessful()) {
                     String userId = auth.getCurrentUser().getUid();
-                    new RegisterRequest().start(new UserRegisterDTO(userId), viewModel);
+                    new RegisterRequest().start(new UserRegisterDTO(userId), callBack);
                     updateNotificationToken();
                 }
             }
@@ -103,7 +105,7 @@ public class APIConnection implements NetworkConnection, NotificationsService {
     }
 
     @Override
-    public void getMovementData(final SensorDataCallBack callBack, Date dateFrom, Date dateTo) {
+    public void getMovementData(SensorDataCallBack callBack, Date dateFrom, Date dateTo) {
         String token = "Bearer " + auth.getCurrentUser().getIdToken(false).getResult().getToken();
         String userId = auth.getCurrentUser().getUid();
         String from = DateFormatConverter.convertDateToDotNetFormat(dateFrom);
@@ -117,7 +119,7 @@ public class APIConnection implements NetworkConnection, NotificationsService {
     }
 
     @Override
-    public void getCo2(final SensorDataCallBack callBack, Date dateFrom, Date dateTo) {
+    public void getCo2(SensorDataCallBack callBack, Date dateFrom, Date dateTo) {
         String token = "Bearer " + auth.getCurrentUser().getIdToken(false).getResult().getToken();
         String userId = auth.getCurrentUser().getUid();
         String from = DateFormatConverter.convertDateToDotNetFormat(dateFrom);
@@ -126,7 +128,15 @@ public class APIConnection implements NetworkConnection, NotificationsService {
     }
 
     @Override
-    public void getTemperatureData(final SensorDataCallBack callBack, Date dateFrom, Date dateTo) {
+    public void getTemperatureData(SensorDataCallBack callBack, Date dateFrom, Date dateTo) {
+        String token = "Bearer " + auth.getCurrentUser().getIdToken(false).getResult().getToken();
+        String userId = auth.getCurrentUser().getUid();
+        String from = DateFormatConverter.convertDateToDotNetFormat(dateFrom);
+        String to = DateFormatConverter.convertDateToDotNetFormat(dateTo);
+        new TemperatureRequest().start(token, userId, callBack, from, to);
+    }
+
+    @Override
     public void updateNotificationToken() {
         final String token = "Bearer " + auth.getCurrentUser().getIdToken(false).getResult().getToken();
         final String userId = auth.getCurrentUser().getUid();
@@ -141,16 +151,7 @@ public class APIConnection implements NetworkConnection, NotificationsService {
     }
 
     @Override
-    public void getMovementData(final SensorDataCallBack viewModel) {
-        String token = "Bearer " + auth.getCurrentUser().getIdToken(false).getResult().getToken();
-        String userId = auth.getCurrentUser().getUid();
-        String from = DateFormatConverter.convertDateToDotNetFormat(dateFrom);
-        String to = DateFormatConverter.convertDateToDotNetFormat(dateTo);
-        new TemperatureRequest().start(token, userId, callBack, from, to);
-    }
-
-    @Override
-    public void getHumidityData(final SensorDataCallBack callBack, Date dateFrom, Date dateTo) {
+    public void getHumidityData(SensorDataCallBack callBack, Date dateFrom, Date dateTo) {
         String token = "Bearer " + auth.getCurrentUser().getIdToken(false).getResult().getToken();
         String userId = auth.getCurrentUser().getUid();
         String from = DateFormatConverter.convertDateToDotNetFormat(dateFrom);
