@@ -1,6 +1,8 @@
 package com.example.homie.network;
 
 
+import android.util.Log;
+
 import androidx.annotation.NonNull;
 
 import com.example.homie.DTO.UserRegisterDTO;
@@ -14,6 +16,7 @@ import com.example.homie.viewModels.AuthCallBack;
 import com.example.homie.viewModels.SensorDataCallBack;
 import com.example.homie.viewModels.util.StatusCode;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
@@ -77,10 +80,16 @@ public class APIConnection implements NetworkConnection, NotificationsService {
 
     @Override
     public void updateNotificationToken() {
-        String token = "Bearer " + auth.getCurrentUser().getIdToken(false).getResult().getToken();
-        String userId = auth.getCurrentUser().getUid();
-        String notificationToken = FirebaseInstanceId.getInstance().getInstanceId().getResult().getToken();
-        new NotificationRequest().setNotificationToken(token, userId, notificationToken);
+        final String token = "Bearer " + auth.getCurrentUser().getIdToken(false).getResult().getToken();
+        final String userId = auth.getCurrentUser().getUid();
+        FirebaseInstanceId.getInstance().getInstanceId().addOnSuccessListener(new OnSuccessListener<InstanceIdResult>() {
+            @Override
+            public void onSuccess(InstanceIdResult instanceIdResult) {
+                String notificationToken = instanceIdResult.getToken();
+                Log.d("```````````````````", "" + notificationToken);
+                new NotificationRequest().setNotificationToken(token, userId, notificationToken);
+            }
+        });
     }
 
     @Override
