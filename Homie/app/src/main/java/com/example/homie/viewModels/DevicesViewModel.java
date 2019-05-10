@@ -41,7 +41,7 @@ public class DevicesViewModel extends AndroidViewModel implements DevicesCallbac
     }
 
     public void deleteDevice(String deviceId) {
-        userRepository.deleteDevice(deviceId);
+        userRepository.deleteDevice(deviceId, this);
     }
 
     @Override
@@ -57,11 +57,11 @@ public class DevicesViewModel extends AndroidViewModel implements DevicesCallbac
     }
 
     @Override
-    public void onDelete(int statusCode){
-        if(statusCode == StatusCode.OK){
+    public void onDelete(int statusCode) {
+        if (statusCode == StatusCode.OK) {
             loadAllDevices();
             showError.setValue("Device was deleted");
-        }else{
+        } else {
             showError.setValue("Device wasn't deleted");
         }
     }

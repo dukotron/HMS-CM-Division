@@ -32,7 +32,6 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.iid.FirebaseInstanceId;
 import com.google.firebase.iid.InstanceIdResult;
-import com.google.firebase.messaging.FirebaseMessagingService;
 
 import java.util.Date;
 
@@ -115,7 +114,8 @@ public class APIConnection implements NetworkConnection, NotificationsService {
 //        String userId = "bEU0lty14bevfkFoiXUIfCGAoJ32";
 //        String from = "2017-09-08T19:01:55.714942";
 //        String to = "2019-09-08T19:01:55.714942";
-        new MovementRequest().start(token, userId, callBack, from, to);
+        new MovementRequest().getDailyData(token, userId, callBack, from, to);
+        new MovementRequest().getHourlyData(token, userId, callBack, from, to);
     }
 
     @Override
@@ -124,7 +124,8 @@ public class APIConnection implements NetworkConnection, NotificationsService {
         String userId = auth.getCurrentUser().getUid();
         String from = DateFormatConverter.convertDateToDotNetFormat(dateFrom);
         String to = DateFormatConverter.convertDateToDotNetFormat(dateTo);
-        new CO2Request().start(token, userId, callBack, from, to);
+        new CO2Request().getDailyData(token, userId, callBack, from, to);
+        new CO2Request().getHourlyData(token, userId, callBack, from, to);
     }
 
     @Override
@@ -133,7 +134,8 @@ public class APIConnection implements NetworkConnection, NotificationsService {
         String userId = auth.getCurrentUser().getUid();
         String from = DateFormatConverter.convertDateToDotNetFormat(dateFrom);
         String to = DateFormatConverter.convertDateToDotNetFormat(dateTo);
-        new TemperatureRequest().start(token, userId, callBack, from, to);
+        new TemperatureRequest().getDailyData(token, userId, callBack, from, to);
+        new TemperatureRequest().getHourlyData(token, userId, callBack, from, to);
     }
 
     @Override
@@ -156,7 +158,8 @@ public class APIConnection implements NetworkConnection, NotificationsService {
         String userId = auth.getCurrentUser().getUid();
         String from = DateFormatConverter.convertDateToDotNetFormat(dateFrom);
         String to = DateFormatConverter.convertDateToDotNetFormat(dateTo);
-        new HumidityRequest().start(token, userId, callBack, from, to);
+        new HumidityRequest().getDailyData(token, userId, callBack, from, to);
+        new HumidityRequest().getHourlyData(token, userId, callBack, from, to);
     }
 
     @Override
@@ -165,7 +168,8 @@ public class APIConnection implements NetworkConnection, NotificationsService {
         String userId = auth.getCurrentUser().getUid();
         String from = DateFormatConverter.convertDateToDotNetFormat(dateFrom);
         String to = DateFormatConverter.convertDateToDotNetFormat(dateTo);
-        new LightRequest().start(token, userId, callBack, from, to);
+        new LightRequest().getDailyData(token, userId, callBack, from, to);
+        new LightRequest().getHourlyData(token, userId, callBack, from, to);
     }
 
     @Override

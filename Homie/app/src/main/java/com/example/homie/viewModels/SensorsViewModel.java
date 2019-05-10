@@ -1,6 +1,7 @@
 package com.example.homie.viewModels;
 
 import android.app.Application;
+
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
@@ -8,53 +9,82 @@ import androidx.annotation.NonNull;
 
 import com.example.homie.DRO.SensorDRO;
 import com.example.homie.DRO.SensorData;
-import com.example.homie.models.Sensor;
 import com.example.homie.repositories.SensorRepository;
 import com.example.homie.viewModels.util.StatusCode;
 
-import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 
 public class SensorsViewModel extends AndroidViewModel implements SensorDataCallBack {
 
     private SensorRepository sensorRepository;
-    private MutableLiveData<List<SensorData>> movementData;
+    private MutableLiveData<List<SensorData>> movementDailyData;
     private MutableLiveData<List<SensorData>> movementHourlyData;
-    private MutableLiveData<List<SensorData>> co2Data;
-    private MutableLiveData<List<SensorData>> temperatureData;
-    private MutableLiveData<List<SensorData>> humidityData;
-    private MutableLiveData<List<SensorData>> lightData;
+    private MutableLiveData<List<SensorData>> co2DailyData;
+    private MutableLiveData<List<SensorData>> co2HourlyData;
+    private MutableLiveData<List<SensorData>> temperatureDailyData;
+    private MutableLiveData<List<SensorData>> temperatureHourlyData;
+    private MutableLiveData<List<SensorData>> humidityDailyData;
+    private MutableLiveData<List<SensorData>> humidityHourlyData;
+    private MutableLiveData<List<SensorData>> lightDailyData;
+    private MutableLiveData<List<SensorData>> lightHourlyData;
 
     public SensorsViewModel(@NonNull Application application) {
         super(application);
         sensorRepository = SensorRepository.getInstance();
-        movementData = new MutableLiveData<>();
-        co2Data = new MutableLiveData<>();
-        temperatureData = new MutableLiveData<>();
-        humidityData = new MutableLiveData<>();
-        lightData = new MutableLiveData<>();
+        movementDailyData = new MutableLiveData<>();
+        movementHourlyData = new MutableLiveData<>();
+        co2DailyData = new MutableLiveData<>();
+        co2HourlyData = new MutableLiveData<>();
+        temperatureDailyData = new MutableLiveData<>();
+        temperatureHourlyData = new MutableLiveData<>();
+        humidityDailyData = new MutableLiveData<>();
+        humidityHourlyData = new MutableLiveData<>();
+        lightDailyData = new MutableLiveData<>();
+        lightHourlyData = new MutableLiveData<>();
     }
 
-    public LiveData<List<SensorData>> getMovementData() {
-        return movementData;
+    public LiveData<List<SensorData>> getMovementDailyData() {
+        return movementDailyData;
     }
 
-    public LiveData<List<SensorData>> getCoData() {
-        return co2Data;
+    public LiveData<List<SensorData>> getMovementHourlyData() {
+        return movementHourlyData;
     }
 
-    public LiveData<List<SensorData>> getHumidityData() {
-        return humidityData;
+    public LiveData<List<SensorData>> getCoDailyData() {
+        return co2DailyData;
     }
 
-    public LiveData<List<SensorData>> getTemperatureData() {
-        return temperatureData;
+    public LiveData<List<SensorData>> getCoHourlyData() {
+        return co2HourlyData;
     }
 
-    public LiveData<List<SensorData>> getLightData() {return lightData; }
+    public LiveData<List<SensorData>> getHumidityDailyData() {
+        return humidityDailyData;
+    }
 
-    public void loadMovementData(Date dateFrom, Date dateTo){
+    public LiveData<List<SensorData>> getHumidityHourlyData() {
+        return humidityHourlyData;
+    }
+
+    public LiveData<List<SensorData>> getTemperatureDailyData() {
+        return temperatureDailyData;
+    }
+
+    public LiveData<List<SensorData>> getTemperatureHourlyData() {
+        return temperatureHourlyData;
+    }
+
+    public LiveData<List<SensorData>> getLightDailyData() {
+        return lightDailyData;
+    }
+
+    public LiveData<List<SensorData>> getLightHourlyData() {
+        return lightHourlyData;
+    }
+
+    public void loadMovementData(Date dateFrom, Date dateTo) {
         sensorRepository.getMovementData(this, dateFrom, dateTo);
     }
 
@@ -75,37 +105,72 @@ public class SensorsViewModel extends AndroidViewModel implements SensorDataCall
     }
 
     @Override
-    public void onReturnMovementData(SensorDRO response) {
-        if(response.getStatusCode() == StatusCode.OK){
-            movementData.setValue(response.getSensorDataList());
+    public void onReturnMovementDailyData(SensorDRO response) {
+        if (response.getStatusCode() == StatusCode.OK) {
+            movementDailyData.setValue(response.getSensorDataList());
         }
     }
 
     @Override
-    public void onReturnCo2Data(SensorDRO response) {
-        if(response.getStatusCode() == StatusCode.OK){
-            co2Data.setValue(response.getSensorDataList());
+    public void onReturnMovementHourlyData(SensorDRO response) {
+        if (response.getStatusCode() == StatusCode.OK) {
+            movementHourlyData.setValue(response.getSensorDataList());
         }
     }
 
     @Override
-    public void onReturnHumidityData(SensorDRO response) {
-        if(response.getStatusCode() == StatusCode.OK){
-            humidityData.setValue(response.getSensorDataList());
+    public void onReturnCo2DailyData(SensorDRO response) {
+        if (response.getStatusCode() == StatusCode.OK) {
+            co2DailyData.setValue(response.getSensorDataList());
         }
     }
 
     @Override
-    public void onReturnTemperatureData(SensorDRO response) {
-        if(response.getStatusCode() == StatusCode.OK){
-            temperatureData.setValue(response.getSensorDataList());
+    public void onReturnCo2HourlyData(SensorDRO response) {
+        if (response.getStatusCode() == StatusCode.OK) {
+            co2HourlyData.setValue(response.getSensorDataList());
         }
     }
 
     @Override
-    public void onReturnLightData(SensorDRO response) {
-        if(response.getStatusCode() == StatusCode.OK){
-            lightData.setValue(response.getSensorDataList());
+    public void onReturnHumidityDailyData(SensorDRO response) {
+        if (response.getStatusCode() == StatusCode.OK) {
+            humidityDailyData.setValue(response.getSensorDataList());
+        }
+    }
+
+    @Override
+    public void onReturnHumidityHourlyData(SensorDRO response) {
+        if (response.getStatusCode() == StatusCode.OK) {
+            humidityHourlyData.setValue(response.getSensorDataList());
+        }
+    }
+
+    @Override
+    public void onReturnTemperatureDailyData(SensorDRO response) {
+        if (response.getStatusCode() == StatusCode.OK) {
+            temperatureDailyData.setValue(response.getSensorDataList());
+        }
+    }
+
+    @Override
+    public void onReturnTemperatureHourlyData(SensorDRO response) {
+        if (response.getStatusCode() == StatusCode.OK) {
+            temperatureHourlyData.setValue(response.getSensorDataList());
+        }
+    }
+
+    @Override
+    public void onReturnLightDailyData(SensorDRO response) {
+        if (response.getStatusCode() == StatusCode.OK) {
+            lightDailyData.setValue(response.getSensorDataList());
+        }
+    }
+
+    @Override
+    public void onReturnLightHourlyData(SensorDRO response) {
+        if (response.getStatusCode() == StatusCode.OK) {
+            lightHourlyData.setValue(response.getSensorDataList());
         }
     }
 }

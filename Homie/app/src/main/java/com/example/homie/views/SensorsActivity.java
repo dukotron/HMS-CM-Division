@@ -31,6 +31,8 @@ import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
 import com.github.mikephil.charting.formatter.ValueFormatter;
+import com.github.mikephil.charting.interfaces.datasets.IBarDataSet;
+import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
 
 import java.sql.Timestamp;
 import java.text.DateFormat;
@@ -52,7 +54,7 @@ public class SensorsActivity extends AppCompatActivity {
     private Button movementBtn;
     private LinearLayout movementCharts;
     private LineChart movementLineChart;
-    private List<SensorData> movementData;
+    private List<ILineDataSet> movementDataSets;
 
     private TextView coSensorTitle;
     private EditText coDateFrom;
@@ -60,7 +62,7 @@ public class SensorsActivity extends AppCompatActivity {
     private Button coBtn;
     private LinearLayout coCharts;
     private BarChart coBarChart;
-    private List<SensorData> coData;
+    private List<IBarDataSet> coDataSets;
 
     private TextView temperatureSensorTitle;
     private EditText temperatureDateFrom;
@@ -68,7 +70,7 @@ public class SensorsActivity extends AppCompatActivity {
     private Button temperatureBtn;
     private LinearLayout temperatureCharts;
     private BarChart temperatureBarChart;
-    private List<SensorData> temperatureData;
+    private List<IBarDataSet> temperatureDataSets;
 
     private TextView humiditySensorTitle;
     private EditText humidityDateFrom;
@@ -76,7 +78,7 @@ public class SensorsActivity extends AppCompatActivity {
     private Button humidityBtn;
     private LinearLayout humidityCharts;
     private LineChart humidityLineChart;
-    private List<SensorData> humidityData;
+    private List<ILineDataSet> humidityDataSets;
 
     private TextView lightSensorTitle;
     private EditText lightDateFrom;
@@ -84,7 +86,7 @@ public class SensorsActivity extends AppCompatActivity {
     private Button lightBtn;
     private LinearLayout lightCharts;
     private LineChart lightLineChart;
-    private List<SensorData> lightData;
+    private List<ILineDataSet> lightDataSets;
 
     private SensorsViewModel viewModel;
 
@@ -98,6 +100,11 @@ public class SensorsActivity extends AppCompatActivity {
 
         deviceTitle = getIntent().getExtras().getString("deviceTitle");
         deviceId = getIntent().getExtras().getString("deviceId");
+        movementDataSets = new ArrayList<>();
+        coDataSets = new ArrayList<>();
+        temperatureDataSets = new ArrayList<>();
+        humidityDataSets = new ArrayList<>();
+        lightDataSets = new ArrayList<>();
 
         initToolbar();
         initViewModel();
@@ -106,7 +113,7 @@ public class SensorsActivity extends AppCompatActivity {
 
         final Calendar cldr = Calendar.getInstance();
         int day = cldr.get(Calendar.DAY_OF_MONTH);
-        int month = cldr.get(Calendar.MONTH) + 1; // months start from 0
+        int month = cldr.get(Calendar.MONTH) + 1; // months getDailyData from 0
         int year = cldr.get(Calendar.YEAR);
         dateToday = day + "-" + month + "-" + year;
         cldr.add(Calendar.DATE, -7);
@@ -115,8 +122,6 @@ public class SensorsActivity extends AppCompatActivity {
         year = cldr.get(Calendar.YEAR);
         dateWeekAgo = day + "-" + month + "-" + year;
 
-        styleCharts();
-        //TODO refactor DRY;  get hourly avrg
         initMovementCharts();
         initMovementData();
 
@@ -131,6 +136,7 @@ public class SensorsActivity extends AppCompatActivity {
 
         initLightCharts();
         initLightData();
+        styleCharts();
     }
 
     private void initToolbar() {
@@ -140,59 +146,121 @@ public class SensorsActivity extends AppCompatActivity {
 
     private void initViewModel() {
         viewModel = ViewModelProviders.of(this).get(SensorsViewModel.class);
-        viewModel.getMovementData().observe(this, new Observer<List<SensorData>>() {
+        viewModel.getMovementDailyData().observe(this, new Observer<List<SensorData>>() {
             @Override
             public void onChanged(@Nullable List<SensorData> sensorsData) {
                 if (sensorsData != null && sensorsData.size() != 0) {
-                    movementData = sensorsData;
-                    setupMovementSensorData();
+                    loadLineChartData(movementLineChart, sensorsData, "Daily average",
+                            new int[]{Color.RED, Color.YELLOW, Color.CYAN, Color.BLACK}, movementDataSets);
                 }
             }
         });
 
-        viewModel.getCoData().observe(this, new Observer<List<SensorData>>() {
-            @Override
-            public void onChanged(@Nullable List<SensorData> sensorsData) {
-                if (sensorsData != null && sensorsData.size() != 0) {
-                    coData = sensorsData;
-                    setupCoSensorData();
-                }
-            }
-        });
-
-        viewModel.getTemperatureData().observe(this, new Observer<List<SensorData>>() {
-            @Override
-            public void onChanged(@Nullable List<SensorData> sensorsData) {
-                if (sensorsData != null && sensorsData.size() != 0) {
-                    temperatureData = sensorsData;
-                    setupTemperatureSensorData();
-                }
-            }
-        });
-
-        viewModel.getHumidityData().observe(this, new Observer<List<SensorData>>() {
-            @Override
-            public void onChanged(@Nullable List<SensorData> sensorsData) {
-                if (sensorsData != null && sensorsData.size() != 0) {
-                    humidityData = sensorsData;
-                    setupHumiditySensorData();
-                }
-            }
-        });
-
-        viewModel.getLightData().observe(this, new Observer<List<SensorData>>() {
+        viewModel.getMovementHourlyData().observe(this, new Observer<List<SensorData>>() {
             @Override
             public void onChanged(List<SensorData> sensorsData) {
-                if(sensorsData != null && sensorsData.size() != 0 ){
-                    lightData = sensorsData;
-                    setupLightSensorData();
+                if (sensorsData != null && sensorsData.size() != 0) {
+                    loadLineChartData(movementLineChart, sensorsData, "Hourly average",
+                            new int[]{Color.GREEN, Color.WHITE, Color.YELLOW, Color.RED}, movementDataSets);
+                }
+            }
+        });
+
+        viewModel.getCoDailyData().observe(this, new Observer<List<SensorData>>() {
+            @Override
+            public void onChanged(@Nullable List<SensorData> sensorsData) {
+                if (sensorsData != null && sensorsData.size() != 0) {
+                    loadBarChartData(coBarChart, sensorsData, "Daily average",
+                            new int[]{Color.RED, Color.YELLOW, Color.CYAN, Color.BLACK}, coDataSets);
+                }
+            }
+        });
+
+        viewModel.getCoHourlyData().observe(this, new Observer<List<SensorData>>() {
+            @Override
+            public void onChanged(List<SensorData> sensorsData) {
+                if (sensorsData != null && sensorsData.size() != 0) {
+                    loadBarChartData(coBarChart, sensorsData, "Hourly average",
+                            new int[]{Color.GREEN, Color.WHITE, Color.YELLOW, Color.RED}, coDataSets);
+                }
+            }
+        });
+
+        viewModel.getTemperatureDailyData().observe(this, new Observer<List<SensorData>>() {
+            @Override
+            public void onChanged(@Nullable List<SensorData> sensorsData) {
+                if (sensorsData != null && sensorsData.size() != 0) {
+                    loadBarChartData(temperatureBarChart, sensorsData, "Daily average",
+                            new int[]{Color.RED, Color.YELLOW, Color.CYAN, Color.BLACK}, temperatureDataSets);
+                }
+            }
+        });
+
+        viewModel.getTemperatureHourlyData().observe(this, new Observer<List<SensorData>>() {
+            @Override
+            public void onChanged(@Nullable List<SensorData> sensorsData) {
+                if (sensorsData != null && sensorsData.size() != 0) {
+                    loadBarChartData(temperatureBarChart, sensorsData, "Hourly average",
+                            new int[]{Color.GREEN, Color.WHITE, Color.YELLOW, Color.RED}, temperatureDataSets);
+                }
+            }
+        });
+
+        viewModel.getHumidityDailyData().observe(this, new Observer<List<SensorData>>() {
+            @Override
+            public void onChanged(@Nullable List<SensorData> sensorsData) {
+                if (sensorsData != null && sensorsData.size() != 0) {
+                    loadLineChartData(humidityLineChart, sensorsData, "Daily average",
+                            new int[]{Color.RED, Color.YELLOW, Color.CYAN, Color.BLACK}, humidityDataSets);
+                }
+            }
+        });
+
+        viewModel.getHumidityHourlyData().observe(this, new Observer<List<SensorData>>() {
+            @Override
+            public void onChanged(@Nullable List<SensorData> sensorsData) {
+                if (sensorsData != null && sensorsData.size() != 0) {
+                    loadLineChartData(humidityLineChart, sensorsData, "Hourly average",
+                            new int[]{Color.RED, Color.YELLOW, Color.CYAN, Color.BLACK}, humidityDataSets);
+                }
+            }
+        });
+
+        viewModel.getLightDailyData().observe(this, new Observer<List<SensorData>>() {
+            @Override
+            public void onChanged(List<SensorData> sensorsData) {
+                if (sensorsData != null && sensorsData.size() != 0) {
+                    loadLineChartData(lightLineChart, sensorsData, "Daily average",
+                            new int[]{Color.GREEN, Color.WHITE, Color.YELLOW, Color.RED}, lightDataSets);
+                }
+            }
+        });
+
+        viewModel.getLightHourlyData().observe(this, new Observer<List<SensorData>>() {
+            @Override
+            public void onChanged(List<SensorData> sensorsData) {
+                if (sensorsData != null && sensorsData.size() != 0) {
+                    loadLineChartData(lightLineChart, sensorsData, "Hourly average",
+                            new int[]{Color.GREEN, Color.WHITE, Color.YELLOW, Color.RED}, lightDataSets);
                 }
             }
         });
     }
 
-    private void styleCharts(){
+    private void styleCharts() {
+        // style movement chart
+        movementLineChart.getAxisLeft().setTextColor(Color.WHITE);
+        movementLineChart.getXAxis().setTextColor(Color.WHITE);
+        movementLineChart.getAxisRight().setEnabled(false);
+        int bgColor = getResources().getColor(R.color.transparent);
+        movementCharts.setBackgroundColor(bgColor);
 
+        //style co2 chart
+        coBarChart.getAxisLeft().setTextColor(Color.WHITE);
+        coBarChart.getXAxis().setTextColor(Color.WHITE);
+        coBarChart.getAxisRight().setEnabled(false);
+        bgColor = getResources().getColor(R.color.transparent);
+        coCharts.setBackgroundColor(bgColor);
     }
 
     private void initMovementCharts() {
@@ -225,21 +293,23 @@ public class SensorsActivity extends AppCompatActivity {
     private void initMovementData() {
 
         try {
-            viewModel.loadMovementData(dateFormat.parse(movementDateFrom.getText().toString()),
-                    dateFormat.parse(movementDateTo.getText().toString()));
+            Calendar cal = Calendar.getInstance();
+            String[] date = movementDateTo.getText().toString().split("-");
+            cal.set(Integer.parseInt(date[2]), Integer.parseInt(date[1]), Integer.parseInt(date[0]), 23, 50);
+            viewModel.loadMovementData(dateFormat.parse(movementDateFrom.getText().toString()), cal.getTime());
         } catch (ParseException e) {
             Toast.makeText(this, "Some error occurred", Toast.LENGTH_SHORT).show();
         }
     }
 
-    private void setupMovementSensorData() {
+    private void loadLineChartData(LineChart lineChart, List<SensorData> sensorData, String dataName, int[] colors, List<ILineDataSet> dataSets) {
         // remember first item's timestamp - referenceTimestamp
-        long referenceTimestamp = (new Timestamp(movementData.get(0).getDate().getTime())).getTime();
+        long referenceTimestamp = (new Timestamp(sensorData.get(0).getDate().getTime())).getTime();
 
-        List<Entry> entries = new ArrayList<>(movementData.size() + 1);
+        List<Entry> entries = new ArrayList<>(sensorData.size() + 1);
         Entry e;
-        for (int i = 0; i < movementData.size(); i++) {
-            SensorData sensorEntry = movementData.get(i);
+        for (int i = 0; i < sensorData.size(); i++) {
+            SensorData sensorEntry = sensorData.get(i);
             //convert SensorData timestamps to short timestamps
             float Xnew = (new Timestamp(sensorEntry.getDate().getTime())).getTime() - referenceTimestamp;
             e = new Entry(Xnew, sensorEntry.getValue());
@@ -247,22 +317,50 @@ public class SensorsActivity extends AppCompatActivity {
         }
 
         // setup chart
-        LineDataSet lineDataSet = new LineDataSet(entries, "Daily average");
+        LineDataSet lineDataSet = new LineDataSet(entries, dataName);
         lineDataSet.setCircleRadius(2);
-        LineData lineData = new LineData(lineDataSet);
+        lineDataSet.setColor(colors[0]);
+
+        dataSets.add(lineDataSet);
+        LineData lineData = new LineData(dataSets);
         // set value formatter for x axis to show dates
         ValueFormatter xAxisFormatter = new DateAxisValueFormatter(referenceTimestamp);
-        XAxis xAxis = movementLineChart.getXAxis();
+        XAxis xAxis = lineChart.getXAxis();
         xAxis.setValueFormatter(xAxisFormatter);
-        // style the chart
-        movementLineChart.getAxisLeft().setTextColor(Color.WHITE);
-        movementLineChart.getXAxis().setTextColor(Color.WHITE);
-        movementLineChart.getAxisRight().setEnabled(false);
-        int bgColor = getResources().getColor(R.color.transparent);
-        movementCharts.setBackgroundColor(bgColor);
+
         // set data and notify the chart
-        movementLineChart.setData(lineData);
-        movementLineChart.invalidate();
+        lineChart.setData(lineData);
+        lineChart.invalidate();
+    }
+
+    private void loadBarChartData(BarChart barChart, List<SensorData> sensorData, String dataName, int[] colors, List<IBarDataSet> dataSets) {
+        // remember first item's timestamp - referenceTimestamp
+        long referenceTimestamp = (new Timestamp(sensorData.get(0).getDate().getTime())).getTime();
+
+        List<BarEntry> entries = new ArrayList<>(sensorData.size() + 1);
+        BarEntry e;
+        for (int i = 0; i < sensorData.size(); i++) {
+            SensorData sensorEntry = sensorData.get(i);
+            //convert SensorData timestamps to short timestamps
+            float Xnew = (new Timestamp(sensorEntry.getDate().getTime())).getTime() - referenceTimestamp;
+            e = new BarEntry(Xnew, sensorEntry.getValue());
+            entries.add(e);
+        }
+
+        // setup chart
+        BarDataSet barDataSet = new BarDataSet(entries, dataName);
+        barDataSet.setColor(colors[0]);
+        dataSets.add(barDataSet);
+        BarData barData = new BarData(barDataSet);
+        // set value formatter for x axis to show dates
+        ValueFormatter xAxisFormatter = new DateAxisValueFormatter(referenceTimestamp);
+        XAxis xAxis = barChart.getXAxis();
+        xAxis.setValueFormatter(xAxisFormatter);
+
+        // set data and notify the chart
+        barChart.setData(barData);
+        barChart.setFitBars(true);
+        barChart.invalidate();
     }
 
     private void initCoCharts() {
@@ -294,46 +392,13 @@ public class SensorsActivity extends AppCompatActivity {
 
     private void initCoData() {
         try {
-            viewModel.loadCoData(dateFormat.parse(coDateFrom.getText().toString()),
-                    dateFormat.parse(coDateTo.getText().toString()));
+            Calendar cal = Calendar.getInstance();
+            String[] date = coDateTo.getText().toString().split("-");
+            cal.set(Integer.parseInt(date[2]), Integer.parseInt(date[1]), Integer.parseInt(date[0]), 23, 50);
+            viewModel.loadCoData(dateFormat.parse(coDateFrom.getText().toString()), cal.getTime());
         } catch (ParseException e) {
             Toast.makeText(this, "Some error occurred", Toast.LENGTH_SHORT).show();
         }
-    }
-
-    private void setupCoSensorData() {
-        // remember first item's timestamp - referenceTimestamp
-        long referenceTimestamp = (new Timestamp(coData.get(0).getDate().getTime())).getTime();
-
-        List<BarEntry> entries = new ArrayList<>(coData.size() + 1);
-        BarEntry e;
-        for (int i = 0; i < coData.size(); i++) {
-            SensorData sensorEntry = coData.get(i);
-            //convert SensorData timestamps to short timestamps
-            float Xnew = (new Timestamp(sensorEntry.getDate().getTime())).getTime() - referenceTimestamp;
-            e = new BarEntry(Xnew, sensorEntry.getValue());
-            entries.add(e);
-        }
-
-        // setup chart
-        BarDataSet barDataSet = new BarDataSet(entries, "Daily average");
-        BarData barData = new BarData(barDataSet);
-        // set value formatter for x axis to show dates
-        ValueFormatter xAxisFormatter = new DateAxisValueFormatter(referenceTimestamp);
-        XAxis xAxis = coBarChart.getXAxis();
-        xAxis.setValueFormatter(xAxisFormatter);
-        // style the chart
-        barData.setBarWidth(0.9f);
-
-        coBarChart.getAxisLeft().setTextColor(Color.WHITE);
-        coBarChart.getXAxis().setTextColor(Color.WHITE);
-        coBarChart.getAxisRight().setEnabled(false);
-        int bgColor = getResources().getColor(R.color.transparent);
-        coCharts.setBackgroundColor(bgColor);
-        // set data and notify the chart
-        coBarChart.setData(barData);
-        coBarChart.setFitBars(true);
-        coBarChart.invalidate();
     }
 
     private void initTemperatureCharts() {
@@ -365,48 +430,13 @@ public class SensorsActivity extends AppCompatActivity {
 
     private void initTemperatureData() {
         try {
-            viewModel.loadTemperatureData(dateFormat.parse(temperatureDateFrom.getText().toString()),
-                    dateFormat.parse(temperatureDateTo.getText().toString()));
+            Calendar cal = Calendar.getInstance();
+            String[] date = temperatureDateTo.getText().toString().split("-");
+            cal.set(Integer.parseInt(date[2]), Integer.parseInt(date[1]), Integer.parseInt(date[0]), 23, 50);
+            viewModel.loadTemperatureData(dateFormat.parse(temperatureDateFrom.getText().toString()), cal.getTime());
         } catch (ParseException e) {
             Toast.makeText(this, "Some error occurred", Toast.LENGTH_SHORT).show();
         }
-    }
-
-    private void setupTemperatureSensorData() {
-        // remember first item's timestamp - referenceTimestamp
-        long referenceTimestamp = (new Timestamp(temperatureData.get(0).getDate().getTime())).getTime();
-
-        List<BarEntry> entries = new ArrayList<>(temperatureData.size() + 1);
-        BarEntry e;
-        for (int i = 0; i < temperatureData.size(); i++) {
-            SensorData sensorEntry = temperatureData.get(i);
-            //convert SensorData timestamps to short timestamps
-            float Xnew = (new Timestamp(sensorEntry.getDate().getTime())).getTime() - referenceTimestamp;
-            e = new BarEntry(Xnew, sensorEntry.getValue());
-            entries.add(e);
-        }
-
-        // setup chart
-        BarDataSet barDataSet = new BarDataSet(entries, "Daily average");
-        barDataSet.setColor(Color.RED);
-        BarData barData = new BarData(barDataSet);
-        // set value formatter for x axis to show dates
-        ValueFormatter xAxisFormatter = new DateAxisValueFormatter(referenceTimestamp);
-        XAxis xAxis = temperatureBarChart.getXAxis();
-        xAxis.setValueFormatter(xAxisFormatter);
-        // style the chart
-        barData.setBarWidth(0.5f);
-
-        temperatureBarChart.getAxisLeft().setTextColor(Color.WHITE);
-        temperatureBarChart.getXAxis().setTextColor(Color.WHITE);
-        temperatureBarChart.getAxisRight().setEnabled(false);
-        int bgColor = getResources().getColor(R.color.transparent);
-        temperatureBarChart.setBackgroundColor(bgColor);
-        // set data and notify the chart
-        temperatureBarChart.setData(barData);
-        temperatureBarChart.setFitBars(true);
-        temperatureBarChart.setDrawBarShadow(false);
-        temperatureBarChart.invalidate();
     }
 
     private void initHumidityCharts() {
@@ -438,47 +468,16 @@ public class SensorsActivity extends AppCompatActivity {
 
     private void initHumidityData() {
         try {
-            viewModel.loadHumidityData(dateFormat.parse(humidityDateFrom.getText().toString()),
-                    dateFormat.parse(humidityDateTo.getText().toString()));
+            Calendar cal = Calendar.getInstance();
+            String[] date = humidityDateTo.getText().toString().split("-");
+            cal.set(Integer.parseInt(date[2]), Integer.parseInt(date[1]), Integer.parseInt(date[0]), 23, 50);
+            viewModel.loadHumidityData(dateFormat.parse(humidityDateFrom.getText().toString()), cal.getTime());
         } catch (ParseException e) {
             Toast.makeText(this, "Some error occurred", Toast.LENGTH_SHORT).show();
         }
     }
 
-    private void setupHumiditySensorData() {
-        // remember first item's timestamp - referenceTimestamp
-        long referenceTimestamp = (new Timestamp(humidityData.get(0).getDate().getTime())).getTime();
-
-        List<Entry> entries = new ArrayList<>(humidityData.size() + 1);
-        Entry e;
-        for (int i = 0; i < humidityData.size(); i++) {
-            SensorData sensorEntry = humidityData.get(i);
-            //convert SensorData timestamps to short timestamps
-            float Xnew = (new Timestamp(sensorEntry.getDate().getTime())).getTime() - referenceTimestamp;
-            e = new Entry(Xnew, sensorEntry.getValue());
-            entries.add(e);
-        }
-
-        // setup chart
-        LineDataSet lineDataSet = new LineDataSet(entries, "Daily average");
-        lineDataSet.setCircleRadius(2);
-        LineData lineData = new LineData(lineDataSet);
-        // set value formatter for x axis to show dates
-        ValueFormatter xAxisFormatter = new DateAxisValueFormatter(referenceTimestamp);
-        XAxis xAxis = humidityLineChart.getXAxis();
-        xAxis.setValueFormatter(xAxisFormatter);
-        // style the chart
-        humidityLineChart.getAxisLeft().setTextColor(Color.WHITE);
-        humidityLineChart.getXAxis().setTextColor(Color.WHITE);
-        humidityLineChart.getAxisRight().setEnabled(false);
-        int bgColor = getResources().getColor(R.color.transparent);
-        humidityCharts.setBackgroundColor(bgColor);
-        // set data and notify the chart
-        humidityLineChart.setData(lineData);
-        humidityLineChart.invalidate();
-    }
-
-    private void initLightCharts(){
+    private void initLightCharts() {
         lightLineChart = findViewById(R.id.light_sensor_line_chart);
         lightCharts = findViewById(R.id.light_sensor_charts);
         lightSensorTitle = findViewById(R.id.light_sensor);
@@ -505,45 +504,15 @@ public class SensorsActivity extends AppCompatActivity {
         });
     }
 
-    private void initLightData(){
+    private void initLightData() {
         try {
-            viewModel.loadLightData(dateFormat.parse(lightDateFrom.getText().toString()),
-                    dateFormat.parse(lightDateTo.getText().toString()));
+            Calendar cal = Calendar.getInstance();
+            String[] date = lightDateTo.getText().toString().split("-");
+            cal.set(Integer.parseInt(date[2]), Integer.parseInt(date[1]), Integer.parseInt(date[0]), 23, 50);
+            viewModel.loadLightData(dateFormat.parse(lightDateFrom.getText().toString()), cal.getTime());
         } catch (ParseException e) {
             Toast.makeText(this, "Some error occurred", Toast.LENGTH_SHORT).show();
         }
     }
 
-    private void setupLightSensorData(){
-        // remember first item's timestamp - referenceTimestamp
-        long referenceTimestamp = (new Timestamp(lightData.get(0).getDate().getTime())).getTime();
-
-        List<Entry> entries = new ArrayList<>(lightData.size() + 1);
-        Entry e;
-        for (int i = 0; i < lightData.size(); i++) {
-            SensorData sensorEntry = lightData.get(i);
-            //convert SensorData timestamps to short timestamps
-            float Xnew = (new Timestamp(sensorEntry.getDate().getTime())).getTime() - referenceTimestamp;
-            e = new Entry(Xnew, sensorEntry.getValue());
-            entries.add(e);
-        }
-
-        // setup chart
-        LineDataSet lineDataSet = new LineDataSet(entries, "Daily average");
-        lineDataSet.setCircleRadius(2);
-        LineData lineData = new LineData(lineDataSet);
-        // set value formatter for x axis to show dates
-        ValueFormatter xAxisFormatter = new DateAxisValueFormatter(referenceTimestamp);
-        XAxis xAxis = lightLineChart.getXAxis();
-        xAxis.setValueFormatter(xAxisFormatter);
-        // style the chart
-        lightLineChart.getAxisLeft().setTextColor(Color.WHITE);
-        lightLineChart.getXAxis().setTextColor(Color.WHITE);
-        lightLineChart.getAxisRight().setEnabled(false);
-        int bgColor = getResources().getColor(R.color.transparent);
-        lightLineChart.setBackgroundColor(bgColor);
-        // set data and notify the chart
-        lightLineChart.setData(lineData);
-        lightLineChart.invalidate();
-    }
 }
