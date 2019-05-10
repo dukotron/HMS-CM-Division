@@ -58,6 +58,7 @@ public class APIConnection implements NetworkConnection, NotificationsService {
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if (task.isSuccessful()) {
                     callBack.onReturn(StatusCode.OK);
+                    updateNotificationToken();
                     Log.d("TOKEN", "Bearer " + auth.getCurrentUser().getIdToken(false).getResult().getToken());
                 }
             }

@@ -15,6 +15,7 @@ import androidx.preference.PreferenceFragmentCompat;
 import com.example.homie.R;
 import com.example.homie.viewModels.MainViewModel;
 import com.example.homie.viewModels.PreferencesViewModel;
+import com.example.homie.viewModels.util.TempMemory;
 import com.google.android.material.navigation.NavigationView;
 
 import java.util.Map;
@@ -76,7 +77,7 @@ public class PreferencesActivity extends AppCompatActivity {
             if(all.get(key) instanceof Boolean){ // atHome preference
                 viewModel.setAtHome(sharedPreferences.getBoolean(key,false));
             } else if(all.get(key) instanceof String){ // name preference
-
+                TempMemory.saveUserName(getContext(),sharedPreferences.getString(key,""));
             }
         }
     }

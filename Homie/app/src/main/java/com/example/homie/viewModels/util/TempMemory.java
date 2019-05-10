@@ -6,20 +6,20 @@ import android.content.SharedPreferences;
 public class TempMemory {
 
     private final static String APP_PREFERENCES = "tempdata";
-    private final static String USERID_KEY = "userId";
+    private final static String USER_NAME_KEY = "userName";
 
-    private final static String DEFAULT_VALUE = "0";
+    private final static String DEFAULT_NAME = "Product Owner";
 
-    public static void saveUserId(Context context, String userId){
-        SharedPreferences sharedPreferences = context.getSharedPreferences(APP_PREFERENCES,Context.MODE_PRIVATE);
+    public static void saveUserName(Context context, String userName) {
+        SharedPreferences sharedPreferences = context.getSharedPreferences(APP_PREFERENCES, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putString(USERID_KEY, userId);
+        editor.putString(USER_NAME_KEY, userName);
         editor.apply();
     }
 
-    public static String getUserId(Context context){
+    public static String getUserName(Context context) {
         SharedPreferences sharedPreferences = context.getSharedPreferences(APP_PREFERENCES, Context.MODE_PRIVATE);
-        String userId = sharedPreferences.getString(USERID_KEY,DEFAULT_VALUE);
-        return userId;
+        String userName = sharedPreferences.getString(USER_NAME_KEY, DEFAULT_NAME);
+        return userName;
     }
 }

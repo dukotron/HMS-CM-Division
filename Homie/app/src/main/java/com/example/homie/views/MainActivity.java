@@ -6,6 +6,8 @@ import androidx.lifecycle.ViewModelProviders;
 import android.content.Intent;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+
+import com.example.homie.viewModels.util.TempMemory;
 import com.google.android.material.navigation.NavigationView;
 import androidx.fragment.app.Fragment;
 import androidx.core.view.GravityCompat;
@@ -17,6 +19,7 @@ import android.os.Bundle;
 import androidx.appcompat.widget.Toolbar;
 
 import android.view.MenuItem;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.homie.R;
@@ -26,6 +29,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     private Toolbar toolbar;
     private DrawerLayout drawerLayout;
+    private NavigationView navigationView;
     private MainViewModel viewModel;
 
     @Override
@@ -36,6 +40,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         initToolbar();
         initViewModel();
         displayFragment(new DevicesFragment());
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        TextView userName = navigationView.getHeaderView(0).findViewById(R.id.textView_userName);
+        userName.setText(TempMemory.getUserName(this));
     }
 
     private  void initViewModel(){
@@ -78,7 +89,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         actionBar.setHomeAsUpIndicator(R.drawable.ic_menu_black_24dp);
 
         drawerLayout = findViewById(R.id.drawerLayout);
-        NavigationView navigationView = findViewById(R.id.navigationView);
+        navigationView = findViewById(R.id.navigationView);
         navigationView.setNavigationItemSelectedListener(this);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawerLayout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);

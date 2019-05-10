@@ -17,9 +17,7 @@ public class RegisterViewModel extends AndroidViewModel implements AuthCallBack 
     private MutableLiveData<Boolean> isValidLastName;
     private MutableLiveData<Boolean> isValidEmail;
     private MutableLiveData<Boolean> isValidPassword;
-
     private MutableLiveData<Boolean> isRegistered;
-
     private MutableLiveData<Boolean> showError;
 
     private UserRepository userRepository;
@@ -45,6 +43,7 @@ public class RegisterViewModel extends AndroidViewModel implements AuthCallBack 
 
     public void registerUser(String firstName, String lastName, String email, String password) {
         if (checkEnteredData(firstName, lastName, email, password)) {
+            TempMemory.saveUserName(getApplication().getApplicationContext(), firstName + " " + lastName);
             userRepository.createAccount(firstName, lastName, email, password, this);
         }
     }
