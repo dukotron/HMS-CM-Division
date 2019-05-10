@@ -41,10 +41,10 @@ public interface RetrofitAPI {
     @GET("api/humidity/???")
     Call<SensorDRO> getHumidityData(@Header("Authorization") String token, @Query("userId") String userId, @Query("from") String dateFrom, @Query("to") String dateTo);
 
-    @GET("api/humidity/???")
-    Call<SensorDRO> getLightData(@Header("Authorization") String token, @Query("userId") String userId, @Query("from") String dateFrom, @Query("to") String dateTo);
-
     @POST("api/preferences/atHome")
     Call<String> setAtHome(@Header("Authorization") String token, @Query("userId") String userId, @Body boolean atHome);
+    
+    @PUT("api/user/notificationToken")
+    Call<Integer> setNotificationToken(@Header("Authorization") String tokenAuth, @Query("userId") String userId, @Query("token") String notificationToken);
 }
 

@@ -12,7 +12,7 @@ public class SensorRepository {
     private static SensorRepository instance;
 
     private SensorRepository() {
-        connection = new APIConnection();
+        connection = APIConnection.getInstance();
     }
 
     public static SensorRepository getInstance() {

@@ -14,6 +14,7 @@ import com.example.homie.network.retrofit.DevicesRequest;
 import com.example.homie.network.retrofit.HumidityRequest;
 import com.example.homie.network.retrofit.LightRequest;
 import com.example.homie.network.retrofit.MovementRequest;
+import com.example.homie.network.retrofit.NotificationRequest;
 import com.example.homie.network.retrofit.RegisterRequest;
 import com.example.homie.network.retrofit.SettingsRequest;
 import com.example.homie.network.retrofit.TemperatureRequest;
@@ -25,18 +26,28 @@ import com.example.homie.viewModels.SensorDataCallBack;
 import com.example.homie.network.util.DateFormatConverter;
 import com.example.homie.viewModels.util.StatusCode;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.iid.FirebaseInstanceId;
+import com.google.firebase.iid.InstanceIdResult;
+import com.google.firebase.messaging.FirebaseMessagingService;
 
-import java.util.Date;
-
-public class APIConnection implements NetworkConnection {
+public class APIConnection implements NetworkConnection, NotificationsService {
 
     private FirebaseAuth auth;
+    private static APIConnection instance;
 
-    public APIConnection() {
+    private APIConnection() {
         auth = FirebaseAuth.getInstance();
+    }
+
+    public static APIConnection getInstance() {
+        if (instance == null) {
+            instance = new APIConnection();
+        }
+        return instance;
     }
 
     @Override
@@ -64,7 +75,8 @@ public class APIConnection implements NetworkConnection {
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if (task.isSuccessful()) {
                     String userId = auth.getCurrentUser().getUid();
-                    new RegisterRequest().start(new UserRegisterDTO(userId), callBack);
+                    new RegisterRequest().start(new UserRegisterDTO(userId), viewModel);
+                    updateNotificationToken();
                 }
             }
         });
@@ -115,6 +127,21 @@ public class APIConnection implements NetworkConnection {
 
     @Override
     public void getTemperatureData(final SensorDataCallBack callBack, Date dateFrom, Date dateTo) {
+    public void updateNotificationToken() {
+        final String token = "Bearer " + auth.getCurrentUser().getIdToken(false).getResult().getToken();
+        final String userId = auth.getCurrentUser().getUid();
+        FirebaseInstanceId.getInstance().getInstanceId().addOnSuccessListener(new OnSuccessListener<InstanceIdResult>() {
+            @Override
+            public void onSuccess(InstanceIdResult instanceIdResult) {
+                String notificationToken = instanceIdResult.getToken();
+                Log.d("```````````````````", "" + notificationToken);
+                new NotificationRequest().setNotificationToken(token, userId, notificationToken);
+            }
+        });
+    }
+
+    @Override
+    public void getMovementData(final SensorDataCallBack viewModel) {
         String token = "Bearer " + auth.getCurrentUser().getIdToken(false).getResult().getToken();
         String userId = auth.getCurrentUser().getUid();
         String from = DateFormatConverter.convertDateToDotNetFormat(dateFrom);
