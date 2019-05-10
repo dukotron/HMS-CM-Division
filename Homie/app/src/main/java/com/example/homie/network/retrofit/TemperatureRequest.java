@@ -25,9 +25,14 @@ public class TemperatureRequest implements SensorCallback {
                 .setDateFormat("yyyy-MM-dd'T'HH:mm:ss")
                 .create();
 
+        HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
+        interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
+        OkHttpClient.Builder httpClient=new OkHttpClient.Builder().addInterceptor(interceptor);
+
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(BASE_URL)
                 .addConverterFactory(GsonConverterFactory.create(gson))
+                .client(httpClient.build())
                 .build();
 
         RetrofitAPI client = retrofit.create(RetrofitAPI.class);

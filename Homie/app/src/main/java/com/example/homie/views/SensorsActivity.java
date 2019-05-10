@@ -151,7 +151,7 @@ public class SensorsActivity extends AppCompatActivity {
             public void onChanged(@Nullable List<SensorData> sensorsData) {
                 if (sensorsData != null && sensorsData.size() != 0) {
                     loadLineChartData(movementLineChart, sensorsData, "Daily average",
-                            new int[]{Color.RED, Color.YELLOW, Color.CYAN, Color.BLACK}, movementDataSets);
+                            Color.RED, movementDataSets);
                 }
             }
         });
@@ -161,7 +161,7 @@ public class SensorsActivity extends AppCompatActivity {
             public void onChanged(List<SensorData> sensorsData) {
                 if (sensorsData != null && sensorsData.size() != 0) {
                     loadLineChartData(movementLineChart, sensorsData, "Hourly average",
-                            new int[]{Color.GREEN, Color.WHITE, Color.YELLOW, Color.RED}, movementDataSets);
+                            Color.GREEN, movementDataSets);
                 }
             }
         });
@@ -171,7 +171,7 @@ public class SensorsActivity extends AppCompatActivity {
             public void onChanged(@Nullable List<SensorData> sensorsData) {
                 if (sensorsData != null && sensorsData.size() != 0) {
                     loadBarChartData(coBarChart, sensorsData, "Daily average",
-                            new int[]{Color.RED, Color.YELLOW, Color.CYAN, Color.BLACK}, coDataSets);
+                            Color.RED, coDataSets);
                 }
             }
         });
@@ -181,7 +181,7 @@ public class SensorsActivity extends AppCompatActivity {
             public void onChanged(List<SensorData> sensorsData) {
                 if (sensorsData != null && sensorsData.size() != 0) {
                     loadBarChartData(coBarChart, sensorsData, "Hourly average",
-                            new int[]{Color.GREEN, Color.WHITE, Color.YELLOW, Color.RED}, coDataSets);
+                            Color.GREEN, coDataSets);
                 }
             }
         });
@@ -191,7 +191,7 @@ public class SensorsActivity extends AppCompatActivity {
             public void onChanged(@Nullable List<SensorData> sensorsData) {
                 if (sensorsData != null && sensorsData.size() != 0) {
                     loadBarChartData(temperatureBarChart, sensorsData, "Daily average",
-                            new int[]{Color.RED, Color.YELLOW, Color.CYAN, Color.BLACK}, temperatureDataSets);
+                            Color.RED, temperatureDataSets);
                 }
             }
         });
@@ -201,7 +201,7 @@ public class SensorsActivity extends AppCompatActivity {
             public void onChanged(@Nullable List<SensorData> sensorsData) {
                 if (sensorsData != null && sensorsData.size() != 0) {
                     loadBarChartData(temperatureBarChart, sensorsData, "Hourly average",
-                            new int[]{Color.GREEN, Color.WHITE, Color.YELLOW, Color.RED}, temperatureDataSets);
+                            Color.GREEN, temperatureDataSets);
                 }
             }
         });
@@ -211,7 +211,7 @@ public class SensorsActivity extends AppCompatActivity {
             public void onChanged(@Nullable List<SensorData> sensorsData) {
                 if (sensorsData != null && sensorsData.size() != 0) {
                     loadLineChartData(humidityLineChart, sensorsData, "Daily average",
-                            new int[]{Color.RED, Color.YELLOW, Color.CYAN, Color.BLACK}, humidityDataSets);
+                            Color.RED, humidityDataSets);
                 }
             }
         });
@@ -221,7 +221,7 @@ public class SensorsActivity extends AppCompatActivity {
             public void onChanged(@Nullable List<SensorData> sensorsData) {
                 if (sensorsData != null && sensorsData.size() != 0) {
                     loadLineChartData(humidityLineChart, sensorsData, "Hourly average",
-                            new int[]{Color.RED, Color.YELLOW, Color.CYAN, Color.BLACK}, humidityDataSets);
+                            Color.GREEN, humidityDataSets);
                 }
             }
         });
@@ -231,7 +231,7 @@ public class SensorsActivity extends AppCompatActivity {
             public void onChanged(List<SensorData> sensorsData) {
                 if (sensorsData != null && sensorsData.size() != 0) {
                     loadLineChartData(lightLineChart, sensorsData, "Daily average",
-                            new int[]{Color.GREEN, Color.WHITE, Color.YELLOW, Color.RED}, lightDataSets);
+                            Color.RED, lightDataSets);
                 }
             }
         });
@@ -241,7 +241,7 @@ public class SensorsActivity extends AppCompatActivity {
             public void onChanged(List<SensorData> sensorsData) {
                 if (sensorsData != null && sensorsData.size() != 0) {
                     loadLineChartData(lightLineChart, sensorsData, "Hourly average",
-                            new int[]{Color.GREEN, Color.WHITE, Color.YELLOW, Color.RED}, lightDataSets);
+                            Color.GREEN, lightDataSets);
                 }
             }
         });
@@ -255,12 +255,33 @@ public class SensorsActivity extends AppCompatActivity {
         int bgColor = getResources().getColor(R.color.transparent);
         movementCharts.setBackgroundColor(bgColor);
 
-        //style co2 chart
+        // style co2 chart
         coBarChart.getAxisLeft().setTextColor(Color.WHITE);
         coBarChart.getXAxis().setTextColor(Color.WHITE);
         coBarChart.getAxisRight().setEnabled(false);
         bgColor = getResources().getColor(R.color.transparent);
         coCharts.setBackgroundColor(bgColor);
+
+        // style temperature chart
+        temperatureBarChart.getAxisLeft().setTextColor(Color.WHITE);
+        temperatureBarChart.getXAxis().setTextColor(Color.WHITE);
+        temperatureBarChart.getAxisRight().setEnabled(false);
+        bgColor = getResources().getColor(R.color.transparent);
+        temperatureBarChart.setBackgroundColor(bgColor);
+
+        // style humidity chart
+        humidityLineChart.getAxisLeft().setTextColor(Color.WHITE);
+        humidityLineChart.getXAxis().setTextColor(Color.WHITE);
+        humidityLineChart.getAxisRight().setEnabled(false);
+        bgColor = getResources().getColor(R.color.transparent);
+        humidityCharts.setBackgroundColor(bgColor);
+
+        // style light chart
+        lightLineChart.getAxisLeft().setTextColor(Color.WHITE);
+        lightLineChart.getXAxis().setTextColor(Color.WHITE);
+        lightLineChart.getAxisRight().setEnabled(false);
+        bgColor = getResources().getColor(R.color.transparent);
+        lightLineChart.setBackgroundColor(bgColor);
     }
 
     private void initMovementCharts() {
@@ -302,7 +323,7 @@ public class SensorsActivity extends AppCompatActivity {
         }
     }
 
-    private void loadLineChartData(LineChart lineChart, List<SensorData> sensorData, String dataName, int[] colors, List<ILineDataSet> dataSets) {
+    private void loadLineChartData(LineChart lineChart, List<SensorData> sensorData, String dataName, int color, List<ILineDataSet> dataSets) {
         // remember first item's timestamp - referenceTimestamp
         long referenceTimestamp = (new Timestamp(sensorData.get(0).getDate().getTime())).getTime();
 
@@ -319,7 +340,7 @@ public class SensorsActivity extends AppCompatActivity {
         // setup chart
         LineDataSet lineDataSet = new LineDataSet(entries, dataName);
         lineDataSet.setCircleRadius(2);
-        lineDataSet.setColor(colors[0]);
+        lineDataSet.setColor(color);
 
         dataSets.add(lineDataSet);
         LineData lineData = new LineData(dataSets);
@@ -333,7 +354,7 @@ public class SensorsActivity extends AppCompatActivity {
         lineChart.invalidate();
     }
 
-    private void loadBarChartData(BarChart barChart, List<SensorData> sensorData, String dataName, int[] colors, List<IBarDataSet> dataSets) {
+    private void loadBarChartData(BarChart barChart, List<SensorData> sensorData, String dataName, int color, List<IBarDataSet> dataSets) {
         // remember first item's timestamp - referenceTimestamp
         long referenceTimestamp = (new Timestamp(sensorData.get(0).getDate().getTime())).getTime();
 
@@ -349,9 +370,9 @@ public class SensorsActivity extends AppCompatActivity {
 
         // setup chart
         BarDataSet barDataSet = new BarDataSet(entries, dataName);
-        barDataSet.setColor(colors[0]);
+        barDataSet.setColor(color);
         dataSets.add(barDataSet);
-        BarData barData = new BarData(barDataSet);
+        BarData barData = new BarData(dataSets);
         // set value formatter for x axis to show dates
         ValueFormatter xAxisFormatter = new DateAxisValueFormatter(referenceTimestamp);
         XAxis xAxis = barChart.getXAxis();
