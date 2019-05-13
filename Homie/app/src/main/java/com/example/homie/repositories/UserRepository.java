@@ -4,8 +4,7 @@ import com.example.homie.network.APIConnection;
 import com.example.homie.network.NetworkConnection;
 import com.example.homie.viewModels.AddDeviceCallback;
 import com.example.homie.viewModels.AuthCallBack;
-import com.example.homie.viewModels.DeleteDeviceCallback;
-import com.example.homie.viewModels.DevicesCallback;
+import com.example.homie.viewModels.ManageDevicesCallback;
 
 public class UserRepository {
 
@@ -40,11 +39,11 @@ public class UserRepository {
         connection.addDevice(deviceLocation, deviceId, viewModel);
     }
 
-    public void deleteDevice(String deviceId, DeleteDeviceCallback viewModel) {
+    public void deleteDevice(String deviceId, ManageDevicesCallback viewModel) {
         connection.deleteDevice(deviceId, viewModel);
     }
 
-    public void getUserDevices(DevicesCallback viewModel) {
+    public void getUserDevices(ManageDevicesCallback viewModel) {
         connection.getUserDevices(viewModel);
     }
 

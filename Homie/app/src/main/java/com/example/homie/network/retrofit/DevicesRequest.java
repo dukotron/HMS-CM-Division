@@ -1,14 +1,10 @@
 package com.example.homie.network.retrofit;
 
-import android.util.Log;
-
 import com.example.homie.DRO.DevicesListDRO;
-import com.example.homie.viewModels.DevicesCallback;
+import com.example.homie.viewModels.ManageDevicesCallback;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
-import okhttp3.OkHttpClient;
-import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -17,13 +13,9 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 import static com.example.homie.network.util.NetworkConfig.BASE_URL;
 
-public class DevicesRequest implements Callback<DevicesListDRO> {
+public class DevicesRequest {
 
-    private DevicesCallback callback;
-
-    public void getAllDevices(String token, String userId,DevicesCallback callback){
-        this.callback = callback;
-
+    public void getAllDevices(String token, String userId, final ManageDevicesCallback callback) {
         Gson gson = new GsonBuilder()
                 .setDateFormat("yyyy-MM-dd'T'HH:mm:ss")
                 .create();
@@ -35,18 +27,41 @@ public class DevicesRequest implements Callback<DevicesListDRO> {
 
         RetrofitAPI client = retrofit.create(RetrofitAPI.class);
         Call<DevicesListDRO> call = client.getUserDevices(token, userId);
-        call.enqueue(this);
+        call.enqueue(new Callback<DevicesListDRO>() {
+            @Override
+            public void onResponse(Call<DevicesListDRO> call, Response<DevicesListDRO> response) {
+                if (response.isSuccessful() && response.body() != null) {
+                    callback.onReturnAllDevices(response.body());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<DevicesListDRO> call, Throwable t) {
+
+            }
+        });
     }
 
-    @Override
-    public void onResponse(Call<DevicesListDRO> call, Response<DevicesListDRO> response) {
-        if(response.isSuccessful() && response.body() != null){
-            callback.onReturn(response.body());
-        }
-    }
+    public void deleteDevice(String token, String deviceId, final ManageDevicesCallback callback) {
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(BASE_URL)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
 
-    @Override
-    public void onFailure(Call<DevicesListDRO> call, Throwable t) {
+        RetrofitAPI client = retrofit.create(RetrofitAPI.class);
+        Call<Integer> call = client.deleteDeviceForUser(token, deviceId);
+        call.enqueue(new Callback<Integer>() {
+            @Override
+            public void onResponse(Call<Integer> call, Response<Integer> response) {
+                if (response.isSuccessful() && response.body() != null) {
+                    callback.onDelete(response.body());
+                }
+            }
 
+            @Override
+            public void onFailure(Call<Integer> call, Throwable t) {
+
+            }
+        });
     }
 }

@@ -9,7 +9,6 @@ import com.example.homie.DTO.AddDeviceDTO;
 import com.example.homie.DTO.UserRegisterDTO;
 import com.example.homie.network.retrofit.AddDeviceRequest;
 import com.example.homie.network.retrofit.CO2Request;
-import com.example.homie.network.retrofit.DeleteDeviceRequest;
 import com.example.homie.network.retrofit.DevicesRequest;
 import com.example.homie.network.retrofit.HumidityRequest;
 import com.example.homie.network.retrofit.LightRequest;
@@ -20,8 +19,7 @@ import com.example.homie.network.retrofit.SettingsRequest;
 import com.example.homie.network.retrofit.TemperatureRequest;
 import com.example.homie.viewModels.AddDeviceCallback;
 import com.example.homie.viewModels.AuthCallBack;
-import com.example.homie.viewModels.DeleteDeviceCallback;
-import com.example.homie.viewModels.DevicesCallback;
+import com.example.homie.viewModels.ManageDevicesCallback;
 import com.example.homie.viewModels.SensorDataCallBack;
 import com.example.homie.network.util.DateFormatConverter;
 import com.example.homie.viewModels.util.StatusCode;
@@ -85,7 +83,7 @@ public class APIConnection implements NetworkConnection, NotificationsService {
     }
 
     @Override
-    public void getUserDevices(DevicesCallback callback) {
+    public void getUserDevices(ManageDevicesCallback callback) {
         String token = "Bearer " + auth.getCurrentUser().getIdToken(false).getResult().getToken();
         String userId = auth.getCurrentUser().getUid();
         new DevicesRequest().getAllDevices(token, userId, callback);
@@ -99,9 +97,9 @@ public class APIConnection implements NetworkConnection, NotificationsService {
     }
 
     @Override
-    public void deleteDevice(String deviceId, DeleteDeviceCallback callback) {
+    public void deleteDevice(String deviceId, ManageDevicesCallback callback) {
         String token = "Bearer " + auth.getCurrentUser().getIdToken(false).getResult().getToken();
-        new DeleteDeviceRequest().deleteDevice(token, deviceId, callback);
+        new DevicesRequest().deleteDevice(token, deviceId, callback);
     }
 
     @Override

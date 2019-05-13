@@ -1,10 +1,8 @@
 package com.example.homie.viewModels;
 
 import android.app.Application;
-import android.util.Log;
 
 import androidx.annotation.NonNull;
-import androidx.core.view.ViewCompat;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
@@ -20,7 +18,7 @@ import com.example.homie.viewModels.util.StatusCode;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DevicesViewModel extends AndroidViewModel implements DevicesCallback, DeleteDeviceCallback {
+public class DevicesViewModel extends AndroidViewModel implements ManageDevicesCallback {
 
     private MutableLiveData<List<Device>> devices;
     private MutableLiveData<String> showError;
@@ -45,7 +43,7 @@ public class DevicesViewModel extends AndroidViewModel implements DevicesCallbac
     }
 
     @Override
-    public void onReturn(DevicesListDRO userDevices) {
+    public void onReturnAllDevices(DevicesListDRO userDevices) {
         if (userDevices.getStatusCode() == StatusCode.OK) {
             if (userDevices.getDevices() == null) {
                 showError.setValue("You don't have devices");

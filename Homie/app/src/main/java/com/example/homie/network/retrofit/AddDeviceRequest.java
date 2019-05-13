@@ -2,10 +2,8 @@ package com.example.homie.network.retrofit;
 
 import android.util.Log;
 
-import com.example.homie.DRO.DevicesListDRO;
 import com.example.homie.DTO.AddDeviceDTO;
 import com.example.homie.viewModels.AddDeviceCallback;
-import com.example.homie.viewModels.DevicesCallback;
 
 import retrofit2.Call;
 import retrofit2.Callback;
