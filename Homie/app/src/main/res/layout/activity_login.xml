@@ -36,7 +36,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         android:visibility="gone"/>
-
+    <!--//TODO remove text attribute-->
     <EditText
         android:id="@+id/emailLogin"
         android:layout_width="0dp"
@@ -48,6 +48,7 @@
         android:layout_marginBottom="8dp"
         android:backgroundTint="#ffffff"
         android:hint="Email"
+        android:text="test@test.test"
         android:inputType="textEmailAddress"
         android:paddingStart="10dp"
         android:textColor="#92FFFFFF"
@@ -69,7 +70,8 @@
         android:layout_marginTop="32dp"
         android:backgroundTint="#ffffff"
         android:hint="Password"
-        android:inputType="textEmailAddress"
+        android:text="Test12345"
+        android:inputType="textPassword"
         android:paddingStart="10dp"
         android:textColor="#92FFFFFF"
         android:textColorHint="#92FFFFFF"

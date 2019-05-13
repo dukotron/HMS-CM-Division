@@ -24,13 +24,13 @@ public interface NetworkConnection {
 
     void deleteDevice(String deviceId, DeleteDeviceCallback callback);
 
-    void getMovementData(SensorDataCallBack callBack, Date dateFrom, Date dateTo);
+    void getMovementData(SensorDataCallBack callBack, String deviceId, Date dateFrom, Date dateTo);
 
-    void getCo2(SensorDataCallBack callBack, Date dateFrom, Date dateTo);
+    void getCo2(SensorDataCallBack callBack, String deviceId, Date dateFrom, Date dateTo);
 
-    void getTemperatureData(SensorDataCallBack callBack, Date dateFrom, Date dateTo);
+    void getTemperatureData(SensorDataCallBack callBack, String deviceId, Date dateFrom, Date dateTo);
 
-    void getHumidityData(SensorDataCallBack callBack, Date dateFrom, Date dateTo);
+    void getHumidityData(SensorDataCallBack callBack, String deviceId, Date dateFrom, Date dateTo);
 
-    void getLightData(SensorDataCallBack callBack, Date dateFrom, Date dateTo);
+    void getLightData(SensorDataCallBack callBack, String deviceId, Date dateFrom, Date dateTo);
 }

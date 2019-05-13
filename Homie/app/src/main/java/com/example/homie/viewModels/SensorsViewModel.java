@@ -18,6 +18,7 @@ import java.util.List;
 public class SensorsViewModel extends AndroidViewModel implements SensorDataCallBack {
 
     private SensorRepository sensorRepository;
+    private String deviceId;
     private MutableLiveData<List<SensorData>> movementDailyData;
     private MutableLiveData<List<SensorData>> movementHourlyData;
     private MutableLiveData<List<SensorData>> co2DailyData;
@@ -84,24 +85,28 @@ public class SensorsViewModel extends AndroidViewModel implements SensorDataCall
         return lightHourlyData;
     }
 
+    public void setDeviceId(String deviceId) {
+        this.deviceId = deviceId;
+    }
+
     public void loadMovementData(Date dateFrom, Date dateTo) {
-        sensorRepository.getMovementData(this, dateFrom, dateTo);
+        sensorRepository.getMovementData(this, deviceId, dateFrom, dateTo);
     }
 
     public void loadCoData(Date dateFrom, Date dateTo) {
-        sensorRepository.getCo2Data(this, dateFrom, dateTo);
+        sensorRepository.getCo2Data(this, deviceId, dateFrom, dateTo);
     }
 
     public void loadTemperatureData(Date dateFrom, Date dateTo) {
-        sensorRepository.getTemperatureData(this, dateFrom, dateTo);
+        sensorRepository.getTemperatureData(this, deviceId, dateFrom, dateTo);
     }
 
     public void loadHumidityData(Date dateFrom, Date dateTo) {
-        sensorRepository.getHumidityData(this, dateFrom, dateTo);
+        sensorRepository.getHumidityData(this, deviceId, dateFrom, dateTo);
     }
 
     public void loadLightData(Date dateFrom, Date dateTo) {
-        sensorRepository.getLightData(this, dateFrom, dateTo);
+        sensorRepository.getLightData(this, deviceId, dateFrom, dateTo);
     }
 
     @Override

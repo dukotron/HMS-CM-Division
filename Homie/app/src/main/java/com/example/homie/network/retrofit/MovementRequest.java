@@ -21,7 +21,7 @@ import static com.example.homie.network.util.NetworkConfig.BASE_URL;
 public class MovementRequest implements SensorCallback {
 
     @Override
-    public void getDailyData(String token, String userId, final SensorDataCallBack callBack, String dateFrom, String dateTo) {
+    public void getDailyData(String token, String deviceId, String userId, final SensorDataCallBack callBack, String dateFrom, String dateTo) {
         Gson gson = new GsonBuilder()
                 .setDateFormat("yyyy-MM-dd'T'HH:mm:ss")
                 .create();
@@ -32,7 +32,7 @@ public class MovementRequest implements SensorCallback {
                 .build();
 
         RetrofitAPI client = retrofit.create(RetrofitAPI.class);
-        Call<SensorDRO> call = client.getMovementDailyData(token, userId, dateFrom, dateTo);
+        Call<SensorDRO> call = client.getMovementDailyData(token, deviceId, userId, dateFrom, dateTo);
         call.enqueue(new Callback<SensorDRO>() {
             @Override
             public void onResponse(Call<SensorDRO> call, Response<SensorDRO> response) {
@@ -49,7 +49,7 @@ public class MovementRequest implements SensorCallback {
     }
 
     @Override
-    public void getHourlyData(String token, String userId, final SensorDataCallBack callBack, String dateFrom, String dateTo) {
+    public void getHourlyData(String token, String deviceId, String userId, final SensorDataCallBack callBack, String dateFrom, String dateTo) {
         Gson gson = new GsonBuilder()
                 .setDateFormat("yyyy-MM-dd'T'HH:mm:ss")
                 .create();
@@ -60,7 +60,7 @@ public class MovementRequest implements SensorCallback {
                 .build();
 
         RetrofitAPI client = retrofit.create(RetrofitAPI.class);
-        Call<SensorDRO> call = client.getMovementHourlyData(token, userId, dateFrom, dateTo);
+        Call<SensorDRO> call = client.getMovementHourlyData(token, deviceId, userId, dateFrom, dateTo);
         call.enqueue(new Callback<SensorDRO>() {
             @Override
             public void onResponse(Call<SensorDRO> call, Response<SensorDRO> response) {

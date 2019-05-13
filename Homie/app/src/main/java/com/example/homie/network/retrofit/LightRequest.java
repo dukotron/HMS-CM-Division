@@ -20,7 +20,7 @@ import static com.example.homie.network.util.NetworkConfig.BASE_URL;
 public class LightRequest implements SensorCallback {
 
     @Override
-    public void getDailyData(String token, String userId, final SensorDataCallBack callBack, String dateFrom, String dateTo) {
+    public void getDailyData(String token, String deviceId, String userId, final SensorDataCallBack callBack, String dateFrom, String dateTo) {
         Gson gson = new GsonBuilder()
                 .setDateFormat("yyyy-MM-dd'T'HH:mm:ss")
                 .create();
@@ -31,7 +31,7 @@ public class LightRequest implements SensorCallback {
                 .build();
 
         RetrofitAPI client = retrofit.create(RetrofitAPI.class);
-        Call<SensorDRO> call = client.getLightDailyData(token, userId, dateFrom, dateTo);
+        Call<SensorDRO> call = client.getLightDailyData(token, deviceId, userId, dateFrom, dateTo);
         call.enqueue(new Callback<SensorDRO>() {
             @Override
             public void onResponse(Call<SensorDRO> call, Response<SensorDRO> response) {
@@ -48,14 +48,14 @@ public class LightRequest implements SensorCallback {
     }
 
     @Override
-    public void getHourlyData(String token, String userId, final SensorDataCallBack callBack, String dateFrom, String dateTo) {
+    public void getHourlyData(String token, String deviceId, String userId, final SensorDataCallBack callBack, String dateFrom, String dateTo) {
         Gson gson = new GsonBuilder()
                 .setDateFormat("yyyy-MM-dd'T'HH:mm:ss")
                 .create();
 
         HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
         interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
-        OkHttpClient.Builder httpClient=new OkHttpClient.Builder().addInterceptor(interceptor);
+        OkHttpClient.Builder httpClient = new OkHttpClient.Builder().addInterceptor(interceptor);
 
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(BASE_URL)
@@ -64,7 +64,7 @@ public class LightRequest implements SensorCallback {
                 .build();
 
         RetrofitAPI client = retrofit.create(RetrofitAPI.class);
-        Call<SensorDRO> call = client.getLightHourlyData(token, userId, dateFrom, dateTo);
+        Call<SensorDRO> call = client.getLightHourlyData(token, deviceId, userId, dateFrom, dateTo);
         call.enqueue(new Callback<SensorDRO>() {
             @Override
             public void onResponse(Call<SensorDRO> call, Response<SensorDRO> response) {

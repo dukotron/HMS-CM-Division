@@ -30,34 +30,34 @@ public interface RetrofitAPI {
     Call<DevicesListDRO> getUserDevices(@Header("Authorization") String token, @Query("userId") String userId);
 
     @GET("api/movement/dailyavg")
-    Call<SensorDRO> getMovementDailyData(@Header("Authorization") String token, @Query("userId") String userId, @Query("from") String dateFrom, @Query("to") String dateTo);
+    Call<SensorDRO> getMovementDailyData(@Header("Authorization") String token, @Query("deviceId") String deviceId, @Query("userId") String userId, @Query("from") String dateFrom, @Query("to") String dateTo);
 
     @GET("api/movement/hourlyavg")
-    Call<SensorDRO> getMovementHourlyData(@Header("Authorization") String token, @Query("userId") String userId, @Query("from") String dateFrom, @Query("to") String dateTo);
+    Call<SensorDRO> getMovementHourlyData(@Header("Authorization") String token, @Query("deviceId") String deviceId, @Query("userId") String userId, @Query("from") String dateFrom, @Query("to") String dateTo);
 
     @GET("api/co2/dailyavg")
-    Call<SensorDRO> getCo2DailyData(@Header("Authorization") String token, @Query("userId") String userId, @Query("from") String dateFrom, @Query("to") String dateTo);
+    Call<SensorDRO> getCo2DailyData(@Header("Authorization") String token, @Query("deviceId") String deviceId, @Query("userId") String userId, @Query("from") String dateFrom, @Query("to") String dateTo);
 
     @GET("api/co2/hourlyavg")
-    Call<SensorDRO> getCo2HourlyData(@Header("Authorization") String token, @Query("userId") String userId, @Query("from") String dateFrom, @Query("to") String dateTo);
+    Call<SensorDRO> getCo2HourlyData(@Header("Authorization") String token, @Query("deviceId") String deviceId, @Query("userId") String userId, @Query("from") String dateFrom, @Query("to") String dateTo);
 
     @GET("api/Temperature/dailyavg")
-    Call<SensorDRO> getTemperatureDailyData(@Header("Authorization") String token, @Query("userId") String userId, @Query("from") String dateFrom, @Query("to") String dateTo);
+    Call<SensorDRO> getTemperatureDailyData(@Header("Authorization") String token, @Query("deviceId") String deviceId, @Query("userId") String userId, @Query("from") String dateFrom, @Query("to") String dateTo);
 
     @GET("api/Temperature/hourlyavg")
-    Call<SensorDRO> getTemperatureHourlyData(@Header("Authorization") String token, @Query("userId") String userId, @Query("from") String dateFrom, @Query("to") String dateTo);
+    Call<SensorDRO> getTemperatureHourlyData(@Header("Authorization") String token, @Query("deviceId") String deviceId, @Query("userId") String userId, @Query("from") String dateFrom, @Query("to") String dateTo);
 
     @GET("api/Humidity/dailyavg")
-    Call<SensorDRO> getHumidityDailyData(@Header("Authorization") String token, @Query("userId") String userId, @Query("from") String dateFrom, @Query("to") String dateTo);
+    Call<SensorDRO> getHumidityDailyData(@Header("Authorization") String token, @Query("deviceId") String deviceId, @Query("userId") String userId, @Query("from") String dateFrom, @Query("to") String dateTo);
 
     @GET("api/Humidity/hourlyavg")
-    Call<SensorDRO> getHumidityHourlyData(@Header("Authorization") String token, @Query("userId") String userId, @Query("from") String dateFrom, @Query("to") String dateTo);
+    Call<SensorDRO> getHumidityHourlyData(@Header("Authorization") String token, @Query("deviceId") String deviceId, @Query("userId") String userId, @Query("from") String dateFrom, @Query("to") String dateTo);
 
     @GET("api/Light/dailyavg")
-    Call<SensorDRO> getLightDailyData(@Header("Authorization") String token, @Query("userId") String userId, @Query("from") String dateFrom, @Query("to") String dateTo);
+    Call<SensorDRO> getLightDailyData(@Header("Authorization") String token, @Query("deviceId") String deviceId, @Query("userId") String userId, @Query("from") String dateFrom, @Query("to") String dateTo);
 
     @GET("api/Light/hourlyavg")
-    Call<SensorDRO> getLightHourlyData(@Header("Authorization") String token, @Query("userId") String userId, @Query("from") String dateFrom, @Query("to") String dateTo);
+    Call<SensorDRO> getLightHourlyData(@Header("Authorization") String token, @Query("deviceId") String deviceId, @Query("userId") String userId, @Query("from") String dateFrom, @Query("to") String dateTo);
 
     @POST("api/preferences/atHome")
     Call<String> setAtHome(@Header("Authorization") String token, @Query("userId") String userId, @Body boolean atHome);

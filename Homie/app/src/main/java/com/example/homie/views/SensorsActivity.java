@@ -11,6 +11,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.Toolbar;
 
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -140,6 +141,16 @@ public class SensorsActivity extends AppCompatActivity {
         styleCharts();
     }
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == android.R.id.home) {
+            onBackPressed();
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+
     private void initToolbar() {
         Toolbar toolbar = findViewById(R.id.toolbar);
         toolbar.setTitle(deviceTitle);
@@ -150,6 +161,7 @@ public class SensorsActivity extends AppCompatActivity {
 
     private void initViewModel() {
         viewModel = ViewModelProviders.of(this).get(SensorsViewModel.class);
+        viewModel.setDeviceId(deviceId);
         viewModel.getMovementDailyData().observe(this, new Observer<List<SensorData>>() {
             @Override
             public void onChanged(@Nullable List<SensorData> sensorsData) {
@@ -368,7 +380,7 @@ public class SensorsActivity extends AppCompatActivity {
             SensorData sensorEntry = sensorData.get(i);
             //convert SensorData timestamps to short timestamps
             float Xnew = (new Timestamp(sensorEntry.getDate().getTime())).getTime() - referenceTimestamp;
-            e = new BarEntry(Xnew, sensorEntry.getValue());
+            e = new BarEntry(sensorEntry.getDate().getDay(), sensorEntry.getValue());
             entries.add(e);
         }
 

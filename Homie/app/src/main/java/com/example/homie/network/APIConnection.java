@@ -105,7 +105,7 @@ public class APIConnection implements NetworkConnection, NotificationsService {
     }
 
     @Override
-    public void getMovementData(SensorDataCallBack callBack, Date dateFrom, Date dateTo) {
+    public void getMovementData(SensorDataCallBack callBack, String deviceId, Date dateFrom, Date dateTo) {
         String token = "Bearer " + auth.getCurrentUser().getIdToken(false).getResult().getToken();
         String userId = auth.getCurrentUser().getUid();
         String from = DateFormatConverter.convertDateToDotNetFormat(dateFrom);
@@ -115,28 +115,28 @@ public class APIConnection implements NetworkConnection, NotificationsService {
 //        String userId = "bEU0lty14bevfkFoiXUIfCGAoJ32";
 //        String from = "2017-09-08T19:01:55.714942";
 //        String to = "2019-09-08T19:01:55.714942";
-        new MovementRequest().getDailyData(token, userId, callBack, from, to);
-        new MovementRequest().getHourlyData(token, userId, callBack, from, to);
+        new MovementRequest().getDailyData(token, deviceId, userId, callBack, from, to);
+        new MovementRequest().getHourlyData(token, deviceId, userId, callBack, from, to);
     }
 
     @Override
-    public void getCo2(SensorDataCallBack callBack, Date dateFrom, Date dateTo) {
+    public void getCo2(SensorDataCallBack callBack, String deviceId, Date dateFrom, Date dateTo) {
         String token = "Bearer " + auth.getCurrentUser().getIdToken(false).getResult().getToken();
         String userId = auth.getCurrentUser().getUid();
         String from = DateFormatConverter.convertDateToDotNetFormat(dateFrom);
         String to = DateFormatConverter.convertDateToDotNetFormat(dateTo);
-        new CO2Request().getDailyData(token, userId, callBack, from, to);
-        new CO2Request().getHourlyData(token, userId, callBack, from, to);
+        new CO2Request().getDailyData(token, deviceId, userId, callBack, from, to);
+        new CO2Request().getHourlyData(token, deviceId, userId, callBack, from, to);
     }
 
     @Override
-    public void getTemperatureData(SensorDataCallBack callBack, Date dateFrom, Date dateTo) {
+    public void getTemperatureData(SensorDataCallBack callBack, String deviceId, Date dateFrom, Date dateTo) {
         String token = "Bearer " + auth.getCurrentUser().getIdToken(false).getResult().getToken();
         String userId = auth.getCurrentUser().getUid();
         String from = DateFormatConverter.convertDateToDotNetFormat(dateFrom);
         String to = DateFormatConverter.convertDateToDotNetFormat(dateTo);
-        new TemperatureRequest().getDailyData(token, userId, callBack, from, to);
-        new TemperatureRequest().getHourlyData(token, userId, callBack, from, to);
+        new TemperatureRequest().getDailyData(token, deviceId, userId, callBack, from, to);
+        new TemperatureRequest().getHourlyData(token, deviceId, userId, callBack, from, to);
     }
 
     @Override
@@ -154,23 +154,23 @@ public class APIConnection implements NetworkConnection, NotificationsService {
     }
 
     @Override
-    public void getHumidityData(SensorDataCallBack callBack, Date dateFrom, Date dateTo) {
+    public void getHumidityData(SensorDataCallBack callBack, String deviceId, Date dateFrom, Date dateTo) {
         String token = "Bearer " + auth.getCurrentUser().getIdToken(false).getResult().getToken();
         String userId = auth.getCurrentUser().getUid();
         String from = DateFormatConverter.convertDateToDotNetFormat(dateFrom);
         String to = DateFormatConverter.convertDateToDotNetFormat(dateTo);
-        new HumidityRequest().getDailyData(token, userId, callBack, from, to);
-        new HumidityRequest().getHourlyData(token, userId, callBack, from, to);
+        new HumidityRequest().getDailyData(token, deviceId, userId, callBack, from, to);
+        new HumidityRequest().getHourlyData(token, deviceId, userId, callBack, from, to);
     }
 
     @Override
-    public void getLightData(SensorDataCallBack callBack, Date dateFrom, Date dateTo) {
+    public void getLightData(SensorDataCallBack callBack, String deviceId, Date dateFrom, Date dateTo) {
         String token = "Bearer " + auth.getCurrentUser().getIdToken(false).getResult().getToken();
         String userId = auth.getCurrentUser().getUid();
         String from = DateFormatConverter.convertDateToDotNetFormat(dateFrom);
         String to = DateFormatConverter.convertDateToDotNetFormat(dateTo);
-        new LightRequest().getDailyData(token, userId, callBack, from, to);
-        new LightRequest().getHourlyData(token, userId, callBack, from, to);
+        new LightRequest().getDailyData(token, deviceId, userId, callBack, from, to);
+        new LightRequest().getHourlyData(token, deviceId, userId, callBack, from, to);
     }
 
     @Override
