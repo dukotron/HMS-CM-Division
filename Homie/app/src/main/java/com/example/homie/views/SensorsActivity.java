@@ -322,6 +322,7 @@ public class SensorsActivity extends AppCompatActivity {
         movementBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                movementDataSets = new ArrayList<>();
                 initMovementData();
             }
         });
@@ -422,6 +423,7 @@ public class SensorsActivity extends AppCompatActivity {
         coBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                coDataSets = new ArrayList<>();
                 initCoData();
             }
         });
@@ -460,6 +462,7 @@ public class SensorsActivity extends AppCompatActivity {
         temperatureBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                temperatureDataSets = new ArrayList<>();
                 initTemperatureData();
             }
         });
@@ -498,6 +501,7 @@ public class SensorsActivity extends AppCompatActivity {
         humidityBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                humidityDataSets = new ArrayList<>();
                 initHumidityData();
             }
         });
@@ -536,6 +540,7 @@ public class SensorsActivity extends AppCompatActivity {
         lightBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                lightDataSets = new ArrayList<>();
                 initLightData();
             }
         });

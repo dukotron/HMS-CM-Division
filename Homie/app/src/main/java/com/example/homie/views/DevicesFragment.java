@@ -77,7 +77,7 @@ public class DevicesFragment extends Fragment {
             @Override
             public void onChanged(Float score) {
                 ActionBar actionBar = ((AppCompatActivity) getContext()).getSupportActionBar();
-                actionBar.setTitle(actionBar.getTitle() + " - " + score + "/10");
+                actionBar.setTitle("Overview - " + score + "/10");
             }
         });
     }
