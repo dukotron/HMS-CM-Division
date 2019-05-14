@@ -14,17 +14,10 @@ import com.example.homie.R;
 import com.example.homie.viewModels.MainViewModel;
 import com.example.homie.viewModels.PreferencesViewModel;
 import com.example.homie.viewModels.util.TempMemory;
-import com.google.android.material.navigation.NavigationView;
 
 import java.util.Map;
 
 public class PreferencesActivity extends AppCompatActivity {
-
-    private Toolbar toolbar;
-    private DrawerLayout drawerLayout;
-    private MainViewModel viewModel;
-    DrawerLayout drawer;
-    NavigationView navigationView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,7 +37,7 @@ public class PreferencesActivity extends AppCompatActivity {
 
         private PreferencesViewModel viewModel;
 
-        public SettingsFragment(PreferencesViewModel viewModel){
+        public SettingsFragment(PreferencesViewModel viewModel) {
             this.viewModel = viewModel;
         }
 
@@ -71,18 +64,13 @@ public class PreferencesActivity extends AppCompatActivity {
 
         @Override
         public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
-            Map<String,?> all = sharedPreferences.getAll();
-            if(all.get(key) instanceof Boolean){ // atHome preference
-                viewModel.setAtHome(sharedPreferences.getBoolean(key,false));
-            } else if(all.get(key) instanceof String){ // name preference
-                TempMemory.saveUserName(getContext(),sharedPreferences.getString(key,""));
+            Map<String, ?> all = sharedPreferences.getAll();
+            if (all.get(key) instanceof Boolean) { // atHome preference
+                viewModel.setAtHome(sharedPreferences.getBoolean(key, false));
+            } else if (all.get(key) instanceof String) { // name preference
+                TempMemory.saveUserName(getContext(), sharedPreferences.getString(key, ""));
             }
         }
     }
-
-
-
-
-    
 
 }

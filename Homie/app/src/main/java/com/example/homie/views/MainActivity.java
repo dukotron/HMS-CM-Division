@@ -3,19 +3,24 @@ package com.example.homie.views;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.ViewModelProviders;
+
 import android.content.Intent;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.example.homie.viewModels.util.TempMemory;
 import com.google.android.material.navigation.NavigationView;
+
 import androidx.fragment.app.Fragment;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
+
 import android.os.Bundle;
+
 import androidx.appcompat.widget.Toolbar;
 
 import android.view.MenuItem;
@@ -49,13 +54,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         userName.setText(TempMemory.getUserName(this));
     }
 
-    private  void initViewModel(){
+    private void initViewModel() {
         viewModel = ViewModelProviders.of(this).get(MainViewModel.class);
 
         viewModel.getIsLoggedOut().observe(this, new Observer<Boolean>() {
             @Override
             public void onChanged(@Nullable Boolean aBoolean) {
-                if(aBoolean){
+                if (aBoolean) {
                     startActivity(new Intent(MainActivity.this, LoginActivity.class));
                     finish();
                 }
@@ -72,7 +77,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()){
+        switch (item.getItemId()) {
             case android.R.id.home:
                 drawerLayout.openDrawer(GravityCompat.START);
                 return true;
@@ -80,7 +85,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         return super.onOptionsItemSelected(item);
     }
 
-    void initToolbar(){
+    void initToolbar() {
         toolbar = findViewById(R.id.toolbar);
         toolbar.setTitle("Overview");
         setSupportActionBar(toolbar);
@@ -99,7 +104,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
-        switch(menuItem.getItemId()){
+        switch (menuItem.getItemId()) {
             case R.id.logout:
                 viewModel.logoutUser();
                 break;

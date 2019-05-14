@@ -3,10 +3,13 @@ package com.example.homie.views;
 
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
+
 import android.content.Intent;
 import android.os.Bundle;
+
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+
 import android.text.InputType;
 import android.view.MotionEvent;
 import android.view.View;

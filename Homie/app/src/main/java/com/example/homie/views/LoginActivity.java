@@ -1,12 +1,16 @@
 package com.example.homie.views;
 
 import android.content.Intent;
+
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+
 import android.os.Bundle;
 import android.view.View;
+
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
+
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
@@ -19,7 +23,7 @@ import com.example.homie.viewModels.LoginViewModel;
 import com.example.homie.viewModels.SensorDataCallBack;
 
 
-public class LoginActivity extends AppCompatActivity{
+public class LoginActivity extends AppCompatActivity {
 
     EditText email;
     EditText password;
@@ -35,7 +39,7 @@ public class LoginActivity extends AppCompatActivity{
         email = findViewById(R.id.emailLogin);
         password = findViewById(R.id.passwordLogin);
         progressBar = findViewById(R.id.progressBar_login);
-        
+
         initLoginButton();
         initViewModel();
     }

@@ -75,7 +75,7 @@ public class AddDeviceActivity extends AppCompatActivity {
         viewModel.getShowError().observe(this, new Observer<Boolean>() {
             @Override
             public void onChanged(Boolean showError) {
-                if(showError){
+                if (showError) {
                     progressBar.setVisibility(View.GONE);
                     Toast.makeText(AddDeviceActivity.this, "Device wasn't added", Toast.LENGTH_SHORT).show();
                 }
