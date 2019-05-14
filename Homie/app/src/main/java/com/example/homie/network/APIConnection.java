@@ -15,6 +15,7 @@ import com.example.homie.network.retrofit.LightRequest;
 import com.example.homie.network.retrofit.MovementRequest;
 import com.example.homie.network.retrofit.NotificationRequest;
 import com.example.homie.network.retrofit.RegisterRequest;
+import com.example.homie.network.retrofit.ScoreRequest;
 import com.example.homie.network.retrofit.SettingsRequest;
 import com.example.homie.network.retrofit.TemperatureRequest;
 import com.example.homie.viewModels.AddDeviceCallback;
@@ -90,6 +91,15 @@ public class APIConnection implements NetworkConnection, NotificationsService {
     }
 
     @Override
+    public void getUserHomeScore(DevicesCallback callBack, Date dateFrom, Date dateTo) {
+        String token = "Bearer " + auth.getCurrentUser().getIdToken(false).getResult().getToken();
+        String userId = auth.getCurrentUser().getUid();
+        String from = DateFormatConverter.convertDateToDotNetFormat(dateFrom);
+        String to = DateFormatConverter.convertDateToDotNetFormat(dateTo);
+        new ScoreRequest().getHourlyScore(token, userId, callBack, from, to);
+    }
+
+    @Override
     public void addDevice(String deviceLocation, String deviceId, AddDeviceCallback callback) {
         String token = "Bearer " + auth.getCurrentUser().getIdToken(false).getResult().getToken();
         String userId = auth.getCurrentUser().getUid();
@@ -133,7 +143,7 @@ public class APIConnection implements NetworkConnection, NotificationsService {
     }
 
     @Override
-        public void updateNotificationToken() {
+    public void updateNotificationToken() {
         final String token = "Bearer " + auth.getCurrentUser().getIdToken(false).getResult().getToken();
         final String userId = auth.getCurrentUser().getUid();
         FirebaseInstanceId.getInstance().getInstanceId().addOnSuccessListener(new OnSuccessListener<InstanceIdResult>() {

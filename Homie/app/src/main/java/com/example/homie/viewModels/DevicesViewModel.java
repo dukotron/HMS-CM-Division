@@ -1,6 +1,7 @@
 package com.example.homie.viewModels;
 
 import android.app.Application;
+import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
@@ -10,19 +11,25 @@ import androidx.lifecycle.MutableLiveData;
 import com.example.homie.DRO.DeviceData;
 import com.example.homie.DRO.DevicesListDRO;
 import com.example.homie.DRO.Sensor;
+import com.example.homie.DRO.SensorDRO;
 import com.example.homie.models.CurrentData;
 import com.example.homie.models.Device;
+import com.example.homie.repositories.SensorRepository;
 import com.example.homie.repositories.UserRepository;
 import com.example.homie.viewModels.util.StatusCode;
 
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 public class DevicesViewModel extends AndroidViewModel implements DevicesCallback {
 
     private MutableLiveData<List<Device>> devices;
     private MutableLiveData<String> showError;
+    private MutableLiveData<Float> score;
     private UserRepository userRepository;
+    private SensorRepository sensorRepository;
 
     private List<DeviceData> devicesDRO;
 
@@ -30,12 +37,22 @@ public class DevicesViewModel extends AndroidViewModel implements DevicesCallbac
         super(application);
 
         userRepository = UserRepository.getInstance();
+        sensorRepository = SensorRepository.getInstance();
         showError = new MutableLiveData<>();
         devices = new MutableLiveData<>();
+        score = new MutableLiveData<>();
     }
 
     public void loadAllDevices() {
         userRepository.getUserDevices(this);
+    }
+
+    public void loadHomeScore() {
+        Calendar cal = Calendar.getInstance();
+        Date todayDate = cal.getTime();
+        cal.set(cal.get(Calendar.YEAR), cal.get(Calendar.MONTH), cal.get(Calendar.DATE)-1,0,0);
+        Date yesterdayDate = cal.getTime();
+        sensorRepository.getHomeScore(this, yesterdayDate, todayDate);
     }
 
     public void deleteDevice(String deviceId) {
@@ -64,6 +81,13 @@ public class DevicesViewModel extends AndroidViewModel implements DevicesCallbac
         }
     }
 
+    @Override
+    public void onReturnScore(SensorDRO scoreData) {
+        if (scoreData.getStatusCode() == StatusCode.OK) {
+            score.setValue(scoreData.getSensorDataList().get(0).getValue());
+        }
+    }
+
     private void processDevices() {
 
         List<Device> devicesTemp = new ArrayList<>(devicesDRO.size() + 1);
@@ -80,6 +104,10 @@ public class DevicesViewModel extends AndroidViewModel implements DevicesCallbac
             devicesTemp.add(new Device(deviceData.getLocation(), deviceData.getId(), a));
         }
         devices.setValue(devicesTemp);
+    }
+
+    public LiveData<Float> getScore() {
+        return score;
     }
 
     public LiveData<String> getShowError() {

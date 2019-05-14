@@ -19,6 +19,8 @@ public interface NetworkConnection {
 
     void getUserDevices(DevicesCallback callback);
 
+    void getUserHomeScore(DevicesCallback callBack, Date dateFrom, Date dateTo);
+
     void addDevice(String deviceLocation, String deviceId, AddDeviceCallback callback);
 
     void deleteDevice(String deviceId, DevicesCallback callback);

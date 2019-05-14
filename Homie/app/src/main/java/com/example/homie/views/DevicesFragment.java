@@ -5,6 +5,8 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
@@ -71,12 +73,20 @@ public class DevicesFragment extends Fragment {
                 adapter.notifyDataSetChanged();
             }
         });
+        viewModel.getScore().observe(this, new Observer<Float>() {
+            @Override
+            public void onChanged(Float score) {
+                ActionBar actionBar = ((AppCompatActivity) getContext()).getSupportActionBar();
+                actionBar.setTitle(actionBar.getTitle() + " - " + score + "/10");
+            }
+        });
     }
 
     @Override
     public void onResume() {
         super.onResume();
         getDevicesInfo();
+        getHomeScore();
     }
 
     @Override
@@ -96,6 +106,10 @@ public class DevicesFragment extends Fragment {
 
     private void getDevicesInfo() {
         viewModel.loadAllDevices();
+    }
+
+    private void getHomeScore() {
+        viewModel.loadHomeScore();
     }
 
     private void initRecycleView(View view) {
