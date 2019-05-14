@@ -1,7 +1,7 @@
 package com.example.homie.network.retrofit;
 
 import com.example.homie.DRO.DevicesListDRO;
-import com.example.homie.viewModels.ManageDevicesCallback;
+import com.example.homie.viewModels.DevicesCallback;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
@@ -15,7 +15,7 @@ import static com.example.homie.network.util.NetworkConfig.BASE_URL;
 
 public class DevicesRequest {
 
-    public void getAllDevices(String token, String userId, final ManageDevicesCallback callback) {
+    public void getAllDevices(String token, String userId, final DevicesCallback callback) {
         Gson gson = new GsonBuilder()
                 .setDateFormat("yyyy-MM-dd'T'HH:mm:ss")
                 .create();
@@ -42,7 +42,7 @@ public class DevicesRequest {
         });
     }
 
-    public void deleteDevice(String token, String deviceId, final ManageDevicesCallback callback) {
+    public void deleteDevice(String token, String deviceId, final DevicesCallback callback) {
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(BASE_URL)
                 .addConverterFactory(GsonConverterFactory.create())

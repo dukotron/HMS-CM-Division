@@ -18,7 +18,7 @@ import com.example.homie.viewModels.util.StatusCode;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DevicesViewModel extends AndroidViewModel implements ManageDevicesCallback {
+public class DevicesViewModel extends AndroidViewModel implements DevicesCallback {
 
     private MutableLiveData<List<Device>> devices;
     private MutableLiveData<String> showError;

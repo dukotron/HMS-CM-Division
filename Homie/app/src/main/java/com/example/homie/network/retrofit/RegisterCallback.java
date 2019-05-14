@@ -1,6 +1,5 @@
 package com.example.homie.network.retrofit;
 
-import com.example.homie.DRO.AuthDRO;
 import com.example.homie.DTO.UserRegisterDTO;
 import com.example.homie.viewModels.AuthCallBack;
 

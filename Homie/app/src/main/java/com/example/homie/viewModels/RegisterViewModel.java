@@ -6,7 +6,6 @@ import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.MutableLiveData;
 import androidx.annotation.NonNull;
 
-import com.example.homie.DRO.AuthDRO;
 import com.example.homie.repositories.UserRepository;
 import com.example.homie.viewModels.util.InputDataValidator;
 import com.example.homie.viewModels.util.StatusCode;
@@ -44,7 +43,7 @@ public class RegisterViewModel extends AndroidViewModel implements AuthCallBack 
     public void registerUser(String firstName, String lastName, String email, String password) {
         if (checkEnteredData(firstName, lastName, email, password)) {
             TempMemory.saveUserName(getApplication().getApplicationContext(), firstName + " " + lastName);
-            userRepository.createAccount(firstName, lastName, email, password, this);
+            userRepository.createAccount(email, password, this);
         }
     }
 
