@@ -13,7 +13,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 import static com.example.homie.network.util.NetworkConfig.BASE_URL;
 
-public class AddDeviceRequest implements Callback<Integer>{
+public class AddDeviceRequest implements Callback<Integer> {
 
     private AddDeviceCallback addDeviceCallback;
 
@@ -36,11 +36,10 @@ public class AddDeviceRequest implements Callback<Integer>{
         if (response.isSuccessful() && response.body() != null) {
             addDeviceCallback.onReturn(response.body());
         }
-        Log.d("ADDING DEVICE",""+response.body());
     }
 
     @Override
     public void onFailure(Call<Integer> call, Throwable t) {
-
+        Log.d("AddDeviceRequest", t.toString());
     }
 }

@@ -1,5 +1,7 @@
 package com.example.homie.network.retrofit;
 
+import android.util.Log;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -27,7 +29,6 @@ public class SettingsRequest implements Callback<String> {
 
     @Override
     public void onFailure(Call<String> call, Throwable t) {
-        // empty on purpose
+        Log.d("SettingsRequest", t.toString());
     }
-
 }

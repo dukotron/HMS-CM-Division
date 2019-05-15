@@ -41,5 +41,4 @@ public class HomieFirebaseMessagingService extends FirebaseMessagingService {
         NotificationsService server = APIConnection.getInstance();
         server.updateNotificationToken();
     }
-
 }

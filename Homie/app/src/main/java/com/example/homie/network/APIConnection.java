@@ -58,7 +58,6 @@ public class APIConnection implements NetworkConnection, NotificationsService {
                 if (task.isSuccessful()) {
                     callBack.onReturn(StatusCode.OK);
                     updateNotificationToken();
-                    Log.d("TOKEN", "Bearer " + auth.getCurrentUser().getIdToken(false).getResult().getToken());
                 }
             }
         });
@@ -150,7 +149,6 @@ public class APIConnection implements NetworkConnection, NotificationsService {
             @Override
             public void onSuccess(InstanceIdResult instanceIdResult) {
                 String notificationToken = instanceIdResult.getToken();
-                Log.d("```````````````````", "" + notificationToken);
                 new NotificationRequest().setNotificationToken(token, userId, notificationToken);
             }
         });

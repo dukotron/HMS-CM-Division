@@ -46,9 +46,8 @@ public class ScoreRequest {
 
             @Override
             public void onFailure(Call<SensorDRO> call, Throwable t) {
-                Log.d("Co2Request", t.toString());
+                Log.d("ScoreRequest", t.toString());
             }
         });
     }
-
 }

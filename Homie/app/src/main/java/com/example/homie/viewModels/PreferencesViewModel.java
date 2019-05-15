@@ -17,7 +17,7 @@ public class PreferencesViewModel extends AndroidViewModel {
         userRepository = UserRepository.getInstance();
     }
 
-    public void setAtHome(boolean atHome){
+    public void setAtHome(boolean atHome) {
         userRepository.setAtHome(atHome);
     }
 }

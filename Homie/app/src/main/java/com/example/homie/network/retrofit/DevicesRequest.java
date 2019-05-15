@@ -1,5 +1,7 @@
 package com.example.homie.network.retrofit;
 
+import android.util.Log;
+
 import com.example.homie.DRO.DevicesListDRO;
 import com.example.homie.viewModels.DevicesCallback;
 import com.google.gson.Gson;
@@ -44,7 +46,7 @@ public class DevicesRequest {
 
             @Override
             public void onFailure(Call<DevicesListDRO> call, Throwable t) {
-
+                Log.d("DevicesRequest", t.toString());
             }
         });
     }
@@ -67,7 +69,7 @@ public class DevicesRequest {
 
             @Override
             public void onFailure(Call<Integer> call, Throwable t) {
-
+                Log.d("DevicesRequest", t.toString());
             }
         });
     }

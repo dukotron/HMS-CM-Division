@@ -1,6 +1,7 @@
 package com.example.homie.viewModels;
 
 import android.app.Application;
+
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
@@ -24,7 +25,7 @@ public class MainViewModel extends AndroidViewModel {
 
     }
 
-    public void logoutUser(){
+    public void logoutUser() {
         userRepository.logoutAccount();
         isLoggedOut.setValue(true);
     }

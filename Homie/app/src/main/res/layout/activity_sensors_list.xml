@@ -2,8 +2,8 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:background="@drawable/gradient">
+    android:background="@drawable/gradient"
+    android:orientation="vertical">
 
     <include
         layout="@layout/toolbar"
@@ -19,49 +19,47 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recycler_view_sensors_list"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recycler_view_sensors_list"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
 
             <TextView
                 android:id="@+id/movement_sensor"
-                android:text="movement"
-                style="@style/sensor_list_sensor_title_style"/>
+                style="@style/sensor_list_sensor_title_style"
+                android:text="movement" />
 
             <LinearLayout
                 android:id="@+id/movement_sensor_charts"
                 style="@style/sensor_list_sensor_charts_style">
 
-                <LinearLayout
-                    style="@style/sensor_list_frame_for_date_style">
+                <LinearLayout style="@style/sensor_list_frame_for_date_style">
 
                     <TextView
-                        android:text="From:"
-                        style="@style/sensor_list_date_text_style"/>
+                        style="@style/sensor_list_date_text_style"
+                        android:text="@string/from" />
 
                     <EditText
                         android:id="@+id/movement_date_from"
-                        style="@style/sensor_list_date_edit_style"/>
+                        style="@style/sensor_list_date_edit_style" />
 
                 </LinearLayout>
 
-                <LinearLayout
-                    style="@style/sensor_list_frame_for_date_style">
+                <LinearLayout style="@style/sensor_list_frame_for_date_style">
 
                     <TextView
-                        android:text="To:"
-                        style="@style/sensor_list_date_text_style"/>
+                        style="@style/sensor_list_date_text_style"
+                        android:text="@string/to" />
 
                     <EditText
                         android:id="@+id/movement_date_to"
-                        style="@style/sensor_list_date_edit_style"/>
+                        style="@style/sensor_list_date_edit_style" />
 
                 </LinearLayout>
 
                 <Button
                     android:id="@+id/movement_btn_show"
-                    style="@style/sensor_list_show_button_style"/>
+                    style="@style/sensor_list_show_button_style" />
 
                 <com.github.mikephil.charting.charts.LineChart
                     android:id="@+id/movement_sensor_line_chart"
@@ -72,42 +70,40 @@
 
             <TextView
                 android:id="@+id/co_sensor"
-                android:text="CO2"
-                style="@style/sensor_list_sensor_title_style"/>
+                style="@style/sensor_list_sensor_title_style"
+                android:text="@string/co2" />
 
             <LinearLayout
                 android:id="@+id/co_sensor_charts"
                 style="@style/sensor_list_sensor_charts_style">
 
-                <LinearLayout
-                    style="@style/sensor_list_frame_for_date_style">
+                <LinearLayout style="@style/sensor_list_frame_for_date_style">
 
                     <TextView
-                        android:text="From:"
-                        style="@style/sensor_list_date_text_style"/>
+                        style="@style/sensor_list_date_text_style"
+                        android:text="@string/from" />
 
                     <EditText
                         android:id="@+id/co_date_from"
-                        style="@style/sensor_list_date_edit_style"/>
+                        style="@style/sensor_list_date_edit_style" />
 
                 </LinearLayout>
 
-                <LinearLayout
-                    style="@style/sensor_list_frame_for_date_style">
+                <LinearLayout style="@style/sensor_list_frame_for_date_style">
 
                     <TextView
-                        android:text="To:"
-                        style="@style/sensor_list_date_text_style"/>
+                        style="@style/sensor_list_date_text_style"
+                        android:text="@string/to" />
 
                     <EditText
                         android:id="@+id/co_date_to"
-                        style="@style/sensor_list_date_edit_style"/>
+                        style="@style/sensor_list_date_edit_style" />
 
                 </LinearLayout>
 
                 <Button
                     android:id="@+id/co_btn_show"
-                    style="@style/sensor_list_show_button_style"/>
+                    style="@style/sensor_list_show_button_style" />
 
                 <com.github.mikephil.charting.charts.BarChart
                     android:id="@+id/co_sensor_bar_chart"
@@ -118,42 +114,40 @@
 
             <TextView
                 android:id="@+id/temperature_sensor"
-                android:text="temperature"
-                style="@style/sensor_list_sensor_title_style"/>
+                style="@style/sensor_list_sensor_title_style"
+                android:text="@string/temperature" />
 
             <LinearLayout
                 android:id="@+id/temperature_sensor_charts"
                 style="@style/sensor_list_sensor_charts_style">
 
-                <LinearLayout
-                    style="@style/sensor_list_frame_for_date_style">
+                <LinearLayout style="@style/sensor_list_frame_for_date_style">
 
                     <TextView
-                        android:text="From:"
-                        style="@style/sensor_list_date_text_style"/>
+                        style="@style/sensor_list_date_text_style"
+                        android:text="@string/from:" />
 
                     <EditText
                         android:id="@+id/temperature_date_from"
-                        style="@style/sensor_list_date_edit_style"/>
+                        style="@style/sensor_list_date_edit_style" />
 
                 </LinearLayout>
 
-                <LinearLayout
-                    style="@style/sensor_list_frame_for_date_style">
+                <LinearLayout style="@style/sensor_list_frame_for_date_style">
 
                     <TextView
-                        android:text="To:"
-                        style="@style/sensor_list_date_text_style"/>
+                        style="@style/sensor_list_date_text_style"
+                        android:text="@string/to" />
 
                     <EditText
                         android:id="@+id/temperature_date_to"
-                        style="@style/sensor_list_date_edit_style"/>
+                        style="@style/sensor_list_date_edit_style" />
 
                 </LinearLayout>
 
                 <Button
                     android:id="@+id/temperature_btn_show"
-                    style="@style/sensor_list_show_button_style"/>
+                    style="@style/sensor_list_show_button_style" />
 
                 <com.github.mikephil.charting.charts.BarChart
                     android:id="@+id/temperature_sensor_bar_chart"
@@ -164,42 +158,40 @@
 
             <TextView
                 android:id="@+id/humidity_sensor"
-                android:text="humidity"
-                style="@style/sensor_list_sensor_title_style"/>
+                style="@style/sensor_list_sensor_title_style"
+                android:text="@string/humidity" />
 
             <LinearLayout
                 android:id="@+id/humidity_sensor_charts"
                 style="@style/sensor_list_sensor_charts_style">
 
-                <LinearLayout
-                    style="@style/sensor_list_frame_for_date_style">
+                <LinearLayout style="@style/sensor_list_frame_for_date_style">
 
                     <TextView
-                        android:text="From:"
-                        style="@style/sensor_list_date_text_style"/>
+                        style="@style/sensor_list_date_text_style"
+                        android:text="@string/from" />
 
                     <EditText
                         android:id="@+id/humidity_date_from"
-                        style="@style/sensor_list_date_edit_style"/>
+                        style="@style/sensor_list_date_edit_style" />
 
                 </LinearLayout>
 
-                <LinearLayout
-                    style="@style/sensor_list_frame_for_date_style">
+                <LinearLayout style="@style/sensor_list_frame_for_date_style">
 
                     <TextView
-                        android:text="To:"
-                        style="@style/sensor_list_date_text_style"/>
+                        style="@style/sensor_list_date_text_style"
+                        android:text="@string/to" />
 
                     <EditText
                         android:id="@+id/humidity_date_to"
-                        style="@style/sensor_list_date_edit_style"/>
+                        style="@style/sensor_list_date_edit_style" />
 
                 </LinearLayout>
 
                 <Button
                     android:id="@+id/humidity_btn_show"
-                    style="@style/sensor_list_show_button_style"/>
+                    style="@style/sensor_list_show_button_style" />
 
                 <com.github.mikephil.charting.charts.LineChart
                     android:id="@+id/humidity_sensor_line_chart"
@@ -210,42 +202,40 @@
 
             <TextView
                 android:id="@+id/light_sensor"
-                android:text="light"
-                style="@style/sensor_list_sensor_title_style"/>
+                style="@style/sensor_list_sensor_title_style"
+                android:text="@string/light" />
 
             <LinearLayout
                 android:id="@+id/light_sensor_charts"
                 style="@style/sensor_list_sensor_charts_style">
 
-                <LinearLayout
-                    style="@style/sensor_list_frame_for_date_style">
+                <LinearLayout style="@style/sensor_list_frame_for_date_style">
 
                     <TextView
-                        android:text="From:"
-                        style="@style/sensor_list_date_text_style"/>
+                        style="@style/sensor_list_date_text_style"
+                        android:text="@string/from" />
 
                     <EditText
                         android:id="@+id/light_date_from"
-                        style="@style/sensor_list_date_edit_style"/>
+                        style="@style/sensor_list_date_edit_style" />
 
                 </LinearLayout>
 
-                <LinearLayout
-                    style="@style/sensor_list_frame_for_date_style">
+                <LinearLayout style="@style/sensor_list_frame_for_date_style">
 
                     <TextView
-                        android:text="To:"
-                        style="@style/sensor_list_date_text_style"/>
+                        style="@style/sensor_list_date_text_style"
+                        android:text="@string/to" />
 
                     <EditText
                         android:id="@+id/light_date_to"
-                        style="@style/sensor_list_date_edit_style"/>
+                        style="@style/sensor_list_date_edit_style" />
 
                 </LinearLayout>
 
                 <Button
                     android:id="@+id/light_btn_show"
-                    style="@style/sensor_list_show_button_style"/>
+                    style="@style/sensor_list_show_button_style" />
 
                 <com.github.mikephil.charting.charts.LineChart
                     android:id="@+id/light_sensor_line_chart"

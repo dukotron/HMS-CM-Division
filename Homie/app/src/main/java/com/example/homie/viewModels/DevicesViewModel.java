@@ -50,7 +50,7 @@ public class DevicesViewModel extends AndroidViewModel implements DevicesCallbac
     public void loadHomeScore() {
         Calendar cal = Calendar.getInstance();
         Date todayDate = cal.getTime();
-        cal.set(cal.get(Calendar.YEAR), cal.get(Calendar.MONTH), cal.get(Calendar.DATE)-1,0,0);
+        cal.set(cal.get(Calendar.YEAR), cal.get(Calendar.MONTH), cal.get(Calendar.DATE) - 1, 0, 0);
         Date yesterdayDate = cal.getTime();
         sensorRepository.getHomeScore(this, yesterdayDate, todayDate);
     }

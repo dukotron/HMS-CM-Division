@@ -340,7 +340,8 @@ public class SensorsActivity extends AppCompatActivity {
         }
     }
 
-    private void loadLineChartData(LineChart lineChart, List<SensorData> sensorData, String dataName, int color, List<ILineDataSet> dataSets) {
+    private void loadLineChartData(LineChart lineChart, List<SensorData> sensorData,
+                                   String dataName, int color, List<ILineDataSet> dataSets) {
         // remember first item's timestamp - referenceTimestamp
         long referenceTimestamp = (new Timestamp(sensorData.get(0).getDate().getTime())).getTime();
 
@@ -371,7 +372,8 @@ public class SensorsActivity extends AppCompatActivity {
         lineChart.invalidate();
     }
 
-    private void loadBarChartData(BarChart barChart, List<SensorData> sensorData, String dataName, int color, List<IBarDataSet> dataSets) {
+    private void loadBarChartData(BarChart barChart, List<SensorData> sensorData,
+                                  String dataName, int color, List<IBarDataSet> dataSets) {
         // remember first item's timestamp - referenceTimestamp
         long referenceTimestamp = (new Timestamp(sensorData.get(0).getDate().getTime())).getTime();
 

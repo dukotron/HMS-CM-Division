@@ -1,6 +1,7 @@
 package com.example.homie.viewModels;
 
 import android.app.Application;
+
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
@@ -9,7 +10,7 @@ import androidx.annotation.NonNull;
 import com.example.homie.repositories.UserRepository;
 import com.example.homie.viewModels.util.InputDataValidator;
 
-public class LoginViewModel extends AndroidViewModel implements AuthCallBack{
+public class LoginViewModel extends AndroidViewModel implements AuthCallBack {
 
     private MutableLiveData<Boolean> isValidEmail;
     private MutableLiveData<Boolean> isValidPassword;
@@ -78,7 +79,7 @@ public class LoginViewModel extends AndroidViewModel implements AuthCallBack{
     public void onReturn(int statusCode) {
         if (statusCode == 0) {
             isLoggedIn.setValue(true);
-        }else{
+        } else {
             showError.setValue(true);
         }
     }

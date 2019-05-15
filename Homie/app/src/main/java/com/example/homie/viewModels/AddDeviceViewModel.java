@@ -38,7 +38,7 @@ public class AddDeviceViewModel extends AndroidViewModel implements AddDeviceCal
 
     public void addDevice(String deviceLocation, String deviceId) {
         if (checkEnteredData(deviceLocation, deviceId)) {
-            userRepository.addDevice(deviceLocation, deviceId,this);
+            userRepository.addDevice(deviceLocation, deviceId, this);
         }
     }
 

@@ -27,4 +27,16 @@
     </string>
     <string name="attachment_summary_off">Only download attachments when manually requested</string>
     <string name="add_device">Add device</string>
+    <string name="last_name">Last name</string>
+    <string name="location_of_device">Location of device</string>
+    <string name="id_of_device">ID of device</string>
+    <string name="email">Email</string>
+    <string name="from">From:</string>
+    <string name="to">To:</string>
+    <string name="co2">CO2</string>
+    <string name="temperature">temperature</string>
+    <string name="humidity">humidity</string>
+    <string name="light">light</string>
+    <string name="howdy">Howdy,</string>
+    <string name="product_owner">Product Owner</string>
 </resources>

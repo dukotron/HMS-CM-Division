@@ -1,5 +1,7 @@
 package com.example.homie.network.retrofit;
 
+import android.util.Log;
+
 import com.example.homie.DTO.UserRegisterDTO;
 import com.example.homie.viewModels.AuthCallBack;
 import com.example.homie.viewModels.util.StatusCode;
@@ -41,5 +43,6 @@ public class RegisterRequest implements RegisterCallback {
     @Override
     public void onFailure(Call<Integer> call, Throwable t) {
         callBack.onReturn(StatusCode.NOT_OK);
+        Log.d("RegisterRequest", t.toString());
     }
 }

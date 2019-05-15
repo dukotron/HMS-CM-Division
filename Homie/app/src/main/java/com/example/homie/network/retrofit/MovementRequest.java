@@ -74,7 +74,5 @@ public class MovementRequest implements SensorCallback {
                 Log.d("MovementRequest", t.toString());
             }
         });
-
     }
-
 }

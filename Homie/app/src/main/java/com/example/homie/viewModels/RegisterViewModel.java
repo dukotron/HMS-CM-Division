@@ -3,6 +3,7 @@ package com.example.homie.viewModels;
 import android.app.Application;
 
 import androidx.lifecycle.AndroidViewModel;
+import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.annotation.NonNull;
 
@@ -71,27 +72,27 @@ public class RegisterViewModel extends AndroidViewModel implements AuthCallBack 
         return valid;
     }
 
-    public MutableLiveData<Boolean> getIsValidFirstName() {
+    public LiveData<Boolean> getIsValidFirstName() {
         return isValidFirstName;
     }
 
-    public MutableLiveData<Boolean> getIsValidLastName() {
+    public LiveData<Boolean> getIsValidLastName() {
         return isValidLastName;
     }
 
-    public MutableLiveData<Boolean> getIsValidEmail() {
+    public LiveData<Boolean> getIsValidEmail() {
         return isValidEmail;
     }
 
-    public MutableLiveData<Boolean> getIsValidPassword() {
+    public LiveData<Boolean> getIsValidPassword() {
         return isValidPassword;
     }
 
-    public MutableLiveData<Boolean> getIsRegistered() {
+    public LiveData<Boolean> getIsRegistered() {
         return isRegistered;
     }
 
-    public MutableLiveData<Boolean> getShowError() {
+    public LiveData<Boolean> getShowError() {
         return showError;
     }
 

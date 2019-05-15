@@ -11,7 +11,7 @@
         android:id="@+id/textView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Howdy,"
+        android:text="@string/howdy"
         android:textSize="25sp"
         android:gravity="center"
         android:textColor="@color/colorWhite"/>
@@ -20,7 +20,7 @@
         android:id="@+id/textView_userName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Product Owner"
+        android:text="@string/product_owner"
         android:textSize="30sp"
         android:gravity="center"
         android:textColor="@color/colorWhite"/>
